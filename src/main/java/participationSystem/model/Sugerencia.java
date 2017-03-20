@@ -4,12 +4,33 @@ import java.util.List;
 
 public class Sugerencia {
 	int votos;
+	String nombre;
+	String contenido;
 	List<Comentario> comentarios;
 	Categoria categoria;
 
-	public Sugerencia(Categoria cat) {
+	
+	public Sugerencia(String nombre, String contenido, Categoria categoria) {
 		super();
-		this.categoria = cat;
+		this.nombre = nombre;
+		this.contenido = contenido;
+		this.categoria = categoria;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getContenido() {
+		return contenido;
+	}
+
+	public void setContenido(String contenido) {
+		this.contenido = contenido;
 	}
 
 	public int getVotos() {
