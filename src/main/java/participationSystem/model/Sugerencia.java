@@ -1,12 +1,13 @@
 package participationSystem.model;
 
-import java.util.List;
+import java.util.Set;
 
 public class Sugerencia {
+	Long id;
 	int votos;
 	String nombre;
 	String contenido;
-	List<Comentario> comentarios;
+	protected Set<Comentario> comentarios;
 	Categoria categoria;
 
 	
@@ -21,6 +22,9 @@ public class Sugerencia {
 		return nombre;
 	}
 
+	public Long getId() {
+		return id;
+	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
@@ -37,7 +41,7 @@ public class Sugerencia {
 		return votos;
 	}
 
-	public List<Comentario> getComentarios() {
+	public Set<Comentario> getComentarios() {
 		return comentarios;
 	}
 

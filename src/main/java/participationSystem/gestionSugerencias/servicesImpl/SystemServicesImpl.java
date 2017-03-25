@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import participationSystem.DBUpdate.CategoryFinder;
+import participationSystem.DBUpdate.SugerenciaFinder;
 import participationSystem.gestionSugerencias.SystemServices;
 import participationSystem.model.Categoria;
 import participationSystem.model.Configuration;
+import participationSystem.model.Sugerencia;
 
 public class SystemServicesImpl implements SystemServices {
 
@@ -44,6 +46,15 @@ public class SystemServicesImpl implements SystemServices {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public boolean existeLaSugerencia(Sugerencia sugerencia) {
+		Sugerencia s=SugerenciaFinder.findById(sugerencia.getId());
+		if(s==null)
+			return false;
+		else
+			return true;
 	}
 
 }

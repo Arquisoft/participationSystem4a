@@ -2,8 +2,11 @@ package participationSystem.gestionSugerencias.servicesImpl;
 
 import java.util.List;
 
+import participationSystem.DBUpdate.CategoryFinder;
+import participationSystem.DBUpdate.ComentarioFinder;
 import participationSystem.DBUpdate.Insert;
 import participationSystem.DBUpdate.InsertSP;
+import participationSystem.DBUpdate.SugerenciaFinder;
 import participationSystem.gestionSugerencias.CitizenServices;
 import participationSystem.gestionSugerencias.Services;
 import participationSystem.gestionSugerencias.SystemServices;
@@ -44,51 +47,73 @@ public class CitizenServiceImpl implements CitizenServices {
 	}
 
 	@Override
-	public void addComentario(Sugerencia sugerencia, Comentario comment) throws CitizenException {
-		// TODO Auto-generated method stub
-		
+	public void addComentario(Comentario comment) throws CitizenException {
+			db.insertComentario(comment);
 	}
 
 	@Override
-	public void createComentario(String contenido) throws CitizenException {
-		// TODO Auto-generated method stub
-		
+	public void createComentario(String contenido, Sugerencia sugerencia) throws CitizenException {
+		boolean sugBien = systemServices.existeLaSugerencia(sugerencia);
+		boolean commentBien = (systemServices.contienePalabrasAdmitidas(contenido)) ? false : true;
+		boolean todoOK = (commentBien && sugBien) ? true : false;
+		if (todoOK) {
+			Comentario comentario= new Comentario(contenido, sugerencia);
+			addComentario(comentario);
+		}
 	}
 
 	@Override
 	public List<Categoria> getCategoriasDisponibles() throws CitizenException {
-		// TODO Auto-generated method stub
-		return null;
+		SystemServices ss= new SystemServicesImpl();
+		return ss.getAllCategories();
 	}
 
 	@Override
 	public void createCategoria(String nombre) throws CitizenException {
-		// TODO Auto-generated method stub
-		
+		SystemServices ss= new SystemServicesImpl();
+		if(CategoryFinder.findByName(nombre)==null)
+			db.insertCategoria(new Categoria(nombre));
+		else{
+			//Error
+		}
+
 	}
 
 	@Override
 	public void votePositiveComment(Comentario comment) throws CitizenException {
-		// TODO Auto-generated method stub
+		if(ComentarioFinder.findById(comment.getId())==null){
+			//Error
+		}
+		else
+			comment.incrementarVoto();
 		
 	}
 
 	@Override
 	public void voteNegativeComment(Comentario comment) throws CitizenException {
-		// TODO Auto-generated method stub
-		
+		if(ComentarioFinder.findById(comment.getId())==null){
+			//Error
+		}
+		else
+			comment.decrementarVoto();
 	}
 
 	@Override
 	public void votePositiveSugerencia(Sugerencia sug) throws CitizenException {
-		// TODO Auto-generated method stub
-		
+		if(SugerenciaFinder.findById(sug.getId())==null){
+			//Error
+		}
+		else
+			sug.incrementarVotos();
 	}
 
 	@Override
 	public void voteNegativeSugerencia(Sugerencia sug) throws CitizenException {
-		// TODO Auto-generated method stub
-		
+		if(SugerenciaFinder.findById(sug.getId())==null){
+			//Error
+		}
+		else
+			sug.decrementarVotos();
 	}
 
 

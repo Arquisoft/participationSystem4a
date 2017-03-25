@@ -6,6 +6,7 @@ import javax.persistence.EntityTransaction;
 import participationSystem.DBUpdate.Util.Hibernate_Jpa;
 import participationSystem.ReportWriter.WriteReport;
 import participationSystem.model.Categoria;
+import participationSystem.model.Comentario;
 import participationSystem.model.Sugerencia;
 
 public class InsertSP implements Insert{
@@ -35,6 +36,19 @@ public class InsertSP implements Insert{
 		//Comprobaciones 
 		
 		mapper.persist(categoria);
+		trx.commit();
+		mapper.close();
+	}
+
+	@Override
+	public void insertComentario(Comentario comentario) {
+		EntityManager mapper = Hibernate_Jpa.createEntityManager();
+		EntityTransaction trx = mapper.getTransaction();
+		trx.begin();
+		
+		//Comprobaciones 
+		
+		mapper.persist(comentario);
 		trx.commit();
 		mapper.close();
 	}

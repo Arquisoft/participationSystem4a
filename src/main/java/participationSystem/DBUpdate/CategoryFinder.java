@@ -17,5 +17,16 @@ public class CategoryFinder {
         }
         return null;
     }
+	
+	public static List<Categoria> findByName(String name){
+        List<Categoria> list = Hibernate_Jpa.getManager()
+                .createNamedQuery("Categoria.findByName",Categoria.class)
+                .setParameter(1, name)
+                .getResultList();
+        if(!list.isEmpty()){
+            return list;
+        }
+        return null;
+    }
 
 }

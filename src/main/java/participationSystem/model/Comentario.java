@@ -1,16 +1,26 @@
 package participationSystem.model;
 
 public class Comentario {
+	Long id;
 	int votos;
 	String comentario;
+	private Sugerencia sugerencia;
 
-	public Comentario(String comentario) {
+	public Comentario(String comentario, Sugerencia sugerencia) {
 		super();
 		this.comentario = comentario;
+		this.sugerencia=sugerencia;
 	}
 
 	public int getVotos() {
 		return votos;
+	}
+	public Long getId() {
+		return id;
+	}
+	
+	public Sugerencia getSugerencia(){
+		return sugerencia;
 	}
 
 	void setVotos(int votosPositivos) {

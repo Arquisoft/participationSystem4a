@@ -11,9 +11,9 @@ public interface CitizenServices {
 
 	void createSugerencia(String nombre, String contenido, Categoria categoria) throws CitizenException;
 
-	void addComentario(Sugerencia sugerencia, Comentario comment) throws CitizenException;
+	void addComentario(Comentario comment) throws CitizenException;
 
-	void createComentario(String contenido) throws CitizenException;
+	void createComentario(String contenido, Sugerencia sugerencia) throws CitizenException;
 
 	List<Categoria> getCategoriasDisponibles() throws CitizenException;
 

@@ -1,10 +1,11 @@
 package participationSystem.model;
 
-import java.util.List;
+import java.util.Set;
 
 public class Categoria {
+	Long id;
 	String nombre;
-	List<Sugerencia> sugerencias;
+	protected Set<Sugerencia> sugerencias;
 
 	public Categoria(String nombre) {
 		super();
@@ -14,8 +15,11 @@ public class Categoria {
 	public String getNombre() {
 		return nombre;
 	}
+	public Long getId() {
+		return id;
+	}
 
-	public List<Sugerencia> getSugerencias() {
+	public Set<Sugerencia> getSugerencias() {
 		return sugerencias;
 	}
 
