@@ -2,6 +2,8 @@ package participationSystem.gestionSugerencias.servicesImpl;
 
 import java.util.List;
 
+import participationSystem.DBUpdate.Insert;
+import participationSystem.DBUpdate.InsertSP;
 import participationSystem.gestionSugerencias.CitizenServices;
 import participationSystem.gestionSugerencias.Services;
 import participationSystem.gestionSugerencias.SystemServices;
@@ -15,6 +17,7 @@ public class CitizenServiceImpl implements CitizenServices {
 
 	Configuration config;
 	SystemServices systemServices;
+	private static Insert db = new InsertSP();
 
 	public CitizenServiceImpl() {
 		this.config = Services.getSystemServices().getConfiguration();
@@ -31,6 +34,7 @@ public class CitizenServiceImpl implements CitizenServices {
 		if (todoOK) {
 			
 			Sugerencia sugerencia = new Sugerencia(nombre, contenido, categoria);
+			db.insertSugerencia(sugerencia);
 			// GUARDAR EN LA BASE DE DATOS
 
 		}else{

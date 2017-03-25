@@ -3,6 +3,7 @@ package participationSystem.gestionSugerencias.servicesImpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import participationSystem.DBUpdate.CategoryFinder;
 import participationSystem.gestionSugerencias.SystemServices;
 import participationSystem.model.Categoria;
 import participationSystem.model.Configuration;
@@ -20,7 +21,7 @@ public class SystemServicesImpl implements SystemServices {
 	public List<Categoria> getAllCategories() {
 		// TODO Auto-generated method stub
 		//Obtener de la  base de datos y actualizar la lista
-		
+		List<Categoria> categorias=CategoryFinder.findAll();
 		return categorias;
 	}
 
