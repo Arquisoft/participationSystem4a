@@ -7,7 +7,7 @@ import participationSystem.model.Comentario;
 import participationSystem.model.Sugerencia;
 import participationSystem.util.exception.CitizenException;
 
-public interface CitizenServices {
+public interface CitizenServices extends SuperService {
 
 	void createSugerencia(String nombre, String contenido, Categoria categoria) throws CitizenException;
 

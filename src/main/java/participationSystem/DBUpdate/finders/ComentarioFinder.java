@@ -1,4 +1,4 @@
-package participationSystem.DBUpdate;
+package participationSystem.DBUpdate.finders;
 
 import java.util.List;
 

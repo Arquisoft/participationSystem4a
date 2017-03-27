@@ -1,11 +1,23 @@
 package participationSystem.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="CATEGORIA")
 public class Categoria {
+	@Id
+	@GeneratedValue
 	Long id;
 	String nombre;
-	protected Set<Sugerencia> sugerencias;
+	@OneToMany(mappedBy="categoria")
+	protected Set<Sugerencia> sugerencias = new HashSet<Sugerencia>();
 
 	public Categoria(String nombre) {
 		super();
@@ -20,13 +32,12 @@ public class Categoria {
 	}
 
 	public Set<Sugerencia> getSugerencias() {
-		return sugerencias;
+		return new HashSet<Sugerencia>(sugerencias);
 	}
 
-	public void addSugerencia(Sugerencia sug) {
-		this.sugerencias.add(sug);
+	public void removeSugerencia(Sugerencia sugerencia){
+		Association.PoseerSugerencia.unlink(this, sugerencia);
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -63,6 +74,10 @@ public class Categoria {
 	public String toString() {
 		return "Categoria [nombre=" + nombre + ", sugerencias=" + sugerencias
 				+ "]";
+	}
+
+	 Set<Sugerencia> _getSugerencias() {
+		return sugerencias;
 	}
 
 }
