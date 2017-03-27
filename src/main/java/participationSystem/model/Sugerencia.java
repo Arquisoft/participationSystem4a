@@ -1,13 +1,27 @@
 package participationSystem.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="SUGERENCIA")
 public class Sugerencia {
+	@Id
+	@GeneratedValue
 	Long id;
 	int votos;
 	String nombre;
 	String contenido;
-	protected Set<Comentario> comentarios;
+	@OneToMany(mappedBy="sugerencia")
+	protected Set<Comentario> comentarios = new HashSet<Comentario>();
+	@ManyToOne 
 	Categoria categoria;
 
 	
@@ -16,6 +30,8 @@ public class Sugerencia {
 		this.nombre = nombre;
 		this.contenido = contenido;
 		this.categoria = categoria;
+		Association.PoseerSugerencia.link(categoria, this);
+		
 	}
 
 	public String getNombre() {
@@ -42,7 +58,7 @@ public class Sugerencia {
 	}
 
 	public Set<Comentario> getComentarios() {
-		return comentarios;
+		return new HashSet<Comentario>(comentarios);
 	}
 
 	public Categoria getCategoria() {
@@ -56,9 +72,9 @@ public class Sugerencia {
 	public void decrementarVotos() {
 		this.votos--;
 	}
-
-	public void addComentario(Comentario comentario) {
-		this.comentarios.add(comentario);
+	
+	public void removeComentario(Comentario comentario){
+		Association.PoseerComentario.unlink(this, comentario);
 	}
 
 	@Override
@@ -101,6 +117,14 @@ public class Sugerencia {
 		if (votos != other.votos)
 			return false;
 		return true;
+	}
+
+	Set<Comentario> _getComentarios() {
+		return comentarios;
+	}
+
+	void _setCategoria(Categoria categoria2) {
+		this.categoria=categoria2;
 	}
 	
 	

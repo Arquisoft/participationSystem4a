@@ -3,6 +3,11 @@ package participationSystem.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="CONFIGURACION")
 public class Configuration {
 
 	List<String> palabrasNoPermitidas;

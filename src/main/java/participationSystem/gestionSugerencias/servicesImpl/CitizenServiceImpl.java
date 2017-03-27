@@ -2,11 +2,11 @@ package participationSystem.gestionSugerencias.servicesImpl;
 
 import java.util.List;
 
-import participationSystem.DBUpdate.CategoryFinder;
-import participationSystem.DBUpdate.ComentarioFinder;
 import participationSystem.DBUpdate.Insert;
 import participationSystem.DBUpdate.InsertSP;
-import participationSystem.DBUpdate.SugerenciaFinder;
+import participationSystem.DBUpdate.finders.CategoryFinder;
+import participationSystem.DBUpdate.finders.ComentarioFinder;
+import participationSystem.DBUpdate.finders.SugerenciaFinder;
 import participationSystem.gestionSugerencias.CitizenServices;
 import participationSystem.gestionSugerencias.Services;
 import participationSystem.gestionSugerencias.SystemServices;
