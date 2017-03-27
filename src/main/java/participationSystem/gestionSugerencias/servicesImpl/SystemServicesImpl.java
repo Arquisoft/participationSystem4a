@@ -3,8 +3,8 @@ package participationSystem.gestionSugerencias.servicesImpl;
 import java.util.ArrayList;
 import java.util.List;
 
-import participationSystem.DBUpdate.CategoryFinder;
-import participationSystem.DBUpdate.SugerenciaFinder;
+import participationSystem.DBUpdate.finders.CategoryFinder;
+import participationSystem.DBUpdate.finders.SugerenciaFinder;
 import participationSystem.gestionSugerencias.SystemServices;
 import participationSystem.model.Categoria;
 import participationSystem.model.Configuration;

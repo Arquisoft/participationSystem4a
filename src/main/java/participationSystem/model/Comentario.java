@@ -1,15 +1,27 @@
 package participationSystem.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="COMENTARIO")
 public class Comentario {
+	@Id
+	@GeneratedValue
 	Long id;
 	int votos;
 	String comentario;
+	@ManyToOne 
 	private Sugerencia sugerencia;
 
 	public Comentario(String comentario, Sugerencia sugerencia) {
 		super();
 		this.comentario = comentario;
 		this.sugerencia=sugerencia;
+		Association.PoseerComentario.link(sugerencia, this);
 	}
 
 	public int getVotos() {
@@ -76,6 +88,11 @@ public class Comentario {
 	public String toString() {
 		return "Comentario [votos=" + votos + ", comentario=" + comentario
 				+ "]";
+	}
+
+	public void _setSugerencia(Sugerencia sugerencia2) {
+		this.sugerencia=sugerencia2;
+		
 	}
 
 }
