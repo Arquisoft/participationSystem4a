@@ -1,11 +1,11 @@
 package participationSystem.gestionSugerencias;
 
-import java.util.List;
-
 import participationSystem.model.Categoria;
 import participationSystem.model.Comentario;
 import participationSystem.model.Sugerencia;
 import participationSystem.util.exception.CitizenException;
+
+import java.util.List;
 
 public interface CitizenServices extends SuperService {
 
@@ -26,5 +26,6 @@ public interface CitizenServices extends SuperService {
 	void votePositiveSugerencia(Sugerencia sug) throws CitizenException;
 
 	void voteNegativeSugerencia(Sugerencia sug) throws CitizenException;
+
 
 }
