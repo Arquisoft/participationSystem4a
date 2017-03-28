@@ -79,11 +79,12 @@ public class CitizenServiceImpl implements CitizenServices {
 
 	@Override
 	public void createCategoria(String nombre) throws CitizenException {
-		SystemServices ss = new SystemServicesImpl();
+		//SystemServices ss = new SystemServicesImpl();
 		if (CategoryFinder.findByName(nombre) == null)
 			db.insertCategoria(new Categoria(nombre));
 		else {
-			// Error
+			throw new CitizenException("Ha ocurrido un error al crear la categoría.");
+
 		}
 
 	}
@@ -92,33 +93,45 @@ public class CitizenServiceImpl implements CitizenServices {
 	public void votePositiveComment(Comentario comment) throws CitizenException {
 		if (ComentarioFinder.findById(comment.getId()) == null) {
 			// Error
-		} else
+			throw new CitizenException("El comentario no existe");
+		} else{
 			comment.incrementarVoto();
-
+			logger.send(Topics.POSITIVE_COMMENT_VOTE, comment.getId()+"");
+		}
+			
 	}
 
 	@Override
 	public void voteNegativeComment(Comentario comment) throws CitizenException {
 		if (ComentarioFinder.findById(comment.getId()) == null) {
-			// Error
-		} else
+			throw new CitizenException("El comentario no existe");
+		} else{
 			comment.decrementarVoto();
+			logger.send(Topics.POSITIVE_COMMENT_VOTE, comment.getId()+"");
+		}
+			
+		
 	}
 
 	@Override
 	public void votePositiveSugerencia(Sugerencia sug) throws CitizenException {
 		if (SugerenciaFinder.findById(sug.getId()) == null) {
-			// Error
-		} else
+			throw new CitizenException("La sugerencia no existe.");
+		} else{
 			sug.incrementarVotos();
+			logger.send(Topics.POSITIVE_SUGGESTION_VOTE, sug.getId()+"");
+		}
 	}
 
 	@Override
 	public void voteNegativeSugerencia(Sugerencia sug) throws CitizenException {
 		if (SugerenciaFinder.findById(sug.getId()) == null) {
 			// Error
-		} else
+			throw new CitizenException("La sugerencia no existe.");
+		} else{
 			sug.decrementarVotos();
+			logger.send(Topics.NEGATIVE_SUGGESTION_VOTE, sug.getId()+"");
+		}
 	}
 
 }
