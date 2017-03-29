@@ -22,14 +22,15 @@ public class Sugerencia {
 	@OneToMany(mappedBy="sugerencia")
 	protected Set<Comentario> comentarios = new HashSet<Comentario>();
 	@ManyToOne 
-	Categoria categoria;
-	@ManyToOne
-	Citizen usuario; //ANA Set y get de esto
+	Categoria Categoria;
+	//@ManyToOne
+	//Citizen usuario; //ANA Set y get de esto
+	
 	public Sugerencia(String nombre, String contenido, Categoria categoria) {
 		super();
 		this.nombre = nombre;
 		this.contenido = contenido;
-		this.categoria = categoria;
+		this.Categoria = categoria;
 //		Association.PoseerSugerencia.link(categoria, this);
 		
 	}
@@ -62,7 +63,7 @@ public class Sugerencia {
 	}
 
 	public Categoria getCategoria() {
-		return categoria;
+		return Categoria;
 	}
 
 	public void incrementarVotos() {
@@ -80,7 +81,7 @@ public class Sugerencia {
 	@Override
 	public String toString() {
 		return "Sugerencia [votos=" + votos + ", comentarios=" + comentarios
-				+ ", categoria=" + categoria + "]";
+				+ ", categoria=" + Categoria + "]";
 	}
 
 	@Override
@@ -88,7 +89,7 @@ public class Sugerencia {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((categoria == null) ? 0 : categoria.hashCode());
+				+ ((Categoria == null) ? 0 : Categoria.hashCode());
 		result = prime * result
 				+ ((comentarios == null) ? 0 : comentarios.hashCode());
 		result = prime * result + votos;
@@ -104,10 +105,10 @@ public class Sugerencia {
 		if (getClass() != obj.getClass())
 			return false;
 		Sugerencia other = (Sugerencia) obj;
-		if (categoria == null) {
-			if (other.categoria != null)
+		if (Categoria == null) {
+			if (other.Categoria != null)
 				return false;
-		} else if (!categoria.equals(other.categoria))
+		} else if (!Categoria.equals(other.Categoria))
 			return false;
 		if (comentarios == null) {
 			if (other.comentarios != null)
@@ -124,7 +125,7 @@ public class Sugerencia {
 	}
 
 	void _setCategoria(Categoria categoria2) {
-		this.categoria=categoria2;
+		this.Categoria=categoria2;
 	}
 	
 	

@@ -10,13 +10,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="CATEGORIA")
+@Table(name="Categoria")
 public class Categoria {
 	@Id
 	@GeneratedValue
 	Long id;
 	String nombre;
-	@OneToMany(mappedBy="categoria")
+	@OneToMany(mappedBy="Categoria")
 	protected Set<Sugerencia> sugerencias = new HashSet<Sugerencia>();
 
 	public Categoria(String nombre) {
