@@ -14,7 +14,7 @@ import hello.repository.ConfigurationRepository;
 import hello.repository.SuggestionRepository;
 import hello.services.SystemServices;
 
-
+@Service
 public class SystemServicesImpl implements SystemServices {
 
 	List<Categoria> categorias = new ArrayList<>();
