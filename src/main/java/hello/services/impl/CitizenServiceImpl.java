@@ -1,27 +1,20 @@
 package hello.services.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import hello.domain.Categoria;
 import hello.domain.Citizen;
 import hello.domain.Comentario;
-import hello.domain.Configuration;
 import hello.domain.Sugerencia;
 import hello.repository.CategoryRepository;
 import hello.repository.CitizenRepository;
 import hello.repository.CommentRepository;
 import hello.repository.SuggestionRepository;
 import hello.services.CitizenServices;
-import hello.services.Services;
 import hello.services.SystemServices;
 import hello.util.exception.CitizenException;
-import participationSystem.DBUpdate.finders.CategoryFinder;
-import participationSystem.DBUpdate.finders.ComentarioFinder;
-import participationSystem.DBUpdate.finders.SugerenciaFinder;
-import participationSystem.producer.Topics;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CitizenServiceImpl implements CitizenServices {
@@ -64,8 +57,8 @@ public class CitizenServiceImpl implements CitizenServices {
 		try {
 			this.suggestionRepository.save(sug);
 			// Mandar a Kafka (ejemplo que no tiene por qué ser asi)
-			logger.send(Topics.CREATE_SUGGESTION,
-					sug.getNombre() + separator + sug.getContenido() + separator + sug.getCategoria());
+			//logger.send(Topics.CREATE_SUGGESTION,
+				//	sug.getNombre() + separator + sug.getContenido() + separator + sug.getCategoria());
 		} catch (Exception e) {
 			throw new CitizenException("Error al guardar la sugerencia.");
 		}
@@ -82,8 +75,8 @@ public class CitizenServiceImpl implements CitizenServices {
 
 			// addComentario(comentario);
 			this.commentRepository.save(comment);
-			logger.send(Topics.COMMENT_SUGGESTION,
-					comment.getSugerencia().getId() + separator + comment.getContenido());
+			//logger.send(Topics.COMMENT_SUGGESTION,
+				//	comment.getSugerencia().getId() + separator + comment.getContenido());
 		} catch (Exception e) {
 			throw new CitizenException("Error al crear un comentario.");
 		}
@@ -110,45 +103,45 @@ public class CitizenServiceImpl implements CitizenServices {
 
 	@Override
 	public void votePositiveComment(Comentario comment) throws CitizenException {
-		if (ComentarioFinder.findById(comment.getId()) == null) {
+		if (commentRepository.findOne(comment.getId()) == null) {
 			// Error
 			throw new CitizenException("El comentario no existe");
 		} else {
 			comment.incrementarVoto();
-			logger.send(Topics.POSITIVE_COMMENT_VOTE, comment.getId() + "");
+			//logger.send(Topics.POSITIVE_COMMENT_VOTE, comment.getId() + "");
 		}
 
 	}
 
 	@Override
 	public void voteNegativeComment(Comentario comment) throws CitizenException {
-		if (ComentarioFinder.findById(comment.getId()) == null) {
+		if (commentRepository.findOne(comment.getId()) == null) {
 			throw new CitizenException("El comentario no existe");
 		} else {
 			comment.decrementarVoto();
-			logger.send(Topics.POSITIVE_COMMENT_VOTE, comment.getId() + "");
+			//logger.send(Topics.POSITIVE_COMMENT_VOTE, comment.getId() + "");
 		}
 
 	}
 
 	@Override
 	public void votePositiveSugerencia(Sugerencia sug) throws CitizenException {
-		if (SugerenciaFinder.findById(sug.getId()) == null) {
+		if (suggestionRepository.findOne(sug.getId()) == null) {
 			throw new CitizenException("La sugerencia no existe.");
 		} else {
 			sug.incrementarVotos();
-			logger.send(Topics.POSITIVE_SUGGESTION_VOTE, sug.getId() + "");
+			//logger.send(Topics.POSITIVE_SUGGESTION_VOTE, sug.getId() + "");
 		}
 	}
 
 	@Override
 	public void voteNegativeSugerencia(Sugerencia sug) throws CitizenException {
-		if (SugerenciaFinder.findById(sug.getId()) == null) {
+		if (suggestionRepository.findOne(sug.getId()) == null) {
 			// Error
 			throw new CitizenException("La sugerencia no existe.");
 		} else {
 			sug.decrementarVotos();
-			logger.send(Topics.NEGATIVE_SUGGESTION_VOTE, sug.getId() + "");
+			//logger.send(Topics.NEGATIVE_SUGGESTION_VOTE, sug.getId() + "");
 		}
 	}
 

@@ -1,10 +1,7 @@
 package hello.services;
 
-import participationSystem.producer.KafkaProducer;
-import participationSystem.producer.SingletonKafkaProducer;
-import participationSystem.producer.Topics;
 
 public interface SuperService {
-	KafkaProducer logger = SingletonKafkaProducer.getInstance().getProducer();
-	String separator = Topics.SEPARATOR;
+	//KafkaProducer logger = SingletonKafkaProducer.getInstance().getProducer();
+	//String separator = Topics.SEPARATOR;
 }

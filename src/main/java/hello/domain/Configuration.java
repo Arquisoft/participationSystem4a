@@ -1,16 +1,19 @@
 package hello.domain;
 
+
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
 @Table(name="CONFIGURACION")
 public class Configuration {
 
-	List<String> palabrasNoPermitidas;
+	@Id
+	@GeneratedValue
+	Long id;
+	List<String> palabrasNoPermitidas;//Si esto es un POJO... qué hace una lista???
 
 	public Configuration() {
 		loadInfo();
