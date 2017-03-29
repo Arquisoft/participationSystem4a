@@ -5,10 +5,10 @@ import org.springframework.stereotype.Service;
 
 import hello.domain.Configuration;
 import hello.repository.ConfigurationRepository;
-import hello.services.AdminServices;
+import hello.services.AdminService;
 
 @Service
-public class AdminServicesImpl implements AdminServices{
+public class AdminServiceImpl implements AdminService {
 
 	private ConfigurationRepository configurationRepository;
 	@Override

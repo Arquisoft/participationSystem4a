@@ -1,5 +1,11 @@
 package hello.controllers;
 
+import hello.domain.Categoria;
+import hello.domain.Citizen;
+import hello.domain.Sugerencia;
+import hello.producers.KafkaProducer;
+import hello.services.CitizenService;
+import hello.services.SuggestionService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -9,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import hello.domain.Citizen;
-import hello.producers.KafkaProducer;
-import hello.services.CitizenServices;
+import java.util.List;
 
 /**
  * Created by pelay on 28/03/2017.
@@ -22,13 +26,20 @@ public class CitizenController {
 
     @Autowired
     private KafkaProducer kafkaProducer;
-    Citizen citizen;
+    private  Citizen citizen;
+    private List<Sugerencia> listaSugerencias;
 
-    private CitizenServices citizenService;
+    private CitizenService citizenService;
+    private SuggestionService suggestionService;
 
     @Autowired
-    public void setCitizenService(CitizenServices citizenService){
+    public void setCitizenService(CitizenService citizenService){
         this.citizenService =citizenService;
+    }
+
+    @Autowired
+    public void setSuggestionService(SuggestionService suggestionService){
+        this.suggestionService = suggestionService;
     }
 /*
     @RequestMapping("/")
@@ -46,6 +57,8 @@ public class CitizenController {
         if(citizen!=null){
             if(DigestUtils.sha512Hex(password).equals(citizen.getContrasena())){
                 //session.setAttribute("citizen",citizen);
+
+
                 return "/user/index";
 
             }
@@ -61,4 +74,17 @@ public class CitizenController {
         return "redirect:/";
     }
 */
+
+    private void getSugerencias(Categoria c){
+        if(c==null){
+
+            listaSugerencias=suggestionService.findAll();
+        }
+        else{
+            listaSugerencias=suggestionService.findByCat(c);
+
+        }
+    }
+
+
 }

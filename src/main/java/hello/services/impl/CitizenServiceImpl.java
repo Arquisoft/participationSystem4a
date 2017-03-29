@@ -8,8 +8,7 @@ import hello.repository.CategoryRepository;
 import hello.repository.CitizenRepository;
 import hello.repository.CommentRepository;
 import hello.repository.SuggestionRepository;
-import hello.services.CitizenServices;
-import hello.services.SystemServices;
+import hello.services.CitizenService;
 import hello.util.exception.CitizenException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CitizenServiceImpl implements CitizenServices {
+public class CitizenServiceImpl implements CitizenService {
 
 	private CitizenRepository citizenRepository;
 	private SuggestionRepository suggestionRepository;
@@ -85,8 +84,8 @@ public class CitizenServiceImpl implements CitizenServices {
 
 	@Override
 	public List<Categoria> getCategoriasDisponibles() throws CitizenException {
-		SystemServices ss = new SystemServicesImpl();
-		return ss.getAllCategories();
+		//SystemServices ss = new SystemServicesImpl();
+		return categoryRepository.findAll();
 	}
 
 	@Override

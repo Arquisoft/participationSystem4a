@@ -1,24 +1,23 @@
 package participationSystem;
 
-import static org.junit.Assert.assertFalse;
-
-import org.junit.Test;
-
 import hello.domain.Categoria;
 import hello.domain.Comentario;
 import hello.domain.Sugerencia;
-import hello.services.AdminServices;
-import hello.services.CitizenServices;
+import hello.services.AdminService;
+import hello.services.CitizenService;
 import hello.services.Services;
 import hello.services.SystemServices;
 import hello.util.exception.CitizenException;
+import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
 
 
 
 public class TestLogic {
 
-	CitizenServices citizeServices = Services.getCitizenServices();
-	AdminServices adminServices = Services.getAdminServices();
+	CitizenService citizeServices = Services.getCitizenServices();
+	AdminService adminServices = Services.getAdminServices();
 	SystemServices systemSercices = Services.getSystemServices();
 	
 	@Test
