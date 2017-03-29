@@ -1,25 +1,26 @@
-package participationSystem.gestionSugerencias;
+package hello.services;
 
 
 
 import java.util.List;
 
 import hello.domain.Categoria;
+import hello.domain.Citizen;
 import hello.domain.Comentario;
 import hello.domain.Sugerencia;
 import hello.util.exception.CitizenException;
 
 public interface CitizenServices extends SuperService {
 	
-	//Citizen getCitizen(String email);
+	Citizen getCitizen(String email);
 
-	void createSugerencia(String nombre, String contenido, Categoria categoria) throws CitizenException;
+	void createSugerencia(Sugerencia sug) throws CitizenException;
 
-	void createComentario(String contenido, Sugerencia sugerencia) throws CitizenException;
+	void createComentario(Comentario comment) throws CitizenException;
 
 	List<Categoria> getCategoriasDisponibles() throws CitizenException;
 
-	void createCategoria(String nombre) throws CitizenException;
+	void createCategoria(Categoria categoria) throws CitizenException;
 
 	void votePositiveComment(Comentario comment) throws CitizenException;
 

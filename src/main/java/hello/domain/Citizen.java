@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Scope;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Clase del modelo Citizen
@@ -29,6 +30,9 @@ public class Citizen {
     private String contrasena;
     @Transient
     private String contrasena_NC;
+    
+    @OneToMany
+    List<Sugerencia> sugerencias; //ANa set y get  de esto
 
 
     public Citizen() {

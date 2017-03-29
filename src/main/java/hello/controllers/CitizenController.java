@@ -1,8 +1,5 @@
 package hello.controllers;
 
-import hello.domain.Citizen;
-import hello.producers.KafkaProducer;
-import hello.services.CitizenService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -11,6 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import hello.domain.Citizen;
+import hello.producers.KafkaProducer;
+import hello.services.CitizenServices;
 
 /**
  * Created by pelay on 28/03/2017.
@@ -23,11 +24,11 @@ public class CitizenController {
     private KafkaProducer kafkaProducer;
     Citizen citizen;
 
-    private CitizenService citizenService;
+    private CitizenServices citizenService;
 
     @Autowired
-    public void setCitizenService(CitizenService citizenService){
-        this.citizenService=citizenService;
+    public void setCitizenService(CitizenServices citizenService){
+        this.citizenService =citizenService;
     }
 /*
     @RequestMapping("/")
@@ -49,7 +50,7 @@ public class CitizenController {
 
             }
         }
-        model.addAttribute("error", "Your username and password is invalid.");aws@localhost
+        model.addAttribute("error", "Your username and password is invalid.");
         return "index";
 
     }

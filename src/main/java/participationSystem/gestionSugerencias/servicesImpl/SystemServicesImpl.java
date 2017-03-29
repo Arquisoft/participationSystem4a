@@ -15,7 +15,7 @@ public class SystemServicesImpl implements SystemServices {
 	List<Categoria> categorias = new ArrayList<>();
 	Configuration config = null;
 	public Configuration getConfiguration() {
-		//Obtener de la base de datos
+		// ANA Obtener de la base de datos
 		return null;
 	}
 
