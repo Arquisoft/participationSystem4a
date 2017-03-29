@@ -1,21 +1,21 @@
 package hello.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="COMENTARIO")
 public class Comentario {
 	@Id
 	@GeneratedValue
-	Long id;
-	int votos;
-	String contenido;
-	@ManyToOne 
+	private Long id;
+	private int votos;
+	private String contenido;
+	@ManyToOne
+	@JoinColumn(name="sugerencia_id")
 	private Sugerencia sugerencia;
+
+	public Comentario(){}
+
 
 	public Comentario(String comentario, Sugerencia sugerencia) {
 		super();

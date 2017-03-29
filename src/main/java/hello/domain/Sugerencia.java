@@ -1,36 +1,34 @@
 package hello.domain;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
 @Table(name="SUGERENCIA")
 public class Sugerencia {
 	@Id
-	@GeneratedValue
-	Long id;
-	int votos;
-	String nombre;
-	String contenido;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private int votos;
+	private String nombre;
+	private String contenido;
 	@OneToMany(mappedBy="sugerencia")
-	protected Set<Comentario> comentarios = new HashSet<Comentario>();
-	@ManyToOne 
-	Categoria Categoria;
-	//@ManyToOne
-	//Citizen usuario; //ANA Set y get de esto
+	private Set<Comentario> comentarios;
+	@ManyToOne
+	@JoinColumn(name="categoria_id")
+	private Categoria categoria;
+	/*@ManyToOne
+			@JoinColumn(name="categoria_id")
+	//private Citizen usuario; //ANA Set y get de esto*/
+
+	public Sugerencia(){}
 	
 	public Sugerencia(String nombre, String contenido, Categoria categoria) {
 		super();
 		this.nombre = nombre;
 		this.contenido = contenido;
-		this.Categoria = categoria;
+		this.categoria = categoria;
 //		Association.PoseerSugerencia.link(categoria, this);
 		
 	}
@@ -63,7 +61,7 @@ public class Sugerencia {
 	}
 
 	public Categoria getCategoria() {
-		return Categoria;
+		return categoria;
 	}
 
 	public void incrementarVotos() {
@@ -81,7 +79,7 @@ public class Sugerencia {
 	@Override
 	public String toString() {
 		return "Sugerencia [votos=" + votos + ", comentarios=" + comentarios
-				+ ", categoria=" + Categoria + "]";
+				+ ", categoria=" + categoria + "]";
 	}
 
 	@Override
@@ -89,7 +87,7 @@ public class Sugerencia {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((Categoria == null) ? 0 : Categoria.hashCode());
+				+ ((categoria == null) ? 0 : categoria.hashCode());
 		result = prime * result
 				+ ((comentarios == null) ? 0 : comentarios.hashCode());
 		result = prime * result + votos;
@@ -105,10 +103,10 @@ public class Sugerencia {
 		if (getClass() != obj.getClass())
 			return false;
 		Sugerencia other = (Sugerencia) obj;
-		if (Categoria == null) {
-			if (other.Categoria != null)
+		if (categoria == null) {
+			if (other.categoria != null)
 				return false;
-		} else if (!Categoria.equals(other.Categoria))
+		} else if (!categoria.equals(other.categoria))
 			return false;
 		if (comentarios == null) {
 			if (other.comentarios != null)
@@ -120,13 +118,6 @@ public class Sugerencia {
 		return true;
 	}
 
-	Set<Comentario> _getComentarios() {
-		return comentarios;
-	}
-
-	void _setCategoria(Categoria categoria2) {
-		this.Categoria=categoria2;
-	}
 	
 	
 }

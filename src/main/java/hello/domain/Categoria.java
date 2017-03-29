@@ -1,23 +1,22 @@
 package hello.domain;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 @Entity
-@Table(name="Categoria")
+@Table(name="CATEGORIA")
 public class Categoria {
 	@Id
-	@GeneratedValue
-	Long id;
-	String nombre;
-	@OneToMany(mappedBy="Categoria")
-	protected Set<Sugerencia> sugerencias = new HashSet<Sugerencia>();
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String nombre;
+	@OneToMany(mappedBy="categoria")
+	private  Set<Sugerencia> sugerencias;
+
+	public Categoria(){
+
+	}
 
 	public Categoria(String nombre) {
 		super();
@@ -35,7 +34,15 @@ public class Categoria {
 		return new HashSet<Sugerencia>(sugerencias);
 	}
 
-//	public void removeSugerencia(Sugerencia sugerencia){
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setSugerencias(Set<Sugerencia> sugerencias) {
+		this.sugerencias = sugerencias;
+	}
+
+	//	public void removeSugerencia(Sugerencia sugerencia){
 //		Association.PoseerSugerencia.unlink(this, sugerencia);
 //	}
 	@Override

@@ -8,6 +8,6 @@ import hello.domain.Categoria;
 @Repository("categoryRepository")
 public interface CategoryRepository extends JpaRepository<Categoria, Long>{
 
-	Categoria findByName(String name);
+	Categoria findByNombre(String name);
 	
 }

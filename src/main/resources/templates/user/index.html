@@ -76,9 +76,11 @@
             <p><a href="#">Link</a></p>
         </div>
         <div class="col-sm-8 text-left">
-            <th:block th:each="sugerencia : ${listaSugerencia}">
+            <th:block th:each="sugerencia : ${listaSugerencias}">
                 <tr>
-                    <td th:text="${sugerencia.name}"></td>
+                    <td th:text="${sugerencia.nombre}"></td>
+                    <td th:text="${sugerencia.contenido}"></td>
+                    <td th:text="${sugerencia.votos}"></td>
                 </tr>
             </th:block>
         </div>

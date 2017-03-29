@@ -57,6 +57,7 @@ public class CitizenController {
         if(citizen!=null){
             if(DigestUtils.sha512Hex(password).equals(citizen.getContrasena())){
                 //session.setAttribute("citizen",citizen);
+                getSugerencias(null);
 
 
                 return "/user/index";

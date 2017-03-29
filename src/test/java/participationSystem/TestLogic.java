@@ -8,6 +8,7 @@ import hello.services.CitizenService;
 import hello.services.Services;
 import hello.services.SystemServices;
 import hello.util.exception.CitizenException;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -27,7 +28,7 @@ public class TestLogic {
 		String contenido = "Que nos pongan un 10 en mayo.";
 		Categoria cat = new Categoria("Notas ASW"); //Obviamente esta categoria aun no existe
 		boolean todoOK = true;
-		try{
+				try{
 			Sugerencia s = new Sugerencia(nombre, contenido, cat);
 			citizeServices.createSugerencia(s);
 		}catch (CitizenException e){
