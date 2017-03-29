@@ -1,8 +1,8 @@
 package hello.repository;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 import hello.domain.Citizen;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 
 /**
@@ -10,7 +10,7 @@ import hello.domain.Citizen;
 
 
     @Repository("citizenRepository")
-    public interface CitizenRepository extends CrudRepository<Citizen,Long> {
+    public interface CitizenRepository extends JpaRepository<Citizen,Long> {
 
         Citizen findByEmail(String email);
 

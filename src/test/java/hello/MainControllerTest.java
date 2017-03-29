@@ -1,5 +1,6 @@
 package hello;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,6 +41,8 @@ public class MainControllerTest {
 		String userURI = base.toString() + "/user";  
 		ResponseEntity<String> response = template.getForEntity(base.toString(), String.class);
 		assertThat(response.getBody(), containsString("Please"));
+		System.out.println(DigestUtils.sha512Hex("temporal"));
+
 	}
 	
 	@Test

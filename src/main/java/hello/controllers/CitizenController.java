@@ -1,18 +1,27 @@
 package hello.controllers;
 
+import hello.domain.Citizen;
 import hello.producers.KafkaProducer;
 import hello.services.CitizenService;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by pelay on 28/03/2017.
  */
 @Controller
+@Scope("session")
 public class CitizenController {
 
     @Autowired
     private KafkaProducer kafkaProducer;
+    Citizen citizen;
 
     private CitizenService citizenService;
 
@@ -26,21 +35,22 @@ public class CitizenController {
         // model.addAttribute("message", new Message());
         return "index";
     }
+*/
 
-/*
-    @RequestMapping("/login")
-    public String getLogin(HttpSession session, @RequestParam String email, @RequestParam String password, Model model){
+    @RequestMapping(value="/login", method = RequestMethod.POST)
+    public String getLogin(@RequestParam String email, @RequestParam String password, Model model){
 
         Citizen citizen = citizenService.getCitizen(email);
 
         if(citizen!=null){
-            if(DigestUtils.sha512Hex(citizen.getContrasena()).equals(password)){
-                session.setAttribute("citizen",citizen);
+            if(DigestUtils.sha512Hex(password).equals(citizen.getContrasena())){
+                //session.setAttribute("citizen",citizen);
                 return "/user/index";
 
             }
         }
-        return "login";
+        model.addAttribute("error", "Your username and password is invalid.");aws@localhost
+        return "index";
 
     }
     /*

@@ -3,6 +3,7 @@ package hello.domain;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import org.hibernate.validator.constraints.Email;
+import org.springframework.context.annotation.Scope;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Date;
 /**
  * Clase del modelo Citizen
  */
+@Scope("session")
 @Entity
 @Table(name = "USUARIOS")
 public class Citizen {
