@@ -92,6 +92,7 @@ public class CitizenServiceImpl implements CitizenService {
 	@Override
 	public void createCategoria(Categoria categoria) throws CitizenException {
 		// SystemServices ss = new SystemServicesImpl();
+		this.categoryRepository.findByNombre(categoria.getNombre());
 		if (this.categoryRepository.findByNombre(categoria.getNombre()) == null)
 			this.categoryRepository.save(categoria);
 		else {
