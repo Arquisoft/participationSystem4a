@@ -31,6 +31,7 @@ public class TestLogic {
 		boolean todoOK = true;
 				try{
 			Sugerencia s = new Sugerencia(nombre, contenido, cat);
+			citizeServices.createCategoria(cat);
 			citizeServices.createSugerencia(s);
 		}catch (CitizenException e){
 			System.out.println("No se puede crear la sugerencia: "+nombre);
@@ -83,6 +84,11 @@ public class TestLogic {
 	public void testGetCategoriasDisponibles(){
 		Categoria cat = new Categoria("PruebaCategoriasDisponibles");
 		
+		
+	}
+	
+	@Test
+	public void testClasesModelo(){
 		
 	}
 }
