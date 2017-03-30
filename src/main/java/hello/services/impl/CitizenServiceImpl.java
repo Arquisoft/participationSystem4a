@@ -59,6 +59,7 @@ public class CitizenServiceImpl implements CitizenService {
 			// Mandar a Kafka (ejemplo que no tiene por qué ser asi)
 			logger.send(Topics.CREATE_SUGGESTION,
 					sug.getNombre() + separator + sug.getContenido() + separator + sug.getCategoria());
+			loggerCutre.log(this.getClass(), "Sugerencia = " + sug.getNombre(), "Categoria = " + sug.getCategoria().getNombre());
 		} catch (Exception e) {
 			throw new CitizenException("Error al guardar la sugerencia.");
 		}
@@ -77,6 +78,7 @@ public class CitizenServiceImpl implements CitizenService {
 			this.commentRepository.save(comment);
 			logger.send(Topics.COMMENT_SUGGESTION,
 					comment.getSugerencia().getId() + separator + comment.getContenido());
+			loggerCutre.log(this.getClass(), "Comentario ID = " + comment.getId());
 		} catch (Exception e) {
 			throw new CitizenException("Error al crear un comentario.");
 		}
@@ -110,6 +112,7 @@ public class CitizenServiceImpl implements CitizenService {
 		} else {
 			comment.incrementarVoto();
 			logger.send(Topics.POSITIVE_COMMENT_VOTE, comment.getId() + "");
+			loggerCutre.log(this.getClass(), "Votando positivo a comentario ID: "+comment.getId());
 		}
 
 	}
@@ -121,6 +124,7 @@ public class CitizenServiceImpl implements CitizenService {
 		} else {
 			comment.decrementarVoto();
 			logger.send(Topics.POSITIVE_COMMENT_VOTE, comment.getId() + "");
+			loggerCutre.log(this.getClass(), "Votando negativo a comentario ID: "+comment.getId());
 		}
 
 	}
@@ -131,6 +135,30 @@ public class CitizenServiceImpl implements CitizenService {
 	public Citizen getCitizen(String email) {
 		Citizen c = this.citizenRepository.findByEmail(email);
 		return c;
+	}
+
+	@Override
+	public void votePositiveSuggestion(Sugerencia suggestion) throws CitizenException {
+		if(this.suggestionRepository.findOne(suggestion.getId()) == null){
+			loggerCutre.log(this.getClass(), "La sugerencia con nombre: "+suggestion.getNombre() +" no existe.");
+			throw new CitizenException("La sugerencia no existe.");
+		}
+		suggestion.incrementarVotos();
+		logger.send(Topics.POSITIVE_SUGGESTION_VOTE, suggestion.getId() + "");
+		loggerCutre.log(this.getClass(), "Votando postivo a sugerencia ID: "+suggestion.getId());
+
+	}
+
+	@Override
+	public void voteNegativeSuggestion(Sugerencia suggestion) throws CitizenException {
+		if(this.suggestionRepository.findOne(suggestion.getId()) == null){
+			loggerCutre.log(this.getClass(), "La sugerencia con nombre: "+suggestion.getNombre() +" no existe.");
+			throw new CitizenException("La sugerencia no existe.");
+		}
+		suggestion.decrementarVotos();
+		logger.send(Topics.NEGATIVE_SUGGESTION_VOTE, suggestion.getId() + "");
+
+		loggerCutre.log(this.getClass(), "Votando negativo a sugerencia ID: "+suggestion.getId());
 	}
 
 }

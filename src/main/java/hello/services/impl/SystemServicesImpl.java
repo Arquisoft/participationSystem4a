@@ -8,6 +8,7 @@ import hello.repository.CommentRepository;
 import hello.repository.ConfigurationRepository;
 import hello.repository.SuggestionRepository;
 import hello.services.SystemServices;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,9 @@ public class SystemServicesImpl implements SystemServices {
 	private CommentRepository commentRepository;
 	private SuggestionRepository suggestionRepository;
 	private CategoryRepository categoryRepository;
+	
+	public SystemServicesImpl() {
+	}
 	
 	public Configuration getConfiguration() {
 		
