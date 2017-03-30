@@ -25,7 +25,7 @@ public class TestLogic {
 	public void createSugerencia(){
 		System.out.println(DigestUtils.sha512Hex("temporal"));
 		
-		String nombre = "Sugerenicia de prueba";
+		String nombre = "Sugerencia de prueba";
 		String contenido = "Que nos pongan un 10 en mayo.";
 		Categoria cat = new Categoria("Notas ASW"); //Obviamente esta categoria aun no existe
 		boolean todoOK = true;
@@ -36,7 +36,7 @@ public class TestLogic {
 			System.out.println("No se puede crear la sugerencia: "+nombre);
 			todoOK = false;
 		}catch (Exception e2){
-			System.out.println("Ah cascado algo internamente al crear la sugerencia: "+nombre);
+			System.out.println("Ha cascado algo internamente al crear la sugerencia: "+nombre);
 			todoOK = false;
 		}
 		assertFalse(todoOK); 
@@ -44,7 +44,7 @@ public class TestLogic {
 	
 	@Test
 	public void testCreateComment(){
-		String nombre = "Sugerenicia de prueba";
+		String nombre = "Sugerencia de prueba";
 		String contenido = "Que nos pongan un 10 en mayo.";
 		Categoria cat = new Categoria("Notas ASW");
 		Sugerencia sugerencia = new Sugerencia(nombre, contenido, cat);
