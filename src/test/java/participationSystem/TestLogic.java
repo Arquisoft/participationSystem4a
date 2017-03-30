@@ -5,8 +5,11 @@ import hello.domain.Comentario;
 import hello.domain.Configuration;
 import hello.domain.Sugerencia;
 import hello.services.AdminService;
+import hello.services.CategoryService;
 import hello.services.CitizenService;
+import hello.services.CommentService;
 import hello.services.Services;
+import hello.services.SuggestionService;
 import hello.services.SystemServices;
 import hello.util.exception.CitizenException;
 
@@ -25,6 +28,9 @@ public class TestLogic {
 	CitizenService citizeServices = Services.getCitizenServices();
 	AdminService adminServices = Services.getAdminServices();
 	SystemServices systemSercices = Services.getSystemServices();
+	CategoryService categoryService = Services.getCategoryService();
+	CommentService commentService = Services.getCommentService();
+	SuggestionService suggestionService = Services.getSuggestionService();
 	
 	@Test
 	public void createSugerencia(){
@@ -36,8 +42,8 @@ public class TestLogic {
 		boolean todoOK = true;
 				try{
 			Sugerencia s = new Sugerencia(nombre, contenido, cat);
-			citizeServices.createCategoria(cat);
-			citizeServices.createSugerencia(s);
+			categoryService.createCategoria(cat);
+			suggestionService.createSugerencia(s);
 		}catch (CitizenException e){
 			System.out.println("No se puede crear la sugerencia: "+nombre);
 			todoOK = false;
@@ -58,7 +64,7 @@ public class TestLogic {
 		try{
 			String contenidoComment = "Comentario de prueba";
 			Comentario c = new Comentario(contenidoComment, sugerencia);
-			citizeServices.createComentario(c);
+			commentService.createComentario(c);
 			
 			if(sugerencia.getComentarios().size() == 0){
 				todoOK = false;

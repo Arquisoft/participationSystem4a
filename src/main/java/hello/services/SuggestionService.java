@@ -16,7 +16,7 @@ public interface SuggestionService extends SuperService {
     List<Sugerencia>findByCat(Categoria cat);
     void votePositiveSugerencia(Sugerencia sug) throws CitizenException;
     void voteNegativeSugerencia(Sugerencia sug) throws CitizenException;
-
+    public void createSugerencia(Sugerencia sug) throws CitizenException;
 
 
 

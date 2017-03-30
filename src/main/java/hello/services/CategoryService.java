@@ -1,6 +1,7 @@
 package hello.services;
 
 import hello.domain.Categoria;
+import hello.util.exception.CitizenException;
 
 import java.util.List;
 
@@ -13,6 +14,6 @@ public interface CategoryService {
     Categoria findByNombre(String nombre);
     Categoria findById(Long id);
 
-
+    public void createCategoria(Categoria categoria) throws CitizenException;
 
 }

@@ -47,43 +47,43 @@ public class CitizenServiceImpl implements CitizenService {
 		this.categoryRepository = categoryRepository;
 	}
 
-	@Override
-	public void createSugerencia(Sugerencia sug) throws CitizenException {
-		// boolean catBien = systemServices.existeLaCategoria(categoria);
-		// boolean nombreYcontenidoBien =
-		// (systemServices.contienePalabrasAdmitidas(contenido)
-		// || systemServices.contienePalabrasAdmitidas(nombre)) ? false : true;
+//	@Override
+//	public void createSugerencia(Sugerencia sug) throws CitizenException {
+//		// boolean catBien = systemServices.existeLaCategoria(categoria);
+//		// boolean nombreYcontenidoBien =
+//		// (systemServices.contienePalabrasAdmitidas(contenido)
+//		// || systemServices.contienePalabrasAdmitidas(nombre)) ? false : true;
+//
+//		try {
+//			this.suggestionRepository.save(sug);
+//			// Mandar a Kafka (ejemplo que no tiene por qué ser asi)
+//			logger.send(Topics.CREATE_SUGGESTION,
+//					sug.getNombre() + separator + sug.getContenido() + separator + sug.getCategoria());
+//			loggerCutre.log(this.getClass(), "Sugerencia = " + sug.getNombre(), "Categoria = " + sug.getCategoria().getNombre());
+//		} catch (Exception e) {
+//			throw new CitizenException("Error al guardar lasugerencia.");
+//		}
+//
+//	}
 
-		try {
-			this.suggestionRepository.save(sug);
-			// Mandar a Kafka (ejemplo que no tiene por qué ser asi)
-			logger.send(Topics.CREATE_SUGGESTION,
-					sug.getNombre() + separator + sug.getContenido() + separator + sug.getCategoria());
-			loggerCutre.log(this.getClass(), "Sugerencia = " + sug.getNombre(), "Categoria = " + sug.getCategoria().getNombre());
-		} catch (Exception e) {
-			throw new CitizenException("Error al guardar la sugerencia.");
-		}
-
-	}
-
-	@Override
-	public void createComentario(Comentario comment) throws CitizenException {
-		// boolean sugBien = systemServices.existeLaSugerencia(sugerencia);
-		// boolean commentBien =
-		// (systemServices.contienePalabrasAdmitidas(contenido)) ? false : true;
-		// boolean todoOK = (commentBien && sugBien) ? true : false;
-		try {
-
-			// addComentario(comentario);
-			this.commentRepository.save(comment);
-			logger.send(Topics.COMMENT_SUGGESTION,
-					comment.getSugerencia().getId() + separator + comment.getContenido());
-			loggerCutre.log(this.getClass(), "Comentario ID = " + comment.getId());
-		} catch (Exception e) {
-			throw new CitizenException("Error al crear un comentario.");
-		}
-
-	}
+//	@Override
+//	public void createComentario(Comentario comment) throws CitizenException {
+//		// boolean sugBien = systemServices.existeLaSugerencia(sugerencia);
+//		// boolean commentBien =
+//		// (systemServices.contienePalabrasAdmitidas(contenido)) ? false : true;
+//		// boolean todoOK = (commentBien && sugBien) ? true : false;
+//		try {
+//
+//			// addComentario(comentario);
+//			this.commentRepository.save(comment);
+//			logger.send(Topics.COMMENT_SUGGESTION,
+//					comment.getSugerencia().getId() + separator + comment.getContenido());
+//			loggerCutre.log(this.getClass(), "Comentario ID = " + comment.getId());
+//		} catch (Exception e) {
+//			throw new CitizenException("Error al crear un comentario.");
+//		}
+//
+//	}
 
 	@Override
 	public List<Categoria> getCategoriasDisponibles() throws CitizenException {
@@ -91,18 +91,18 @@ public class CitizenServiceImpl implements CitizenService {
 		return categoryRepository.findAll();
 	}
 
-	@Override
-	public void createCategoria(Categoria categoria) throws CitizenException {
-		// SystemServices ss = new SystemServicesImpl();
-		this.categoryRepository.findByNombre(categoria.getNombre());
-		if (this.categoryRepository.findByNombre(categoria.getNombre()) == null)
-			this.categoryRepository.save(categoria);
-		else {
-			throw new CitizenException("Ha ocurrido un error al crear la categoría.");
-
-		}
-
-	}
+//	@Override
+//	public void createCategoria(Categoria categoria) throws CitizenException {
+//		// SystemServices ss = new SystemServicesImpl();
+//		this.categoryRepository.findByNombre(categoria.getNombre());
+//		if (this.categoryRepository.findByNombre(categoria.getNombre()) == null)
+//			this.categoryRepository.save(categoria);
+//		else {
+//			throw new CitizenException("Ha ocurrido un error al crear la categoría.");
+//
+//		}
+//
+//	}
 
 	@Override
 	public void votePositiveComment(Comentario comment) throws CitizenException {
