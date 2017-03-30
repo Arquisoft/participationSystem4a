@@ -7,6 +7,7 @@ import hello.producers.KafkaProducer;
 import hello.services.CategoryService;
 import hello.services.CitizenService;
 import hello.services.SuggestionService;
+import hello.util.exception.CitizenException;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -29,6 +30,7 @@ public class CitizenController {
     @Autowired
     private KafkaProducer kafkaProducer;
     private Citizen citizen;
+    private String idCat="all";
 
 
     private CitizenService citizenService;
@@ -82,21 +84,27 @@ public class CitizenController {
 
     @RequestMapping(value = "/cat")
     public String getSugerenciasCat(@RequestParam String idCat, HttpSession session, Model model) {
+        this.idCat=idCat;
+        putSugerenciasInSession(session);
 
-       if(idCat.equals("all")){
-           session.setAttribute("listaSugerencias", suggestionService.findAll());
-       }
-       else{
-           Long id = Long.parseLong(idCat);
-           Categoria cat = categoryService.findById(id);
-           session.setAttribute("listaSugerencias", suggestionService.findByCat(cat));
 
-       }
        return "/user/index";
 
 
 
 
+    }
+
+    private void putSugerenciasInSession(HttpSession session) {
+        if(idCat.equals("all")){
+            session.setAttribute("listaSugerencias", suggestionService.findAll());
+        }
+        else{
+            Long id = Long.parseLong(idCat);
+            Categoria cat = categoryService.findById(id);
+            session.setAttribute("listaSugerencias", suggestionService.findByCat(cat));
+
+        }
     }
 
 
@@ -108,6 +116,22 @@ public class CitizenController {
     }
 */
 
+    @RequestMapping(value = "/vote+", method = RequestMethod.POST)
+    public String votePos(@RequestParam String idSug, HttpSession session) {
+
+        Long id=Long.parseLong(idSug);
+        Sugerencia sugerencia = suggestionService.findById(id);
+        try {
+            suggestionService.votePositiveSugerencia(sugerencia);
+        } catch (CitizenException e) {
+
+        }
+        putSugerenciasInSession(session);
+
+
+        return "/user/index";
+    }
+
     private List<Sugerencia> getSugerencias(Categoria c) {
         if (c == null) {
 
@@ -117,6 +141,8 @@ public class CitizenController {
 
         }
     }
+
+
 
 
 }

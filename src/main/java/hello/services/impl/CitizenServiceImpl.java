@@ -124,26 +124,7 @@ public class CitizenServiceImpl implements CitizenService {
 
 	}
 
-	@Override
-	public void votePositiveSugerencia(Sugerencia sug) throws CitizenException {
-		if (suggestionRepository.findOne(sug.getId()) == null) {
-			throw new CitizenException("La sugerencia no existe.");
-		} else {
-			sug.incrementarVotos();
-			logger.send(Topics.POSITIVE_SUGGESTION_VOTE, sug.getId() + "");
-		}
-	}
 
-	@Override
-	public void voteNegativeSugerencia(Sugerencia sug) throws CitizenException {
-		if (suggestionRepository.findOne(sug.getId()) == null) {
-			// Error
-			throw new CitizenException("La sugerencia no existe.");
-		} else {
-			sug.decrementarVotos();
-			logger.send(Topics.NEGATIVE_SUGGESTION_VOTE, sug.getId() + "");
-		}
-	}
 
 	@Override
 	public Citizen getCitizen(String email) {

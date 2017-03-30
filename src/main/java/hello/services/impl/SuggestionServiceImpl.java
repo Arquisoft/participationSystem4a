@@ -2,8 +2,10 @@ package hello.services.impl;
 
 import hello.domain.Categoria;
 import hello.domain.Sugerencia;
+import hello.producers.Topics;
 import hello.repository.SuggestionRepository;
 import hello.services.SuggestionService;
+import hello.util.exception.CitizenException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +31,34 @@ public class SuggestionServiceImpl implements SuggestionService {
     }
 
     @Override
+    public Sugerencia findById(Long id) {
+        return this.suggestionRepository.findOne(id);
+    }
+
+    @Override
     public List<Sugerencia> findByCat(Categoria cat) {
         return this.suggestionRepository.findByCategoria(cat);
+    }
+
+    @Override
+    public void votePositiveSugerencia(Sugerencia sug) throws CitizenException {
+        if (suggestionRepository.findOne(sug.getId()) == null) {
+            throw new CitizenException("La sugerencia no existe.");
+        } else {
+            sug.incrementarVotos();
+            suggestionRepository.save(sug);
+          //  logger.send(Topics.POSITIVE_SUGGESTION_VOTE, sug.getId() + "");
+        }
+    }
+
+    @Override
+    public void voteNegativeSugerencia(Sugerencia sug) throws CitizenException {
+        if (suggestionRepository.findOne(sug.getId()) == null) {
+            // Error
+            throw new CitizenException("La sugerencia no existe.");
+        } else {
+            sug.decrementarVotos();
+            logger.send(Topics.NEGATIVE_SUGGESTION_VOTE, sug.getId() + "");
+        }
     }
 }

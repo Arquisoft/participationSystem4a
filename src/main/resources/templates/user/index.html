@@ -98,7 +98,11 @@
                     <td th:text="${sugerencia.nombre}">Título</td>
                     <td th:text="${sugerencia.contenido}">Contenido</td>
                     <td th:text="${sugerencia.votos}">Votos</td>
-                    <td>Voto +</td>
+                    <td>
+                        <form action="#" th:action="@{/vote+}"  method="post">
+                            <input name="idSug" type="hidden" th:value="${sugerencia.id}"/>
+                            <button class="btn btn-success" type="submit">Voto +</button>
+                        </form></td>
                     <td>Voto -</td>
                 </tr>
                 </tbody>
@@ -118,7 +122,8 @@
 <footer class="container-fluid text-center">
     <p>ParticipantsSystem4a - ASW 2017 - Universidad de Oviedo</p>
   <script>  $(document).ready(function() {
-    $('#sugerencias').DataTable();
+    $('#sugerencias').DataTable({
+        "iDisplayLength": 4});
     } );</script>
 </footer>
 

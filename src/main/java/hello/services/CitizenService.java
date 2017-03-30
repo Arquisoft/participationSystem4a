@@ -26,9 +26,7 @@ public interface CitizenService extends SuperService {
 
 	public void voteNegativeComment(Comentario comment) throws CitizenException;
 
-	public void votePositiveSugerencia(Sugerencia sug) throws CitizenException;
 
-	public void voteNegativeSugerencia(Sugerencia sug) throws CitizenException;
 
 
 }
