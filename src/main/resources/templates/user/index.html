@@ -54,12 +54,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">participationSystem4a</a>
+            <a class="navbar-brand" th:href="@{/cat(idCat=all)}">participationSystem4a</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Crear Sugerencia</a></li>
+                <li><a href="/user/formSugerencia">Crear Sugerencia</a></li>
                 <li><a href="#">Crear Categoría</a></li>
                 <li><a href="#">About us</a></li>
             </ul>
@@ -74,8 +74,9 @@
     <div class="row content">
         <div class="col-sm-2 sidenav">
             <strong>Categorias</strong>
+            <p><a th:href="@{/cat(idCat=all)}">Todas</a></p>
             <p th:each="categoria : ${session.listaCategorias}">
-            <a th:text="${categoria.nombre}" href="#">categoria.</a>
+            <a th:text="${categoria.nombre}" th:href="@{/cat(idCat=${categoria.getId()})}">categoria</a>
             </p>
 
         </div>
@@ -88,6 +89,8 @@
                     <th>Título</th>
                     <th>Contenido</th>
                     <th>Votos</th>
+                    <th>+</th>
+                    <th>-</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -95,6 +98,8 @@
                     <td th:text="${sugerencia.nombre}">Título</td>
                     <td th:text="${sugerencia.contenido}">Contenido</td>
                     <td th:text="${sugerencia.votos}">Votos</td>
+                    <td>Voto +</td>
+                    <td>Voto -</td>
                 </tr>
                 </tbody>
             </table>

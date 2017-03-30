@@ -57,7 +57,7 @@ public class CitizenController {
     }
 */
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/home", method = RequestMethod.POST)
     public String getLogin(@RequestParam String email, @RequestParam String password, HttpSession session, Model model) {
 
         Citizen citizen = citizenService.getCitizen(email);
@@ -77,7 +77,29 @@ public class CitizenController {
         model.addAttribute("error", "Your username and password is invalid.");
         return "index";
 
+
     }
+
+    @RequestMapping(value = "/cat")
+    public String getSugerenciasCat(@RequestParam String idCat, HttpSession session, Model model) {
+
+       if(idCat.equals("all")){
+           session.setAttribute("listaSugerencias", suggestionService.findAll());
+       }
+       else{
+           Long id = Long.parseLong(idCat);
+           Categoria cat = categoryService.findById(id);
+           session.setAttribute("listaSugerencias", suggestionService.findByCat(cat));
+
+       }
+       return "/user/index";
+
+
+
+
+    }
+
+
     /*
     @RequestMapping("/send")
     public String send(Model model, @ModelAttribute Message message) {

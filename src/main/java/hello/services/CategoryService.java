@@ -10,6 +10,8 @@ import java.util.List;
 public interface CategoryService {
 
     List<Categoria> findAll();
+    Categoria findByNombre(String nombre);
+    Categoria findById(Long id);
 
 
 
