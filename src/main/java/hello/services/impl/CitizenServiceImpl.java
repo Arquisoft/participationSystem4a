@@ -4,6 +4,7 @@ import hello.domain.Categoria;
 import hello.domain.Citizen;
 import hello.domain.Comentario;
 import hello.domain.Sugerencia;
+import hello.producers.Topics;
 import hello.repository.CategoryRepository;
 import hello.repository.CitizenRepository;
 import hello.repository.CommentRepository;
@@ -56,8 +57,8 @@ public class CitizenServiceImpl implements CitizenService {
 		try {
 			this.suggestionRepository.save(sug);
 			// Mandar a Kafka (ejemplo que no tiene por qué ser asi)
-			//logger.send(Topics.CREATE_SUGGESTION,
-				//	sug.getNombre() + separator + sug.getContenido() + separator + sug.getCategoria());
+			logger.send(Topics.CREATE_SUGGESTION,
+					sug.getNombre() + separator + sug.getContenido() + separator + sug.getCategoria());
 		} catch (Exception e) {
 			throw new CitizenException("Error al guardar la sugerencia.");
 		}
@@ -74,8 +75,8 @@ public class CitizenServiceImpl implements CitizenService {
 
 			// addComentario(comentario);
 			this.commentRepository.save(comment);
-			//logger.send(Topics.COMMENT_SUGGESTION,
-				//	comment.getSugerencia().getId() + separator + comment.getContenido());
+			logger.send(Topics.COMMENT_SUGGESTION,
+					comment.getSugerencia().getId() + separator + comment.getContenido());
 		} catch (Exception e) {
 			throw new CitizenException("Error al crear un comentario.");
 		}
@@ -107,7 +108,7 @@ public class CitizenServiceImpl implements CitizenService {
 			throw new CitizenException("El comentario no existe");
 		} else {
 			comment.incrementarVoto();
-			//logger.send(Topics.POSITIVE_COMMENT_VOTE, comment.getId() + "");
+			logger.send(Topics.POSITIVE_COMMENT_VOTE, comment.getId() + "");
 		}
 
 	}
@@ -118,7 +119,7 @@ public class CitizenServiceImpl implements CitizenService {
 			throw new CitizenException("El comentario no existe");
 		} else {
 			comment.decrementarVoto();
-			//logger.send(Topics.POSITIVE_COMMENT_VOTE, comment.getId() + "");
+			logger.send(Topics.POSITIVE_COMMENT_VOTE, comment.getId() + "");
 		}
 
 	}
@@ -129,7 +130,7 @@ public class CitizenServiceImpl implements CitizenService {
 			throw new CitizenException("La sugerencia no existe.");
 		} else {
 			sug.incrementarVotos();
-			//logger.send(Topics.POSITIVE_SUGGESTION_VOTE, sug.getId() + "");
+			logger.send(Topics.POSITIVE_SUGGESTION_VOTE, sug.getId() + "");
 		}
 	}
 
@@ -140,7 +141,7 @@ public class CitizenServiceImpl implements CitizenService {
 			throw new CitizenException("La sugerencia no existe.");
 		} else {
 			sug.decrementarVotos();
-			//logger.send(Topics.NEGATIVE_SUGGESTION_VOTE, sug.getId() + "");
+			logger.send(Topics.NEGATIVE_SUGGESTION_VOTE, sug.getId() + "");
 		}
 	}
 
