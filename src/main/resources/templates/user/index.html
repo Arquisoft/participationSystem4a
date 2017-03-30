@@ -1,12 +1,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Bootstrap Example</title>
+    <title>ParticipationSystem</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" >
+
     <style>
         /* Remove the navbar's default margin-bottom and rounded borders */
         .navbar {
@@ -71,18 +74,30 @@
     <div class="row content">
         <div class="col-sm-2 sidenav">
             <strong>Categorias</strong>
-            <p><a href="#">Link</a></p>
-            <p><a href="#">Link</a></p>
-            <p><a href="#">Link</a></p>
+            <p th:each="categoria : ${session.listaCategorias}">
+            <a th:text="${categoria.nombre}" href="#">categoria.</a>
+            </p>
+
         </div>
         <div class="col-sm-8 text-left">
-            <th:block th:each="sugerencia : ${listaSugerencias}">
+            <h2>Listado de sugerencias</h2>
+            <hr>
+            <table id="sugerencias" class="display" cellspacing="0" width="100%">
+                <thead>
                 <tr>
-                    <td th:text="${sugerencia.nombre}"></td>
-                    <td th:text="${sugerencia.contenido}"></td>
-                    <td th:text="${sugerencia.votos}"></td>
+                    <th>Título</th>
+                    <th>Contenido</th>
+                    <th>Votos</th>
                 </tr>
-            </th:block>
+                </thead>
+                <tbody>
+                <tr th:each="sugerencia : ${session.listaSugerencias}">
+                    <td th:text="${sugerencia.nombre}">Título</td>
+                    <td th:text="${sugerencia.contenido}">Contenido</td>
+                    <td th:text="${sugerencia.votos}">Votos</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
         <div class="col-sm-2 sidenav">
             <div class="well">
@@ -96,7 +111,10 @@
 </div>
 
 <footer class="container-fluid text-center">
-    <p>Footer Text</p>
+    <p>ParticipantsSystem4a - ASW 2017 - Universidad de Oviedo</p>
+  <script>  $(document).ready(function() {
+    $('#sugerencias').DataTable();
+    } );</script>
 </footer>
 
 </body>

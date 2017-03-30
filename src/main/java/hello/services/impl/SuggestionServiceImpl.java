@@ -2,7 +2,9 @@ package hello.services.impl;
 
 import hello.domain.Categoria;
 import hello.domain.Sugerencia;
+import hello.repository.SuggestionRepository;
 import hello.services.SuggestionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,16 +14,22 @@ import java.util.List;
  */
 @Service
 public class SuggestionServiceImpl implements SuggestionService {
+    SuggestionRepository suggestionRepository;
+
+    @Autowired
+    public void setSuggestionRepository(SuggestionRepository suggRep) {
+        this.suggestionRepository = suggRep;
+    }
 
 
     @Override
     public List<Sugerencia> findAll() {
-        //TODO
-        return null;
+        return this.suggestionRepository.findAll();
+
     }
 
     @Override
     public List<Sugerencia> findByCat(Categoria cat) {
-        return null;
+        return this.suggestionRepository.findByCategoria(cat);
     }
 }

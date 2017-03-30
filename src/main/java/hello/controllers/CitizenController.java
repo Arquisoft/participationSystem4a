@@ -4,6 +4,7 @@ import hello.domain.Categoria;
 import hello.domain.Citizen;
 import hello.domain.Sugerencia;
 import hello.producers.KafkaProducer;
+import hello.services.CategoryService;
 import hello.services.CitizenService;
 import hello.services.SuggestionService;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -26,19 +28,25 @@ public class CitizenController {
 
     @Autowired
     private KafkaProducer kafkaProducer;
-    private  Citizen citizen;
-    private List<Sugerencia> listaSugerencias;
+    private Citizen citizen;
+
 
     private CitizenService citizenService;
     private SuggestionService suggestionService;
+    private CategoryService categoryService;
 
     @Autowired
-    public void setCitizenService(CitizenService citizenService){
-        this.citizenService =citizenService;
+    public void setCategoryService(CategoryService categoryService) {
+        this.categoryService = categoryService;
     }
 
     @Autowired
-    public void setSuggestionService(SuggestionService suggestionService){
+    public void setCitizenService(CitizenService citizenService) {
+        this.citizenService = citizenService;
+    }
+
+    @Autowired
+    public void setSuggestionService(SuggestionService suggestionService) {
         this.suggestionService = suggestionService;
     }
 /*
@@ -49,15 +57,17 @@ public class CitizenController {
     }
 */
 
-    @RequestMapping(value="/login", method = RequestMethod.POST)
-    public String getLogin(@RequestParam String email, @RequestParam String password, Model model){
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String getLogin(@RequestParam String email, @RequestParam String password, HttpSession session, Model model) {
 
         Citizen citizen = citizenService.getCitizen(email);
 
-        if(citizen!=null){
-            if(DigestUtils.sha512Hex(password).equals(citizen.getContrasena())){
-                //session.setAttribute("citizen",citizen);
-                getSugerencias(null);
+        if (citizen != null) {
+            if (DigestUtils.sha512Hex(password).equals(citizen.getContrasena())) {
+                session.setAttribute("citizen", citizen);
+                List<Sugerencia> listaSugerencias = getSugerencias(null);
+                session.setAttribute("listaSugerencias", listaSugerencias);
+                session.setAttribute("listaCategorias",categoryService.findAll() );
 
 
                 return "/user/index";
@@ -76,13 +86,12 @@ public class CitizenController {
     }
 */
 
-    private void getSugerencias(Categoria c){
-        if(c==null){
+    private List<Sugerencia> getSugerencias(Categoria c) {
+        if (c == null) {
 
-            listaSugerencias=suggestionService.findAll();
-        }
-        else{
-            listaSugerencias=suggestionService.findByCat(c);
+            return suggestionService.findAll();
+        } else {
+            return suggestionService.findByCat(c);
 
         }
     }

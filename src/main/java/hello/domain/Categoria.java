@@ -45,36 +45,21 @@ public class Categoria {
 	//	public void removeSugerencia(Sugerencia sugerencia){
 //		Association.PoseerSugerencia.unlink(this, sugerencia);
 //	}
+
+
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-		result = prime * result
-				+ ((sugerencias == null) ? 0 : sugerencias.hashCode());
-		return result;
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Categoria categoria = (Categoria) o;
+
+		return nombre.equals(categoria.nombre);
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Categoria other = (Categoria) obj;
-		if (nombre == null) {
-			if (other.nombre != null)
-				return false;
-		} else if (!nombre.equals(other.nombre))
-			return false;
-		if (sugerencias == null) {
-			if (other.sugerencias != null)
-				return false;
-		} else if (!sugerencias.equals(other.sugerencias))
-			return false;
-		return true;
+	public int hashCode() {
+		return nombre.hashCode();
 	}
 
 	@Override

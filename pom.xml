@@ -72,6 +72,15 @@
 			<version>1.9.21</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.github.dandelion/datatables-thymeleaf -->
+		<dependency>
+			<groupId>com.github.dandelion</groupId>
+			<artifactId>datatables-thymeleaf</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+
+
+
 
 
 
