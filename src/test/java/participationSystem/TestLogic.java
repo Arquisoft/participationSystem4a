@@ -2,16 +2,21 @@ package participationSystem;
 
 import hello.domain.Categoria;
 import hello.domain.Comentario;
+import hello.domain.Configuration;
 import hello.domain.Sugerencia;
 import hello.services.AdminService;
 import hello.services.CitizenService;
 import hello.services.Services;
 import hello.services.SystemServices;
 import hello.util.exception.CitizenException;
+
+import static org.junit.Assert.*;
+
+import java.util.HashSet;
+import java.util.Set;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
-
-import static org.junit.Assert.assertFalse;
 
 
 
@@ -89,6 +94,83 @@ public class TestLogic {
 	
 	@Test
 	public void testClasesModelo(){
+		Categoria c= new Categoria("nombre");
+		Sugerencia s1=new Sugerencia("s1", "contenido1", c);
+		Sugerencia s2=new Sugerencia("s2", "contenido2", c);
+		Sugerencia s3=new Sugerencia("s3", "contenido3", c);
+		Sugerencia s4=new Sugerencia("s4", "contenido4", c);
+		Sugerencia s5=new Sugerencia("s5", "contenido5", c);
+		Set<Sugerencia> suger= new HashSet<>();
+		suger.add(s5);
+		suger.add(s4);
+		suger.add(s3);
+		suger.add(s2);
+		suger.add(s1);
+		c.setSugerencias(suger);
 		
+		Comentario c1= new Comentario("comentario1", s1);
+		Comentario c2= new Comentario("comentario2", s2);
+		Comentario c3= new Comentario("comentario3", s3);
+		Comentario c4= new Comentario("comentario4", s4);
+		
+		
+		Long id=c.getId();
+		assertEquals(c.getNombre(), "nombre");
+		assertEquals(c.getId(), id);
+		assertEquals(c.getSugerencias(), suger);
+		assertEquals(s1.getCategoria(), c);
+		assertEquals(s2.getCategoria(), c);
+		assertEquals(s3.getCategoria(), c);
+		assertEquals(s4.getCategoria(), c);
+		assertEquals(s5.getCategoria(), c);
+		assertEquals(s1.getContenido(), "contenido1");
+		assertEquals(s2.getContenido(), "contenido2");
+		assertEquals(s3.getContenido(), "contenido3");
+		assertEquals(s4.getContenido(), "contenido4");
+		assertEquals(s5.getContenido(), "contenido5");
+		assertEquals(s1.getNombre(), "s1");
+		assertEquals(s2.getNombre(), "s2");
+		assertEquals(s3.getNombre(), "s3");
+		assertEquals(s4.getNombre(), "s4");
+		assertEquals(s5.getNombre(), "s5");
+		assertEquals(s1.getVotos(), 0);
+		assertEquals(s2.getVotos(), 0);
+		assertEquals(s3.getVotos(), 0);
+		assertEquals(s4.getVotos(), 0);
+		assertEquals(s5.getVotos(), 0);
+		
+		assertEquals(c1.getContenido(), "comentario1");
+		assertEquals(c2.getContenido(), "comentario2");
+		assertEquals(c3.getContenido(), "comentario3");
+		assertEquals(c4.getContenido(), "comentario4");
+
+		assertEquals(c1.getSugerencia(), s1);
+		assertEquals(c2.getSugerencia(), s2);
+		assertEquals(c3.getSugerencia(), s3);
+		assertEquals(c4.getSugerencia(), s4);
+		
+		s1.incrementarVotos();
+		assertEquals(s1.getVotos(), 1);
+		s1.incrementarVotos();
+		assertEquals(s1.getVotos(), 2);
+		s1.incrementarVotos();
+		assertEquals(s1.getVotos(), 3);
+		s1.decrementarVotos();
+		assertEquals(s1.getVotos(), 2);
+		s1.decrementarVotos();
+		assertEquals(s1.getVotos(), 1);
+		s1.decrementarVotos();
+		assertEquals(s1.getVotos(), 0);
+		c1.incrementarVoto();
+		assertEquals(c1.getVotos(), 1);
+		c1.incrementarVoto();
+		assertEquals(c1.getVotos(), 2);
+		c1.decrementarVoto();
+		assertEquals(c1.getVotos(), 1);
+		c1.decrementarVoto();
+		assertEquals(c1.getVotos(), 0);
+		
+		Configuration co= new Configuration("mierda");
+		assertEquals(co.getPalabraNoPermitida(), "mierda");
 	}
 }
