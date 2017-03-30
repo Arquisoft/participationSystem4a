@@ -11,7 +11,7 @@ public class Categoria {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nombre;
-	@OneToMany(mappedBy="categoria")
+	@OneToMany(mappedBy="categoria", cascade = CascadeType.ALL)
 	private  Set<Sugerencia> sugerencias;
 
 	public Categoria(){

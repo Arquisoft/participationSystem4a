@@ -23,6 +23,7 @@ public class TestLogic {
 	
 	@Test
 	public void createSugerencia(){
+		System.out.println(DigestUtils.sha512Hex("temporal"));
 		
 		String nombre = "Sugerenicia de prueba";
 		String contenido = "Que nos pongan un 10 en mayo.";

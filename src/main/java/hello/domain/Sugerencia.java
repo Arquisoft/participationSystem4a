@@ -13,7 +13,7 @@ public class Sugerencia {
 	private int votos;
 	private String nombre;
 	private String contenido;
-	@OneToMany(mappedBy="sugerencia")
+	@OneToMany(mappedBy="sugerencia",cascade = CascadeType.ALL)
 	private Set<Comentario> comentarios;
 	@ManyToOne
 	@JoinColumn(name="categoria_id")
