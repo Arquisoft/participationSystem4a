@@ -2,7 +2,6 @@ package hello.services.impl;
 
 import hello.domain.Categoria;
 import hello.domain.Sugerencia;
-import hello.producers.Topics;
 import hello.repository.SuggestionRepository;
 import hello.services.SuggestionService;
 import hello.util.exception.CitizenException;
@@ -58,7 +57,8 @@ public class SuggestionServiceImpl implements SuggestionService {
             throw new CitizenException("La sugerencia no existe.");
         } else {
             sug.decrementarVotos();
-            logger.send(Topics.NEGATIVE_SUGGESTION_VOTE, sug.getId() + "");
+            suggestionRepository.save(sug);
+            //logger.send(Topics.NEGATIVE_SUGGESTION_VOTE, sug.getId() + "");
         }
     }
 }

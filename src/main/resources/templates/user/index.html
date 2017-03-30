@@ -103,7 +103,11 @@
                             <input name="idSug" type="hidden" th:value="${sugerencia.id}"/>
                             <button class="btn btn-success" type="submit">Voto +</button>
                         </form></td>
-                    <td>Voto -</td>
+                    <td>
+                        <form action="#" th:action="@{/vote-}"  method="post">
+                            <input name="idSug" type="hidden" th:value="${sugerencia.id}"/>
+                            <button class="btn btn-danger" type="submit">Voto -</button>
+                        </form></td>
                 </tr>
                 </tbody>
             </table>

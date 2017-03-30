@@ -132,6 +132,23 @@ public class CitizenController {
         return "/user/index";
     }
 
+    @RequestMapping(value = "/vote-", method = RequestMethod.POST)
+    public String voteNeg(@RequestParam String idSug, HttpSession session) {
+
+        Long id=Long.parseLong(idSug);
+        Sugerencia sugerencia = suggestionService.findById(id);
+        try {
+            suggestionService.voteNegativeSugerencia(sugerencia);
+        } catch (CitizenException e) {
+
+        }
+        putSugerenciasInSession(session);
+
+
+        return "/user/index";
+    }
+
+
     private List<Sugerencia> getSugerencias(Categoria c) {
         if (c == null) {
 
