@@ -5,14 +5,17 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
+@IdClass(VotoKey.class)
 @Table(name="VOTO")
 public class Voto implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@ManyToOne
+	@JoinColumn(name="sugerencia_id")
 	protected Sugerencia sugerencia;
 	@Id
 	@ManyToOne
+	@JoinColumn(name="ciudadano_id")	
 	protected Citizen ciudadano;
 	
 	Voto(){
