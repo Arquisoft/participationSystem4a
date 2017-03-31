@@ -191,7 +191,9 @@
             </div>
             <p th:text="${sugerencia.contenido}"></p>
             <div name="comentarios">
-                <div class="col-sm-8">
+
+
+                <div th:each="comentario : ${sugerencia.comentarios}" class="col-sm-8">
                     <div class="panel panel-white post panel-shadow">
                         <div class="post-heading">
                             <div class="pull-left image">
@@ -199,14 +201,14 @@
                             </div>
                             <div class="pull-left meta">
                                 <div class="title h5">
-                                    <a href="#"><b>Ryan Haywood</b></a>
+                                    <b th:text="${comentario.usuario.nombre}" >Ryan Haywood</b>
                                     made a post.
                                 </div>
                                 <h6 class="text-muted time">1 minute ago</h6>
                             </div>
                         </div>
                         <div class="post-description">
-                            <p>Bootdey is a gallery of free snippets resources templates and utilities for bootstrap css hmtl js framework. Codes for developers and web designers</p>
+                            <p th:text="${comentario.contenido}">Bootdey is a gallery of free snippets resources templates and utilities for bootstrap css hmtl js framework. Codes for developers and web designers</p>
                             <div class="stats">
                                 <a href="#" class="btn btn-default stat-item">
                                     <i class="fa fa-thumbs-up icon"></i>2
@@ -218,14 +220,7 @@
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
-
-
-
-
         </div>
         <div class="col-sm-2 sidenav">
             <div class="well">

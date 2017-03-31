@@ -50,6 +50,14 @@ public class Comentario {
 		this.contenido = comentario;
 	}
 
+	public Citizen getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Citizen usuario) {
+		this.usuario = usuario;
+	}
+
 	public void incrementarVoto() {
 		this.votos++;
 	}
