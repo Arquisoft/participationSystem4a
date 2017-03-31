@@ -71,10 +71,6 @@ public class Sugerencia {
 	public void decrementarVotos() {
 		this.votos--;
 	}
-	
-	public void removeComentario(Comentario comentario){
-//		Association.PoseerComentario.unlink(this, comentario);
-	}
 
 	@Override
 	public String toString() {

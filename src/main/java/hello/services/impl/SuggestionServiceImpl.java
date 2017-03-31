@@ -47,7 +47,7 @@ public class SuggestionServiceImpl implements SuggestionService {
         } else {
             sug.incrementarVotos();
             suggestionRepository.save(sug);
-          //  logger.send(Topics.POSITIVE_SUGGESTION_VOTE, sug.getId() + "");
+            logger.send(Topics.POSITIVE_SUGGESTION_VOTE, sug.getId() + "");
         }
     }
 
@@ -62,4 +62,18 @@ public class SuggestionServiceImpl implements SuggestionService {
             logger.send(Topics.NEGATIVE_SUGGESTION_VOTE, sug.getId() + "");
         }
     }
+    @Override
+	public void createSugerencia(Sugerencia sug) throws CitizenException {
+
+		try {
+			this.suggestionRepository.save(sug);
+			// Mandar a Kafka (ejemplo que no tiene por qué ser asi)
+			logger.send(Topics.CREATE_SUGGESTION,
+					sug.getNombre() + separator + sug.getContenido() + separator + sug.getCategoria());
+			loggerCutre.log(this.getClass(), "Sugerencia = " + sug.getNombre(), "Categoria = " + sug.getCategoria().getNombre());
+		} catch (Exception e) {
+			throw new CitizenException("Error al guardar la sugerencia.");
+		}
+
+	}
 }

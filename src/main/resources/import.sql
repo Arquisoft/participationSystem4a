@@ -1,3 +1,30 @@
+DROP TABLE CONFIGURACION;
+DROP TABLE COMENTARIO;
+DROP TABLE SUGERENCIA;
+DROP TABLE CATEGORIA;
+
+Create table CATEGORIA (ID BIGINT NOT NULL 
+AUTO_INCREMENT,
+NOMBRE VARCHAR(255), PRIMARY KEY (ID)) engine=InnoDB;
+
+CREATE TABLE SUGERENCIA(ID BIGINT NOT NULL 
+AUTO_INCREMENT,
+NOMBRE VARCHAR(255), VOTOS INT, CONTENIDO VARCHAR(255),
+CATEGORIA_ID BIGINT,
+FOREIGN KEY (CATEGORIA_ID) REFERENCES Categoria(ID),
+PRIMARY KEY (ID))engine=InnoDB;
+
+
+CREATE TABLE COMENTARIO(ID BIGINT NOT NULL AUTO_INCREMENT,
+VOTOS INT, COMENTARIO VARCHAR(255),
+SUGERENCIA_ID BIGINT,
+FOREIGN KEY (SUGERENCIA_ID) REFERENCES SUGERENCIA(ID),
+PRIMARY KEY (ID))engine=InnoDB;
+
+CREATE TABLE CONFIGURACION (PALABRA_NO_PERMITIDA 
+VARCHAR(255),
+PRIMARY KEY(PALABRA_NO_PERMITIDA));
+
 INSERT INTO `asw`.`usuarios` (`id`, `apellidos`, `contrasena`, `direccion_postal`, `email`, `fecha_nacimiento`, `nacionalidad`, `nombre`, `numero_identificativo`) VALUES ('1', 'García Larteregui', '2088948c702d6fb94bfa4f4bf314341013730d6da4338507e1be3e5f3b8ccddd9d874faecf00923fe6e26cbd67f0322d9d8e4f6ab8d04704c7f13496dc63a5cb', 'Gijón', 'pelayo@gmail.com', '1994/05/25', 'Española', 'Pelayo', '511236');
 INSERT INTO `asw`.`usuarios` (`id`, `apellidos`, `contrasena`, `direccion_postal`, `email`, `fecha_nacimiento`, `nacionalidad`, `nombre`, `numero_identificativo`) VALUES ('2', 'Fernandez Alvarez', '2088948c702d6fb94bfa4f4bf314341013730d6da4338507e1be3e5f3b8ccddd9d874faecf00923fe6e26cbd67f0322d9d8e4f6ab8d04704c7f13496dc63a5cb', 'Oviedo', 'pedro@gmail.com', '1994/05/25', 'Española', 'Pedro', '51123684585T');
 

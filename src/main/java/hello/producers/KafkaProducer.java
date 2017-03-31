@@ -17,9 +17,13 @@ public class KafkaProducer {
 
     private static final Logger logger = Logger.getLogger(KafkaProducer.class);
 
-    @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
+    public KafkaProducer() {
+		KafkaProducerFactory facotria = new KafkaProducerFactory();
+		
+		this.kafkaTemplate = facotria.kafkaTemplate();
+	}
     public void send(String topic, String data) {
         ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(topic, data);
         future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {

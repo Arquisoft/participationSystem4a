@@ -58,7 +58,7 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="active" id="homeParticipation"><a href="#">Home</a></li>
                 <li><a href="/user/formSugerencia">Crear Sugerencia</a></li>
                 <li><a href="#">Crear Categoría</a></li>
                 <li><a href="#">About us</a></li>
@@ -76,7 +76,7 @@
             <strong>Categorias</strong>
             <p><a th:href="@{/cat(idCat=all)}">Todas</a></p>
             <p th:each="categoria : ${session.listaCategorias}">
-            <a th:text="${categoria.nombre}" th:href="@{/cat(idCat=${categoria.getId()})}">categoria</a>
+            <a th:text="${categoria.nombre}" th:href="@{/cat(idCat=${categoria.getId()})}" >categoria</a><!-- th:id="categoria=${categoria.getId()" -->
             </p>
 
         </div>
@@ -98,11 +98,11 @@
                 <tr th:each="sugerencia : ${session.listaSugerencias}">
                     <td th:text="${sugerencia.nombre}">Título</td>
                     <td th:text="${sugerencia.contenido}">Contenido</td>
-                    <td th:text="${sugerencia.votos}">Votos</td>
+                    <td th:name="#{sugerencia(${sugerencia.id})}" th:text="${sugerencia.votos}">Votos</td>
                     <td>
                         <form action="#" th:action="@{/vote+}"  method="post">
                             <input name="idSug" type="hidden" th:value="${sugerencia.id}"/>
-                            <button class="btn btn-success" type="submit">Voto +</button>
+                            <button th:name="${sugerencia.id}" class="btn btn-success" type="submit" >Voto +</button> <!-- th:id="votopositivo?id=${sugerencia.id}" -->
                         </form></td>
                     <td>
                         <form action="#" th:action="@{/vote-}"  method="post">
