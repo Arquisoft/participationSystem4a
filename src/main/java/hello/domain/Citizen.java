@@ -18,6 +18,7 @@ public class Citizen {
     private Long id; // JPA
     private String nombre;
     private String apellidos;
+
     @Email(message="*Introduzca un email válido")
     private String email;
     private Date fecha_nacimiento;
