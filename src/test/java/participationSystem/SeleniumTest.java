@@ -14,7 +14,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import participationSystem.util.SeleniumUtils;
 
 public class SeleniumTest {
-	private WebDriver driver;
+/*	private WebDriver driver;
 	private String baseUrl;
 	private StringBuffer verificationErrors = new StringBuffer();
 	
@@ -122,7 +122,7 @@ public class SeleniumTest {
 		if (!"".equals(verificationErrorString)) {
 			fail(verificationErrorString);
 		}
-	}
+	}*/
 
 
 }

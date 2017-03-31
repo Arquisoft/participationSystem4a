@@ -13,6 +13,9 @@ public class Comentario {
 	@ManyToOne
 	@JoinColumn(name="sugerencia_id")
 	private Sugerencia sugerencia;
+	@ManyToOne
+	@JoinColumn(name="usuario_id")
+	private Citizen usuario;
 
 	public Comentario(){}
 

@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Clase del modelo Citizen
@@ -28,6 +29,8 @@ public class Citizen {
     private String contrasena;
     @Transient
     private String contrasena_NC;
+    @OneToMany(mappedBy="usuario",cascade = CascadeType.ALL)
+    private Set<Comentario> comentarios;
    /*
     @OneToMany
     List<Sugerencia> sugerencias; //ANa set y get  de esto
