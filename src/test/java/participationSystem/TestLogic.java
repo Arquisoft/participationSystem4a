@@ -1,9 +1,12 @@
 package participationSystem;
 
+import hello.Message;
+import hello.controllers.CitizenController;
 import hello.domain.Categoria;
 import hello.domain.Comentario;
 import hello.domain.Configuration;
 import hello.domain.Sugerencia;
+import hello.producers.SingletonKafkaProducer;
 import hello.services.AdminService;
 import hello.services.CategoryService;
 import hello.services.CitizenService;
@@ -11,6 +14,9 @@ import hello.services.CommentService;
 import hello.services.Services;
 import hello.services.SuggestionService;
 import hello.services.SystemServices;
+import hello.services.impl.CategoryServiceImpl;
+import hello.services.impl.CitizenServiceImpl;
+import hello.services.impl.SuggestionServiceImpl;
 import hello.util.exception.CitizenException;
 
 import static org.junit.Assert.*;
@@ -96,6 +102,30 @@ public class TestLogic {
 		Categoria cat = new Categoria("PruebaCategoriasDisponibles");
 		
 		
+	}
+	
+	@SuppressWarnings("static-access")
+	@Test
+	public void testCitizenController(){
+		CitizenController cc= new CitizenController();
+		cc.setCategoryService(new Services().getCategoryService());
+		cc.setCitizenService(new Services().getCitizenServices());
+		cc.setSuggestionService(new Services().getSuggestionService());
+	}
+	
+	@Test
+	public void testMessage(){
+		Message m= new Message();
+		m.setMessage("mensaje");
+		assertEquals(m.getMessage(),"mensaje");
+	}
+	
+	@Test
+	public void testSingletonKafkaProducer(){
+		SingletonKafkaProducer s= new SingletonKafkaProducer();
+		SingletonKafkaProducer s1= SingletonKafkaProducer.getInstance();
+		s.getProducer();
+		s1.getProducer();
 	}
 	
 	@Test
