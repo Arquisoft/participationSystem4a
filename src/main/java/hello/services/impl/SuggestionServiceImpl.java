@@ -1,6 +1,7 @@
 package hello.services.impl;
 
 import hello.domain.Categoria;
+import hello.domain.Citizen;
 import hello.domain.Sugerencia;
 import hello.producers.Topics;
 import hello.repository.SuggestionRepository;
@@ -47,6 +48,7 @@ public class SuggestionServiceImpl implements SuggestionService {
         } else {
             sug.incrementarVotos();
             suggestionRepository.save(sug);
+            //guardar en la tabla votos la sugerencia con el usuario
             logger.send(Topics.POSITIVE_SUGGESTION_VOTE, sug.getId() + "");
         }
     }

@@ -18,9 +18,10 @@ public class Sugerencia {
 	@ManyToOne
 	@JoinColumn(name="categoria_id")
 	private Categoria categoria;
-	/*@ManyToOne
-			@JoinColumn(name="categoria_id")
-	//private Citizen usuario; //ANA Set y get de esto*/
+	
+	@ManyToOne
+	@JoinColumn(name="usuario_id")
+	private Citizen usuario;
 
 	public Sugerencia(){}
 	
@@ -31,6 +32,13 @@ public class Sugerencia {
 		this.categoria = categoria;
 //		Association.PoseerSugerencia.link(categoria, this);
 		
+	}
+	public Sugerencia(String nombre, String contenido, Categoria categoria, Citizen usuario) {
+		super();
+		this.nombre = nombre;
+		this.contenido = contenido;
+		this.categoria = categoria;
+		this.usuario=usuario;	
 	}
 
 	public String getNombre() {

@@ -31,6 +31,11 @@ public class Citizen {
     private String contrasena_NC;
     @OneToMany(mappedBy="usuario",cascade = CascadeType.ALL)
     private Set<Comentario> comentarios;
+    @OneToMany(mappedBy="usuario",cascade = CascadeType.ALL)
+    private Set<Sugerencia> sugerencias;
+    
+    
+    
    /*
     @OneToMany
     List<Sugerencia> sugerencias; //ANa set y get  de esto
