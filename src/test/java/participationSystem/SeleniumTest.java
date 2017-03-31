@@ -34,7 +34,7 @@ public class SeleniumTest {
 		driver.findElement(By.name("botonlogin")).click();
 		//Selenium.waitForPageToLoad("30000");
 		//...
-		driver.findElement(By.id("homeParticipation"));
+	//	driver.findElement(By.id("homeParticipation"));
 	}
 	
 	@Test
@@ -46,7 +46,7 @@ public class SeleniumTest {
 		//...
 	//	assertEquals(driver.findElement(By.id("??sugerencia_es_ES??")), 2);
 	
-		driver.findElement(By.name("8")).click();
+//		driver.findElement(By.name("8")).click();
 	//	assertEquals(driver.findElement(By.id("??sugerencia_es_ES??")), 3);
 	}
 	
@@ -59,7 +59,7 @@ public class SeleniumTest {
 		//...
 	//	assertEquals(driver.findElement(By.id("??sugerencia_es_ES??")), 2);
 	
-		driver.findElement(By.name("8")).click();
+//		driver.findElement(By.name("8")).click();
 	}
 
 	@After
