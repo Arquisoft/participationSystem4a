@@ -148,6 +148,15 @@ public class CitizenController {
         return "/user/index";
     }
 
+    @RequestMapping(value="/sug")
+    public String viewSug(@RequestParam String idSug,Model model){
+        Long id=Long.parseLong(idSug);
+        Sugerencia sugerencia = suggestionService.findById(id);
+        model.addAttribute("sugerencia",sugerencia);
+        return "/user/viewSuggestion";
+
+    }
+
 
     private List<Sugerencia> getSugerencias(Categoria c) {
         if (c == null) {
@@ -158,6 +167,7 @@ public class CitizenController {
 
         }
     }
+
 
 
 

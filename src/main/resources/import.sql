@@ -1,4 +1,4 @@
-DROP TABLE CONFIGURACION;
+/*DROP TABLE CONFIGURACION;
 DROP TABLE COMENTARIO;
 DROP TABLE SUGERENCIA;
 DROP TABLE CATEGORIA;
@@ -24,6 +24,7 @@ PRIMARY KEY (ID))engine=InnoDB;
 CREATE TABLE CONFIGURACION (PALABRA_NO_PERMITIDA 
 VARCHAR(255),
 PRIMARY KEY(PALABRA_NO_PERMITIDA));
+*/
 
 INSERT INTO `asw`.`usuarios` (`id`, `apellidos`, `contrasena`, `direccion_postal`, `email`, `fecha_nacimiento`, `nacionalidad`, `nombre`, `numero_identificativo`) VALUES ('1', 'García Larteregui', '2088948c702d6fb94bfa4f4bf314341013730d6da4338507e1be3e5f3b8ccddd9d874faecf00923fe6e26cbd67f0322d9d8e4f6ab8d04704c7f13496dc63a5cb', 'Gijón', 'pelayo@gmail.com', '1994/05/25', 'Española', 'Pelayo', '511236');
 INSERT INTO `asw`.`usuarios` (`id`, `apellidos`, `contrasena`, `direccion_postal`, `email`, `fecha_nacimiento`, `nacionalidad`, `nombre`, `numero_identificativo`) VALUES ('2', 'Fernandez Alvarez', '2088948c702d6fb94bfa4f4bf314341013730d6da4338507e1be3e5f3b8ccddd9d874faecf00923fe6e26cbd67f0322d9d8e4f6ab8d04704c7f13496dc63a5cb', 'Oviedo', 'pedro@gmail.com', '1994/05/25', 'Española', 'Pedro', '51123684585T');
@@ -84,16 +85,16 @@ INSERT INTO `asw`.`sugerencia` (`id`, `contenido`, `nombre`, `votos`, `categoria
 INSERT INTO `asw`.`sugerencia` (`id`, `contenido`, `nombre`, `votos`, `categoria_id`) VALUES('33','Madrid','Madrid tolerancia cero contra el maltrato animal','12');
 
 
-INSERT INTO `asw`.`comentario` (`id`, `contenido`, `votos`, `sugerencia_id`) VALUES ('1', 'Me parece correctisimo', '0', '1');
-INSERT INTO `asw`.`comentario` (`id`, `contenido`, `votos`, `sugerencia_id`) VALUES ('2', 'Que la soterren ya que estamos', '0', '1');
+INSERT INTO `asw`.`comentario` (`id`, `contenido`, `votos`, `sugerencia_id`,`usuario_id`) VALUES ('1', 'Me parece correctisimo', '0', '1','1');
+INSERT INTO `asw`.`comentario` (`id`, `contenido`, `votos`, `sugerencia_id`,`usuario_id`) VALUES ('2', 'Que la soterren ya que estamos', '0', '1','2');
 
-INSERT INTO `asw`.`comentario` (`id`, `contenido`, `votos`, `sugerencia_id`) VALUES ('3', 'Para que quieres saber eso? xd', '0', '2');
-INSERT INTO `asw`.`comentario` (`id`, `contenido`, `votos`, `sugerencia_id`) VALUES ('4', 'Por un Oviedo verde', '0', '2');
+INSERT INTO `asw`.`comentario` (`id`, `contenido`, `votos`, `sugerencia_id`,`usuario_id`) VALUES ('3', 'Para que quieres saber eso? xd', '0', '2','2');
+INSERT INTO `asw`.`comentario` (`id`, `contenido`, `votos`, `sugerencia_id`,`usuario_id`) VALUES ('4', 'Por un Oviedo verde', '0', '2','1');
 
-INSERT INTO `asw`.`comentario` (`id`, `contenido`, `votos`, `sugerencia_id`) VALUES ('5', 'No se, yo siempre le echo 20', '0', '3');
-INSERT INTO `asw`.`comentario` (`id`, `contenido`, `votos`, `sugerencia_id`) VALUES ('6', 'A mi me vendria genial', '0', '3');
+INSERT INTO `asw`.`comentario` (`id`, `contenido`, `votos`, `sugerencia_id`,`usuario_id`) VALUES ('5', 'No se, yo siempre le echo 20', '0', '3','1');
+INSERT INTO `asw`.`comentario` (`id`, `contenido`, `votos`, `sugerencia_id`,`usuario_id`) VALUES ('6', 'A mi me vendria genial', '0', '3','2');
 
-INSERT INTO `asw`.`comentario` (`id`, `contenido`, `votos`, `sugerencia_id`) VALUES ('7', '¿Pero qué me estas container?', '0', '4');
-INSERT INTO `asw`.`comentario` (`id`, `contenido`, `votos`, `sugerencia_id`) VALUES ('8', 'Cuando hace calor huele fatal', '0', '4');
+INSERT INTO `asw`.`comentario` (`id`, `contenido`, `votos`, `sugerencia_id`,`usuario_id`) VALUES ('7', '¿Pero qué me estas container?', '0', '4','2');
+INSERT INTO `asw`.`comentario` (`id`, `contenido`, `votos`, `sugerencia_id`,`usuario_id`) VALUES ('8', 'Cuando hace calor huele fatal', '0', '4','1');
 
-INSERT INTO `asw`.`comentario` (`id`, `contenido`, `votos`, `sugerencia_id`) VALUES ('9', 'Todo genial', '0', '5');
+INSERT INTO `asw`.`comentario` (`id`, `contenido`, `votos`, `sugerencia_id`,`usuario_id`) VALUES ('9', 'Todo genial', '0', '5','2');

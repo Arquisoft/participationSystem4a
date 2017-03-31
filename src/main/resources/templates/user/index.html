@@ -96,7 +96,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="sugerencia : ${session.listaSugerencias}">
-                    <td th:text="${sugerencia.nombre}">Título</td>
+                    <td> <a th:text="${sugerencia.nombre}" th:href="@{/sug(idSug=${sugerencia.getId()})}">Titulo</a></td>
                     <td th:text="${sugerencia.contenido}">Contenido</td>
                     <td th:name="#{sugerencia(${sugerencia.id})}" th:text="${sugerencia.votos}">Votos</td>
                     <td>

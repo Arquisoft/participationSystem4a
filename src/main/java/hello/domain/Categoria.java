@@ -62,13 +62,16 @@ public class Categoria {
 		return nombre.hashCode();
 	}
 
+
 	@Override
 	public String toString() {
-		return "Categoria [nombre=" + nombre + ", sugerencias=" + sugerencias
-				+ "]";
+		return "Categoria{" +
+				"id=" + id +
+				", nombre='" + nombre + '\'' +
+				'}';
 	}
 
-	 Set<Sugerencia> _getSugerencias() {
+	Set<Sugerencia> _getSugerencias() {
 		return sugerencias;
 	}
 
