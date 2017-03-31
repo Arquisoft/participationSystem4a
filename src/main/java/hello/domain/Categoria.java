@@ -71,8 +71,4 @@ public class Categoria {
 				'}';
 	}
 
-	Set<Sugerencia> _getSugerencias() {
-		return sugerencias;
-	}
-
 }

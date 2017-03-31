@@ -101,9 +101,4 @@ public class Comentario {
 				+ "]";
 	}
 
-	public void _setSugerencia(Sugerencia sugerencia2) {
-		this.sugerencia=sugerencia2;
-		
-	}
-
 }

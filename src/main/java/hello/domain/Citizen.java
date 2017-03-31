@@ -41,7 +41,8 @@ public class Citizen {
     List<Sugerencia> sugerencias; //ANa set y get  de esto
 */
 
-    public Citizen() {
+   
+	public Citizen() {
     }
 
     public Citizen(String nombre, String apellidos, String email, Date fecha_nacimiento, String direccion_postal, String nacionalidad,
@@ -137,6 +138,14 @@ public class Citizen {
         this.contrasena = DigestUtils.sha512Hex(password);
         this.contrasena_NC = password;
     }
+
+    public Set<Comentario> getComentarios() {
+		return comentarios;
+	}
+
+	public Set<Sugerencia> getSugerencias() {
+		return sugerencias;
+	}
 
 
     @Override

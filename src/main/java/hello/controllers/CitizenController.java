@@ -3,7 +3,6 @@ package hello.controllers;
 import hello.domain.Categoria;
 import hello.domain.Citizen;
 import hello.domain.Sugerencia;
-import hello.producers.KafkaProducer;
 import hello.services.CategoryService;
 import hello.services.CitizenService;
 import hello.services.SuggestionService;
@@ -28,8 +27,8 @@ import java.util.List;
 public class CitizenController {
 
     @Autowired
-    private KafkaProducer kafkaProducer;
-    private Citizen citizen;
+    /*private KafkaProducer kafkaProducer;
+    private Citizen citizen;*/
     private String idCat="all";
 
 

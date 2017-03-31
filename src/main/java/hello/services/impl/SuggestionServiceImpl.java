@@ -1,7 +1,6 @@
 package hello.services.impl;
 
 import hello.domain.Categoria;
-import hello.domain.Citizen;
 import hello.domain.Sugerencia;
 import hello.producers.Topics;
 import hello.repository.SuggestionRepository;

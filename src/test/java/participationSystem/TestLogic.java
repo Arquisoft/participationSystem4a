@@ -14,20 +14,12 @@ import hello.services.CommentService;
 import hello.services.Services;
 import hello.services.SuggestionService;
 import hello.services.SystemServices;
-import hello.services.impl.CategoryServiceImpl;
-import hello.services.impl.CitizenServiceImpl;
-import hello.services.impl.SuggestionServiceImpl;
 import hello.util.exception.CitizenException;
-
 import static org.junit.Assert.*;
-
 import java.util.HashSet;
 import java.util.Set;
-
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
-
-
 
 public class TestLogic {
 
@@ -100,7 +92,7 @@ public class TestLogic {
 	@Test
 	public void testGetCategoriasDisponibles(){
 		Categoria cat = new Categoria("PruebaCategoriasDisponibles");
-		
+		assertEquals(cat, cat);
 		
 	}
 	

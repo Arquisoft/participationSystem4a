@@ -1,6 +1,6 @@
 package participationSystem;
 
-import static org.junit.Assert.*;
+/*import static org.junit.Assert.*;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import participationSystem.util.SeleniumUtils;
-
+*/
 public class SeleniumTest {
 /*	private WebDriver driver;
 	private String baseUrl;

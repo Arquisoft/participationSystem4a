@@ -24,6 +24,15 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	public void setConfiguracion(Configuration config) {
+		configurationRepository.save(new Configuration("mierda"));
+		configurationRepository.save(new Configuration("puta"));
+		configurationRepository.save(new Configuration("polla"));
+		configurationRepository.save(new Configuration("gilipollas"));
+		configurationRepository.save(new Configuration("hostia"));
+		configurationRepository.save(new Configuration("cabrón"));
+		configurationRepository.save(new Configuration("subnormal"));
+		configurationRepository.save(new Configuration("coño"));
+		configurationRepository.save(new Configuration("joder"));
 		//ANA Establece la configuracion par ala base de datos
 	}
 
