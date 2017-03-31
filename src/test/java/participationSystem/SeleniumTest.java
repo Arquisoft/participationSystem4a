@@ -1,116 +1,128 @@
-//package participationSystem;
-//
-//import static org.junit.Assert.*;
-//
-//import java.util.concurrent.TimeUnit;
-//
-//import org.junit.After;
-//import org.junit.Before;
-//import org.junit.Test;
-//import org.openqa.selenium.Alert;
-//import org.openqa.selenium.By;
-//import org.openqa.selenium.NoAlertPresentException;
-//import org.openqa.selenium.NoSuchElementException;
-//import org.openqa.selenium.WebDriver;
-//import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-//import org.openqa.selenium.support.ui.WebDriverWait;
-//
-//import com.thoughtworks.selenium.Selenium;
-//
-//public class SeleniumTest {
-//	private WebDriver driver;
-//	private String baseUrl;
-//	private boolean acceptNextAlert = true;
-//	private StringBuffer verificationErrors = new StringBuffer();
-//	
-//	@Before
-//	public void setUp() throws Exception {
-//		driver = new HtmlUnitDriver();
-//		baseUrl = "http://localhost:8080/";
-//		driver.get(baseUrl);
-//	}
-//
-//	@Test
-//	public void testIniciarSesion() throws Exception {
-//		driver.findElement(By.id("inputEmail")).sendKeys("pelayo@gmail.com");
-//		driver.findElement(By.id("inputPassword")).sendKeys("temporal");
-//		driver.findElement(By.xpath("/html/body/div[2]/form/h2"));
-//
-//		driver.findElement(By.name("botonlogin")).click();
-//		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//		//Selenium.waitForPageToLoad("30000");
-//		//...
-//		//driver.findElement(By.xpath("/html/body/div[2]/form/h2"));
-//
-//		//driver.findElement(By.xpath("/html/body/div/div/div[2]/div[1]/h2"));
-//	}
-//	
-//	@Test
-//	public void testVotarPositivo() throws Exception {
-//		driver.findElement(By.id("inputEmail")).sendKeys("pelayo@gmail.com");
-//		driver.findElement(By.id("inputPassword")).sendKeys("temporal");
-//		driver.findElement(By.name("botonlogin")).click();
-//		//Selenium.waitForPageToLoad("30000");
-//		//...
-//	//	assertEquals(driver.findElement(By.id("??sugerencia_es_ES??")), 2);
-//	
-////		driver.findElement(By.name("8")).click();
-//	//	assertEquals(driver.findElement(By.id("??sugerencia_es_ES??")), 3);
-//	}
-//	
-//	
-//	
-//	@Test
-//	public void testVotarNegativo() throws Exception {
-//		driver.findElement(By.id("inputEmail")).sendKeys("pelayo@gmail.com");
-//		driver.findElement(By.id("inputPassword")).sendKeys("temporal");
-//		driver.findElement(By.name("botonlogin")).click();
-//		//Selenium.waitForPageToLoad("30000");
-//		//...
-//	//	assertEquals(driver.findElement(By.id("??sugerencia_es_ES??")), 2);
-//	
-////		driver.findElement(By.name("8")).click();
-//	}
-//
-//	@After
-//	public void tearDown() throws Exception {
-//		driver.quit();
-//		String verificationErrorString = verificationErrors.toString();
-//		if (!"".equals(verificationErrorString)) {
-//			fail(verificationErrorString);
-//		}
-//	}
-//
-//	private boolean isElementPresent(By by) {
-//		try {
-//			driver.findElement(by);
-//			return true;
-//		} catch (NoSuchElementException e) {
-//			return false;
-//		}
-//	}
-//
-//	private boolean isAlertPresent() {
-//		try {
-//			driver.switchTo().alert();
-//			return true;
-//		} catch (NoAlertPresentException e) {
-//			return false;
-//		}
-//	}
-//
-//	private String closeAlertAndGetItsText() {
-//		try {
-//			Alert alert = driver.switchTo().alert();
-//			String alertText = alert.getText();
-//			if (acceptNextAlert) {
-//				alert.accept();
-//			} else {
-//				alert.dismiss();
-//			}
-//			return alertText;
-//		} finally {
-//			acceptNextAlert = true;
-//		}
-//	}
-//}
+package participationSystem;
+
+import static org.junit.Assert.*;
+
+import java.util.concurrent.TimeUnit;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+import participationSystem.util.SeleniumUtils;
+
+public class SeleniumTest {
+/*	private WebDriver driver;
+	private String baseUrl;
+	private StringBuffer verificationErrors = new StringBuffer();
+	
+	@Before
+	public void setUp() throws Exception {
+		driver = new HtmlUnitDriver();
+		baseUrl = "http://localhost:8080/";
+		driver.get(baseUrl);
+		driver.findElement(By.id("inputEmail")).sendKeys("pelayo@gmail.com");
+		driver.findElement(By.id("inputPassword")).sendKeys("temporal");
+		driver.findElement(By.name("botonlogin")).click();
+	}
+
+	@Test
+	public void testIniciarSesion() throws Exception {
+		driver.get(baseUrl);
+		driver.findElement(By.id("inputEmail")).sendKeys("pelayo@gmail.com");
+		driver.findElement(By.id("inputPassword")).sendKeys("temporal");
+		driver.findElement(By.xpath("/html/body/div[2]/form/h2"));
+
+		driver.findElement(By.name("botonlogin")).click();
+		SeleniumUtils.EsperaCargaPaginaxpath(driver, "/html/body/div/div/div[2]/div[1]/h2", 3);
+		//Selenium.waitForPageToLoad("30000");
+		driver.findElement(By.xpath("/html/body/div/div/div[2]/div[1]/h2"));
+	}
+	
+	@Test
+	public void testVotarPositivo() throws Exception {
+		//Selenium.waitForPageToLoad("30000");
+		//...
+		//*[@id="sugerencias"]/tbody/tr[1]/td[1]
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[1]/td[1]")).getText(), "Activar ayudas a la eficiencia energética para apoyar la rehabilitación");
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[2]")).getText(), "La hora de recogida de basuras en invierno es demasiado tarde");
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[3]")).getText(), 1);		
+		driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[4]/form/button")).click();
+		SeleniumUtils.EsperaCargaPaginaxpath(driver, "//*[@id=\"sugerencias\"]/tbody/tr[2]/td[2]", 3);
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[2]")).getText(), "La hora de recogida de basuras en invierno es demasiado tarde");
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[3]")).getText(), 1);		
+	}
+	
+	
+	
+	@Test
+	public void testVotarNegativo() throws Exception {
+		driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[5]/form/button")).click();
+		SeleniumUtils.EsperaCargaPaginaxpath(driver, "//*[@id=\"sugerencias\"]/tbody/tr[2]/td[3]", 3);
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[3]")).getText(), 0);
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[2]")), "La hora de recogida de basuras en invierno es demasiado tarde");
+		
+	}
+	
+	@Test
+	public void testBuscarSugerencia() throws Exception {
+		driver.findElement(By.xpath("//*[@id=\"sugerencias_filter\"]/label/input")).sendKeys("HUCA");
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[1]")).getText(), "Lineas de bus Nuevo HUCA");
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[3]")), 1);
+		driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[4]/form/button")).click();
+		SeleniumUtils.EsperaCargaPaginaxpath(driver, "//*[@id=\"sugerencias\"]/tbody/tr/td[3]", 3);
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[3]")), 2);
+		driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[5]/form/button")).click();
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[3]")), 1);		
+		
+	}
+	
+	@Test
+	public void testPorCategoria() throws Exception {
+		driver.findElement(By.xpath("/html/body/div/div/div[1]/p[5]/a")).click();
+		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[1]")).getText(), "Nuevo estadio de atletismo");
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[3]")).getText(), 6);
+		driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[4]/form/button")).click();
+		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[3]")).getText(), 7);
+		driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[5]/form/button")).click();
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[3]")).getText(), 6);		
+		
+	}
+	
+	@Test
+	public void testOrdenarSugerenciasPorTitulo() throws Exception {		
+		driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/thead/tr/th[1]")).click();
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[1]/td[1]")).getText(), "Activar ayudas a la eficiencia energética para apoyar la rehabilitación");
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[1]")).getText(), "Ampliacion de horario de recogida");
+	}
+	
+	@Test
+	public void testOrdenarSugerenciasPorContenido() throws Exception {		
+		driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/thead/tr/th[1]")).click();
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[1]/td[1]")).getText(), "Ampliar el horario de la zona verde e incluir los domingos");
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[1]")).getText(), "Activar ayudas a la eficiencia energética para apoyar la rehabilitación");
+	}
+	
+	@Test
+	public void testOrdenarSugerenciasPorVotos() throws Exception {		
+		driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/thead/tr/th[1]")).click();
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[1]/td[1]")).getText(), "Ampliacion de horario de recogida");
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[1]")).getText(), "Ampliar el horario de la zona verde e incluir los domingos");
+	}
+	
+
+	@After
+	public void tearDown() throws Exception {
+		driver.quit();
+		String verificationErrorString = verificationErrors.toString();
+		if (!"".equals(verificationErrorString)) {
+			fail(verificationErrorString);
+		}
+	}*/
+
+
+}

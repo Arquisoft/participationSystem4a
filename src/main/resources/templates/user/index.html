@@ -98,11 +98,11 @@
                 <tr th:each="sugerencia : ${session.listaSugerencias}">
                     <td> <a th:text="${sugerencia.nombre}" th:href="@{/sug(idSug=${sugerencia.getId()})}">Titulo</a></td>
                     <td th:text="${sugerencia.contenido}">Contenido</td>
-                    <td th:name="#{sugerencia(${sugerencia.id})}" th:text="${sugerencia.votos}">Votos</td>
+                    <td th:text="${sugerencia.votos}">Votos</td>
                     <td>
                         <form action="#" th:action="@{/vote+}"  method="post">
                             <input name="idSug" type="hidden" th:value="${sugerencia.id}"/>
-                            <button th:name="${sugerencia.id}" class="btn btn-success" type="submit" >Voto +</button> <!-- th:id="votopositivo?id=${sugerencia.id}" -->
+                            <button class="btn btn-success" type="submit" >Voto +</button> <!-- th:id="votopositivo?id=${sugerencia.id}" -->
                         </form></td>
                     <td>
                         <form action="#" th:action="@{/vote-}"  method="post">
