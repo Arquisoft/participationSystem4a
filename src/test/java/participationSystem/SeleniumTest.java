@@ -11,8 +11,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+import participationSystem.util.SeleniumUtils;
+
 public class SeleniumTest {
-/*	private WebDriver driver;
+	private WebDriver driver;
 	private String baseUrl;
 	private StringBuffer verificationErrors = new StringBuffer();
 	
@@ -34,7 +36,7 @@ public class SeleniumTest {
 		driver.findElement(By.xpath("/html/body/div[2]/form/h2"));
 
 		driver.findElement(By.name("botonlogin")).click();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		SeleniumUtils.EsperaCargaPaginaxpath(driver, "/html/body/div/div/div[2]/div[1]/h2", 3);
 		//Selenium.waitForPageToLoad("30000");
 		driver.findElement(By.xpath("/html/body/div/div/div[2]/div[1]/h2"));
 	}
@@ -48,7 +50,7 @@ public class SeleniumTest {
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[2]")).getText(), "La hora de recogida de basuras en invierno es demasiado tarde");
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[3]")).getText(), 1);		
 		driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[4]/form/button")).click();
-		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		SeleniumUtils.EsperaCargaPaginaxpath(driver, "//*[@id=\"sugerencias\"]/tbody/tr[2]/td[2]", 3);
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[2]")).getText(), "La hora de recogida de basuras en invierno es demasiado tarde");
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[3]")).getText(), 1);		
 	}
@@ -58,8 +60,7 @@ public class SeleniumTest {
 	@Test
 	public void testVotarNegativo() throws Exception {
 		driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[5]/form/button")).click();
-		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-		
+		SeleniumUtils.EsperaCargaPaginaxpath(driver, "//*[@id=\"sugerencias\"]/tbody/tr[2]/td[3]", 3);
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[3]")).getText(), 0);
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[2]")), "La hora de recogida de basuras en invierno es demasiado tarde");
 		
@@ -71,7 +72,7 @@ public class SeleniumTest {
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[1]")).getText(), "Lineas de bus Nuevo HUCA");
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[3]")), 1);
 		driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[4]/form/button")).click();
-		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		SeleniumUtils.EsperaCargaPaginaxpath(driver, "//*[@id=\"sugerencias\"]/tbody/tr/td[3]", 3);
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[3]")), 2);
 		driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[5]/form/button")).click();
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[3]")), 1);		
@@ -123,5 +124,5 @@ public class SeleniumTest {
 		}
 	}
 
-*/
+
 }
