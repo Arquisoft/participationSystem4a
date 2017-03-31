@@ -61,8 +61,8 @@ public class SeleniumTest {
 	public void testVotarNegativo() throws Exception {
 		driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[5]/form/button")).click();
 		SeleniumUtils.EsperaCargaPaginaxpath(driver, "//*[@id=\"sugerencias\"]/tbody/tr[2]/td[3]", 3);
-		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[3]")).getText(), 0);
-		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[2]")), "La hora de recogida de basuras en invierno es demasiado tarde");
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[2]")).getText(), "La hora de recogida de basuras en invierno es demasiado tarde");
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[3]")).getText(), "0");
 		
 	}
 	
@@ -84,12 +84,12 @@ public class SeleniumTest {
 		driver.findElement(By.xpath("/html/body/div/div/div[1]/p[5]/a")).click();
 		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[1]")).getText(), "Nuevo estadio de atletismo");
-		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[3]")).getText(), 6);
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[3]")).getText(), "6");
 		driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[4]/form/button")).click();
 		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[3]")).getText(), 7);
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[3]")).getText(), "7");
 		driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[5]/form/button")).click();
-		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[3]")).getText(), 6);		
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[3]")).getText(), "6");		
 		
 	}
 	
@@ -114,6 +114,14 @@ public class SeleniumTest {
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[1]")).getText(), "Ampliar el horario de la zona verde e incluir los domingos");
 	}
 	
+	@Test
+	public void testMostrarComentarios() throws Exception {		
+		driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[1]/a")).click();
+		assertEquals(driver.findElement(By.xpath("/html/body/div/div/div[2]/"
+				+ "div[2]/div/div/div[1]/div[2]/div")).getText(), "Pedro made a post.");
+		assertEquals(driver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div/div/div[2]/p")).getText(), "Todo genial");
+	}
+	
 
 	@After
 	public void tearDown() throws Exception {
@@ -122,7 +130,6 @@ public class SeleniumTest {
 		if (!"".equals(verificationErrorString)) {
 			fail(verificationErrorString);
 		}
-	}*/
-
-
+	}
+*/
 }

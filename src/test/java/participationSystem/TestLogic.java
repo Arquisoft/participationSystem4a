@@ -126,6 +126,8 @@ public class TestLogic {
 		SingletonKafkaProducer s1= SingletonKafkaProducer.getInstance();
 		s.getProducer();
 		s1.getProducer();
+		SingletonKafkaProducer s2= SingletonKafkaProducer.getInstance();
+		assertEquals(s1, s2);
 	}
 	
 	@Test
@@ -143,6 +145,7 @@ public class TestLogic {
 		suger.add(s2);
 		suger.add(s1);
 		c.setSugerencias(suger);
+		assertEquals(c.getSugerencias(), suger);
 		
 		Comentario c1= new Comentario("comentario1", s1);
 		Comentario c2= new Comentario("comentario2", s2);
