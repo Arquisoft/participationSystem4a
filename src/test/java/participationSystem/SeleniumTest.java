@@ -2,8 +2,6 @@ package participationSystem;
 
 import static org.junit.Assert.*;
 
-import java.util.concurrent.TimeUnit;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,26 +12,54 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+import com.thoughtworks.selenium.Selenium;
+
 public class SeleniumTest {
 	private WebDriver driver;
 	private String baseUrl;
 	private boolean acceptNextAlert = true;
 	private StringBuffer verificationErrors = new StringBuffer();
-
+	
 	@Before
 	public void setUp() throws Exception {
 		driver = new HtmlUnitDriver();
-		baseUrl = "http://www.uniovi.es/";
-		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		baseUrl = "http://localhost:8080/";
+		driver.get(baseUrl);
 	}
 
 	@Test
-	public void test1() throws Exception {
-		driver.get(baseUrl + "/");
-		driver.findElement(By.id("cabecera_keywords")).clear();
-		driver.findElement(By.id("cabecera_keywords")).sendKeys("rector");
-		driver.findElement(By.id("cabecera_search")).click();
+	public void testIniciarSesion() throws Exception {
+		driver.findElement(By.id("inputEmail")).sendKeys("pelayo@gmail.com");
+		driver.findElement(By.id("inputPassword")).sendKeys("temporal");
+		driver.findElement(By.name("botonlogin")).click();
+		//Selenium.waitForPageToLoad("30000");
 		//...
+		driver.findElement(By.id("homeParticipation"));
+	}
+	
+	@Test
+	public void testVotarPositivo() throws Exception {
+		driver.findElement(By.id("inputEmail")).sendKeys("pelayo@gmail.com");
+		driver.findElement(By.id("inputPassword")).sendKeys("temporal");
+		driver.findElement(By.name("botonlogin")).click();
+		//Selenium.waitForPageToLoad("30000");
+		//...
+	//	assertEquals(driver.findElement(By.id("??sugerencia_es_ES??")), 2);
+	
+		driver.findElement(By.name("8")).click();
+	//	assertEquals(driver.findElement(By.id("??sugerencia_es_ES??")), 3);
+	}
+	
+	@Test
+	public void testVotarNegativo() throws Exception {
+		driver.findElement(By.id("inputEmail")).sendKeys("pelayo@gmail.com");
+		driver.findElement(By.id("inputPassword")).sendKeys("temporal");
+		driver.findElement(By.name("botonlogin")).click();
+		//Selenium.waitForPageToLoad("30000");
+		//...
+	//	assertEquals(driver.findElement(By.id("??sugerencia_es_ES??")), 2);
+	
+		driver.findElement(By.name("8")).click();
 	}
 
 	@After
