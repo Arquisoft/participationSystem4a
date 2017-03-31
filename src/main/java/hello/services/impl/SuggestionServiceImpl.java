@@ -2,6 +2,7 @@ package hello.services.impl;
 
 import hello.domain.Categoria;
 import hello.domain.Sugerencia;
+import hello.producers.Topics;
 import hello.repository.SuggestionRepository;
 import hello.services.SuggestionService;
 import hello.util.exception.CitizenException;
@@ -58,7 +59,7 @@ public class SuggestionServiceImpl implements SuggestionService {
         } else {
             sug.decrementarVotos();
             suggestionRepository.save(sug);
-            //logger.send(Topics.NEGATIVE_SUGGESTION_VOTE, sug.getId() + "");
+            logger.send(Topics.NEGATIVE_SUGGESTION_VOTE, sug.getId() + "");
         }
     }
 }
