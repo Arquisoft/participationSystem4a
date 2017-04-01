@@ -203,6 +203,9 @@ public class TestLogic {
 		
 		Configuration co= new Configuration("mierda");
 		assertEquals(co.getPalabraNoPermitida(), "mierda");
+		
+		
+		
 	}
 	
 }

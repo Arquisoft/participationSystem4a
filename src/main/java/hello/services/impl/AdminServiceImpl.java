@@ -7,6 +7,11 @@ import hello.domain.Configuration;
 import hello.repository.ConfigurationRepository;
 import hello.services.AdminService;
 
+/**
+ * 
+ * Servicios que necesia el adminsitrador del sistema. 
+ *
+ */
 @Service
 public class AdminServiceImpl implements AdminService {
 

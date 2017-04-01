@@ -3,7 +3,13 @@ package hello.domain;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-
+/**
+ * 
+ * Clase Categoria del modelo del dominio. 
+ * 
+ * Esta clase contiene la informacion y operaciones que posee una categoria. 
+ *
+ */
 @Entity
 @Table(name="CATEGORIA")
 public class Categoria {
@@ -15,9 +21,13 @@ public class Categoria {
 	private  Set<Sugerencia> sugerencias;
 
 	public Categoria(){
-
+		this.nombre = "";
 	}
-
+	
+	/**
+	 * Constructor de la clase que asigna directamente el nombre de la categoria. 
+	 * @param nombre
+	 */
 	public Categoria(String nombre) {
 		super();
 		this.nombre = nombre;
@@ -38,13 +48,13 @@ public class Categoria {
 		this.id = id;
 	}
 
+	/**
+	 * Establece las sugerencias contenidas en esta categoria. 
+	 * @param sugerencias
+	 */
 	public void setSugerencias(Set<Sugerencia> sugerencias) {
 		this.sugerencias = sugerencias;
 	}
-
-	//	public void removeSugerencia(Sugerencia sugerencia){
-//		Association.PoseerSugerencia.unlink(this, sugerencia);
-//	}
 
 
 	@Override
