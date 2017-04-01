@@ -33,7 +33,7 @@ public class Citizen {
     private Set<Comentario> comentarios;
     @OneToMany(mappedBy="usuario",cascade = CascadeType.ALL)
     private Set<Sugerencia> sugerenciasQueHace;
-    @ManyToMany(mappedBy="usuario")
+    @ManyToMany(mappedBy="usuario",fetch = FetchType.EAGER)
     private Set<Sugerencia> sugerenciasQueVota;
     
     
@@ -171,19 +171,17 @@ public class Citizen {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
         Citizen citizen = (Citizen) o;
 
-        return numero_identificativo.equals(citizen.numero_identificativo);
+        return numero_identificativo != null ? numero_identificativo.equals(citizen.numero_identificativo) : citizen.numero_identificativo == null;
     }
 
     @Override
     public int hashCode() {
-        return numero_identificativo.hashCode();
+        return numero_identificativo != null ? numero_identificativo.hashCode() : 0;
     }
 
     @Override

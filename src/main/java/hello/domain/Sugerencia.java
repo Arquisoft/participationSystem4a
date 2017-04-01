@@ -1,6 +1,7 @@
 package hello.domain;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,6 +30,9 @@ public class Sugerencia {
 	@JoinColumn(name="usuario_id")
 	private Citizen usuario;
 
+	private Date fechaCreacion;
+
+
 	public Sugerencia(){}
 	
 	public Sugerencia(String nombre, String contenido, Categoria categoria) {
@@ -45,6 +49,24 @@ public class Sugerencia {
 		this.contenido = contenido;
 		this.categoria = categoria;
 		this.usuario=usuario;	
+	}
+
+	public Sugerencia(Set<Citizen> ciudadanosQueVotan, Categoria categoria, Citizen usuario, Date fechaCreacion) {
+		this.ciudadanosQueVotan = ciudadanosQueVotan;
+		this.categoria = categoria;
+		this.usuario = usuario;
+		this.fechaCreacion = fechaCreacion;
+	}
+
+	public Sugerencia(int votos, String nombre, String contenido, Set<Comentario> comentarios, Set<Citizen> ciudadanosQueVotan, Categoria categoria, Citizen usuario, Date fechaCreacion) {
+		this.votos = votos;
+		this.nombre = nombre;
+		this.contenido = contenido;
+		this.comentarios = comentarios;
+		this.ciudadanosQueVotan = ciudadanosQueVotan;
+		this.categoria = categoria;
+		this.usuario = usuario;
+		this.fechaCreacion = fechaCreacion;
 	}
 
 	public String getNombre() {
@@ -69,6 +91,14 @@ public class Sugerencia {
 	public int getVotos() {
 		return votos;
 	}
+	public Date getFechaCreacion() {
+		return fechaCreacion;
+	}
+
+	public void setFechaCreacion(Date fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+
 
 	public Set<Comentario> getComentarios() {
 		return new HashSet<Comentario>(comentarios);
@@ -93,6 +123,11 @@ public class Sugerencia {
 	public void addCiudadanoHaVotado(Citizen ciudadano){
 		ciudadanosQueVotan.add(ciudadano);
 		ciudadano.addSugerenciaHaVotado(this);
+	}
+
+
+	public boolean checkCiudadano(Citizen citizen){
+		return ciudadanosQueVotan.contains(citizen);
 	}
 	@Override
 	public String toString() {
@@ -135,6 +170,7 @@ public class Sugerencia {
 			return false;
 		return true;
 	}
+
 
 	
 	
