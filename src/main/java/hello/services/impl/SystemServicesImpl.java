@@ -18,15 +18,13 @@ import java.util.List;
 @Service
 public class SystemServicesImpl implements SystemServices {
 
-	List<Categoria> categorias = new ArrayList<>();
-	Configuration config = null;
+	private List<Categoria> categorias = new ArrayList<>();
+	private Configuration config = null;
 	private ConfigurationRepository configurationRepository;
 	private CommentRepository commentRepository;
 	private SuggestionRepository suggestionRepository;
 	private CategoryRepository categoryRepository;
 	
-	public SystemServicesImpl() {
-	}
 	
 	public Configuration getConfiguration() {
 		
@@ -85,19 +83,13 @@ public class SystemServicesImpl implements SystemServices {
 	@Override
 	public boolean existeLaCategoria(Categoria cat) {
 		this.categorias = getAllCategories();
-		if(categorias.contains(cat)){
-			return true;
-		}
-		return false;
+		 return categorias.contains(cat);
 	}
 
 	@Override
 	public boolean existeLaSugerencia(Sugerencia sugerencia) {
 		Sugerencia s = this.suggestionRepository.findOne(sugerencia.getId());
-		if(s==null)
-			return false;
-		else
-			return true;
+		return !(s==null);
 	}
 
 }

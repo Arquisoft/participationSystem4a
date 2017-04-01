@@ -32,10 +32,10 @@ public class SeleniumUtils {
 			//Pasamos el raton por el submenu de Gestion de alumnos	para
 			//que aparezca el menu desplegable
 			Actions builder = new Actions(driver);
-			WebElement hoverElement = SeleniumUtils.EsperaCargaPaginaxpath(driver,submenu,10).get(0);
+			WebElement hoverElement = SeleniumUtils.esperaCargaPaginaxpath(driver,submenu,10).get(0);
 			builder.moveToElement(hoverElement).perform();		
 			//Pinchamos la opcion opcionclick
-			SeleniumUtils.EsperaCargaPaginaxpath(driver,opcionclick,10).get(0).click();
+			SeleniumUtils.esperaCargaPaginaxpath(driver,opcionclick,10).get(0).click();
 				
 		}
 
@@ -52,7 +52,7 @@ public class SeleniumUtils {
 			assertTrue("Texto " + texto + " aun presente !", list.size() == 0);			
 		}
 
-		static public void EsperaCargaPaginaNoTexto(WebDriver driver, String texto, int timeout)
+		static public void esperaCargaPaginaNoTexto(WebDriver driver, String texto, int timeout)
 		{
 			Boolean resultado = 
 					(new WebDriverWait(driver, timeout)).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + texto + "')]")));
@@ -62,7 +62,7 @@ public class SeleniumUtils {
 
 		
 
-		static public List<WebElement> EsperaCargaPaginaxpath(WebDriver driver, String xpath, int timeout)
+		static public List<WebElement> esperaCargaPaginaxpath(WebDriver driver, String xpath, int timeout)
 		{
 			WebElement resultado = 
 					(new WebDriverWait(driver, timeout)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
@@ -77,12 +77,12 @@ public class SeleniumUtils {
 		//Aviso. Que se usa espera por la visibilidad del elemento
 		//De esta forma sirve tanto para carga de páginas enteras
 		//como para elementos que estan ocultos y se hace visibles
-		static public List<WebElement> EsperaCargaPagina(WebDriver driver, String criterio, String id, int timeout)
+		static public List<WebElement> esperaCargaPagina(WebDriver driver, String criterio, String id, int timeout)
 		{
 			String busqueda;
 			if (criterio.equals("id")) busqueda = "//*[contains(@id,'" + id + "')]";
 			else if (criterio.equals("class")) busqueda = "//*[contains(@class,'" + id + "')]";
 			else busqueda = "//*[contains(text(),'" + id + "')]";
-			return EsperaCargaPaginaxpath(driver, busqueda, timeout);
+			return esperaCargaPaginaxpath(driver, busqueda, timeout);
 		}
 }

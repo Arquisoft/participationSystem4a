@@ -27,171 +27,150 @@ import java.util.List;
 @Scope("session")
 public class CitizenController {
 
+	/*
+	 * private KafkaProducer kafkaProducer; private Citizen citizen;
+	 */
+	private String idCat = "all";
 
-    /*private KafkaProducer kafkaProducer;
-    private Citizen citizen;*/
-    private String idCat="all";
+	private CitizenService citizenService;
+	private SuggestionService suggestionService;
+	private CategoryService categoryService;
+	private CommentService commentService;
 
+	@Autowired
+	public void setCommentService(CommentService commentService) {
+		this.commentService = commentService;
+	}
 
-    private CitizenService citizenService;
-    private SuggestionService suggestionService;
-    private CategoryService categoryService;
-    private CommentService commentService;
+	@Autowired
+	public void setCategoryService(CategoryService categoryService) {
+		this.categoryService = categoryService;
+	}
 
-    @Autowired
-    public void setCommentService(CommentService commentService) {
-        this.commentService = commentService;
-    }
+	@Autowired
+	public void setCitizenService(CitizenService citizenService) {
+		this.citizenService = citizenService;
+	}
 
-    @Autowired
-    public void setCategoryService(CategoryService categoryService) {
-        this.categoryService = categoryService;
-    }
+	@Autowired
+	public void setSuggestionService(SuggestionService suggestionService) {
+		this.suggestionService = suggestionService;
+	}
+	/*
+	 * @RequestMapping("/") public String landing(Model model) { //
+	 * model.addAttribute("message", new Message()); return "index"; }
+	 */
 
-    @Autowired
-    public void setCitizenService(CitizenService citizenService) {
-        this.citizenService = citizenService;
-    }
+	@RequestMapping(value = "/home", method = RequestMethod.POST)
+	public String getLogin(@RequestParam String email, @RequestParam String password, HttpSession session,
+			Model model) {
 
-    @Autowired
-    public void setSuggestionService(SuggestionService suggestionService) {
-        this.suggestionService = suggestionService;
-    }
-/*
-    @RequestMapping("/")
-    public String landing(Model model) {
-        // model.addAttribute("message", new Message());
-        return "index";
-    }
-*/
+		Citizen citizen = citizenService.getCitizen(email);
 
-    @RequestMapping(value = "/home", method = RequestMethod.POST)
-    public String getLogin(@RequestParam String email, @RequestParam String password, HttpSession session, Model model) {
+		if (citizen != null && DigestUtils.sha512Hex(password).equals(citizen.getContrasena())) {
+			session.setAttribute("citizen", citizen);
+			List<Sugerencia> listaSugerencias = getSugerencias(null);
+			session.setAttribute("listaSugerencias", listaSugerencias);
+			session.setAttribute("listaCategorias", categoryService.findAll());
 
-        Citizen citizen = citizenService.getCitizen(email);
+			return "/user/index";
+		}
+		model.addAttribute("error", "Your username and password is invalid.");
+		return "index";
 
-        if (citizen != null) {
-            if (DigestUtils.sha512Hex(password).equals(citizen.getContrasena())) {
-                session.setAttribute("citizen", citizen);
-                List<Sugerencia> listaSugerencias = getSugerencias(null);
-                session.setAttribute("listaSugerencias", listaSugerencias);
-                session.setAttribute("listaCategorias",categoryService.findAll() );
+	}
 
+	@RequestMapping(value = "/cat")
+	public String getSugerenciasCat(@RequestParam String idCat, HttpSession session, Model model) {
+		this.idCat = idCat;
+		putSugerenciasInSession(session);
 
-                return "/user/index";
+		return "/user/index";
+	}
 
-            }
-        }
-        model.addAttribute("error", "Your username and password is invalid.");
-        return "index";
+	private void putSugerenciasInSession(HttpSession session) {
+		if (idCat.equals("all")) {
+			session.setAttribute("listaSugerencias", suggestionService.findAll());
+		} else {
+			Long id = Long.parseLong(idCat);
+			Categoria cat = categoryService.findById(id);
+			session.setAttribute("listaSugerencias", suggestionService.findByCat(cat));
 
+		}
+	}
 
-    }
+	/*
+	 * @RequestMapping("/send") public String send(Model model, @ModelAttribute
+	 * Message message) { kafkaProducer.send("exampleTopic",
+	 * message.getMessage()); return "redirect:/"; }
+	 */
 
-    @RequestMapping(value = "/cat")
-    public String getSugerenciasCat(@RequestParam String idCat, HttpSession session, Model model) {
-        this.idCat=idCat;
-        putSugerenciasInSession(session);
+	@RequestMapping(value = "/vote+", method = RequestMethod.POST)
+	public String votePos(@RequestParam String idSug, HttpSession session) {
 
+		Long id = Long.parseLong(idSug);
+		Sugerencia sugerencia = suggestionService.findById(id);
+		Citizen citizen = (Citizen) session.getAttribute("citizen");
+		try {
+			suggestionService.votePositiveSugerencia(sugerencia, citizen);
+		} catch (CitizenException e) {
 
-       return "/user/index";
-    }
+		}
+		putSugerenciasInSession(session);
 
-    private void putSugerenciasInSession(HttpSession session) {
-        if(idCat.equals("all")){
-            session.setAttribute("listaSugerencias", suggestionService.findAll());
-        }
-        else{
-            Long id = Long.parseLong(idCat);
-            Categoria cat = categoryService.findById(id);
-            session.setAttribute("listaSugerencias", suggestionService.findByCat(cat));
+		return "/user/index";
+	}
 
-        }
-    }
+	@RequestMapping(value = "/vote-", method = RequestMethod.POST)
+	public String voteNeg(@RequestParam String idSug, HttpSession session) {
 
+		Long id = Long.parseLong(idSug);
+		Sugerencia sugerencia = suggestionService.findById(id);
+		Citizen citizen = (Citizen) session.getAttribute("citizen");
+		try {
+			suggestionService.voteNegativeSugerencia(sugerencia, citizen);
+		} catch (CitizenException e) {
 
-    /*
-    @RequestMapping("/send")
-    public String send(Model model, @ModelAttribute Message message) {
-        kafkaProducer.send("exampleTopic", message.getMessage());
-        return "redirect:/";
-    }
-*/
+		}
+		putSugerenciasInSession(session);
 
-    @RequestMapping(value = "/vote+", method = RequestMethod.POST)
-    public String votePos(@RequestParam String idSug, HttpSession session) {
+		return "/user/index";
+	}
 
-        Long id=Long.parseLong(idSug);
-        Sugerencia sugerencia = suggestionService.findById(id);
-        Citizen citizen=(Citizen) session.getAttribute("citizen");
-        try {
-            suggestionService.votePositiveSugerencia(sugerencia, citizen);
-        } catch (CitizenException e) {
+	@RequestMapping(value = "/sug")
+	public String viewSug(@RequestParam String idSug, Model model) {
+		Long id = Long.parseLong(idSug);
+		Sugerencia sugerencia = suggestionService.findById(id);
+		model.addAttribute("sugerencia", sugerencia);
+		return "/user/viewSuggestion";
 
-        }
-        putSugerenciasInSession(session);
+	}
 
+	@RequestMapping(value = "/comment")
+	public String addComment(@RequestParam String idSug, String comentario, Model model, HttpSession session) {
+		Long id = Long.parseLong(idSug);
+		Sugerencia sugerencia = suggestionService.findById(id);
+		Citizen citizen = (Citizen) session.getAttribute("citizen");
+		commentService.createComentario(comentario, sugerencia, citizen);
+		sugerencia = suggestionService.findById(id);
+		model.addAttribute("sugerencia", sugerencia);
+		return "/user/viewSuggestion";
+	}
 
-        return "/user/index";
-    }
+	@RequestMapping(value = "/createSuggestion")
+	public String addComment(Model model) {
+		model.addAttribute("listaCategorias", categoryService.findAll());
 
-    @RequestMapping(value = "/vote-", method = RequestMethod.POST)
-    public String voteNeg(@RequestParam String idSug, HttpSession session) {
+		return "/user/createSuggestion";
+	}
 
-        Long id=Long.parseLong(idSug);
-        Sugerencia sugerencia = suggestionService.findById(id);
-        Citizen citizen=(Citizen) session.getAttribute("citizen");
-        try {
-            suggestionService.voteNegativeSugerencia(sugerencia, citizen);
-        } catch (CitizenException e) {
+	private List<Sugerencia> getSugerencias(Categoria c) {
+		if (c == null) {
 
-        }
-        putSugerenciasInSession(session);
-
-
-        return "/user/index";
-    }
-
-    @RequestMapping(value="/sug")
-    public String viewSug(@RequestParam String idSug,Model model){
-        Long id=Long.parseLong(idSug);
-        Sugerencia sugerencia = suggestionService.findById(id);
-        model.addAttribute("sugerencia",sugerencia);
-        return "/user/viewSuggestion";
-
-    }
-
-    @RequestMapping(value = "/comment")
-    public String addComment(@RequestParam String idSug,String comentario,Model model,HttpSession session){
-        Long id=Long.parseLong(idSug);
-        Sugerencia sugerencia = suggestionService.findById(id);
-        Citizen citizen=(Citizen) session.getAttribute("citizen");
-        commentService.createComentario(comentario, sugerencia, citizen );
-        sugerencia = suggestionService.findById(id);
-        model.addAttribute("sugerencia",sugerencia);
-        return "/user/viewSuggestion";
-    }
-    @RequestMapping(value = "/createSuggestion")
-    public String addComment(Model model){
-        model.addAttribute("listaCategorias",categoryService.findAll());
-
-
-        return "/user/createSuggestion";
-    }
-
-
-
-
-
-    private List<Sugerencia> getSugerencias(Categoria c) {
-        if (c == null) {
-
-            return suggestionService.findAll();
-        } else {
-            return suggestionService.findByCat(c);
-        }
-    }
-
-
+			return suggestionService.findAll();
+		} else {
+			return suggestionService.findByCat(c);
+		}
+	}
 
 }

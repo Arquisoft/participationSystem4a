@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Service
 public class SuggestionServiceImpl implements SuggestionService {
-    SuggestionRepository suggestionRepository;
+    private SuggestionRepository suggestionRepository;
     
     @Autowired
     public void setSuggestionRepository(SuggestionRepository suggRep) {

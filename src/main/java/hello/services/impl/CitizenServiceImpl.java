@@ -17,9 +17,6 @@ public class CitizenServiceImpl implements CitizenService {
 	private CitizenRepository citizenRepository;
 	private CategoryRepository categoryRepository;
 
-	public CitizenServiceImpl() {
-	}
-
 	@Autowired
 	public void setCitizenRepository(CitizenRepository citizenRepository) {
 		this.citizenRepository = citizenRepository;

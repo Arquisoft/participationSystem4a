@@ -1,10 +1,6 @@
 package hello.domain;
 
 
-
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.*;
 //import java.util.ArrayList;
 //import java.util.List;
@@ -22,7 +18,7 @@ public class Configuration {
 //	@Transient
 //	private List<String> palabrasNoPermitidas;
 	
-	private String separador = "@@";
+//	private String separador = "@@";
 	public String getPalabraNoPermitida() {
 		return PALABRA_NO_PERMITIDA;
 	}

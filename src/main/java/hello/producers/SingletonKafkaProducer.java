@@ -4,8 +4,7 @@ public class SingletonKafkaProducer {
 	private static SingletonKafkaProducer instance;
 	private KafkaProducer producer;
 	
-	public SingletonKafkaProducer() {
-		// TODO Auto-generated constructor stub
+	private SingletonKafkaProducer() {
 	}
 	
 	public static SingletonKafkaProducer getInstance(){

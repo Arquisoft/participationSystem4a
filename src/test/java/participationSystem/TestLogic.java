@@ -7,13 +7,10 @@ import hello.domain.Comentario;
 import hello.domain.Configuration;
 import hello.domain.Sugerencia;
 import hello.producers.SingletonKafkaProducer;
-import hello.services.AdminService;
 import hello.services.CategoryService;
-import hello.services.CitizenService;
 import hello.services.CommentService;
 import hello.services.Services;
 import hello.services.SuggestionService;
-import hello.services.SystemServices;
 import hello.util.exception.CitizenException;
 import static org.junit.Assert.*;
 import java.util.HashSet;
@@ -23,15 +20,12 @@ import org.junit.Test;
 
 public class TestLogic {
 
-	CitizenService citizeServices = Services.getCitizenServices();
-	AdminService adminServices = Services.getAdminServices();
-	SystemServices systemSercices = Services.getSystemServices();
-	CategoryService categoryService = Services.getCategoryService();
-	CommentService commentService = Services.getCommentService();
-	SuggestionService suggestionService = Services.getSuggestionService();
+	private CategoryService categoryService = Services.getCategoryService();
+	private CommentService commentService = Services.getCommentService();
+	private SuggestionService suggestionService = Services.getSuggestionService();
 	
 	@Test
-	public void createSugerencia(){
+	public void testCreateSugerencia(){
 		System.out.println(DigestUtils.sha512Hex("temporal"));
 		
 		String nombre = "Sugerencia de prueba";
@@ -114,9 +108,7 @@ public class TestLogic {
 	
 	@Test
 	public void testSingletonKafkaProducer(){
-		SingletonKafkaProducer s= new SingletonKafkaProducer();
 		SingletonKafkaProducer s1= SingletonKafkaProducer.getInstance();
-		s.getProducer();
 		s1.getProducer();
 		SingletonKafkaProducer s2= SingletonKafkaProducer.getInstance();
 		assertEquals(s1, s2);
@@ -203,9 +195,6 @@ public class TestLogic {
 		
 		Configuration co= new Configuration("mierda");
 		assertEquals(co.getPalabraNoPermitida(), "mierda");
-		
-		
-		
 	}
 	
 }

@@ -45,7 +45,7 @@ public class Comentario {
 		return sugerencia;
 	}
 
-	void setVotos(int votosPositivos) {
+	public void setVotos(int votosPositivos) {
 		this.votos = votosPositivos;
 	}
 
@@ -53,7 +53,7 @@ public class Comentario {
 		return contenido;
 	}
 
-	void setContenido(String comentario) {
+	public void setContenido(String comentario) {
 		this.contenido = comentario;
 	}
 
@@ -97,9 +97,7 @@ public class Comentario {
 				return false;
 		} else if (!contenido.equals(other.contenido))
 			return false;
-		if (votos != other.votos)
-			return false;
-		return true;
+		return !(votos != other.votos);
 	}
 
 	@Override

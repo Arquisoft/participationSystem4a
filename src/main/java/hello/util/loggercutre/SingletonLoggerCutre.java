@@ -1,12 +1,9 @@
-package hello.util.loggerCutre;
+package hello.util.loggercutre;
 
 public class SingletonLoggerCutre {
 	private static SingletonLoggerCutre instance;
 	private LoggerCutre logger;
-	
-	public SingletonLoggerCutre() {
-		super();
-	}
+
 	
 	public static SingletonLoggerCutre getInstance(){
 		if(instance == null){

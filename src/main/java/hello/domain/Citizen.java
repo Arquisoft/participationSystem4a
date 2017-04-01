@@ -158,15 +158,11 @@ public class Citizen {
 	}
 
 	public boolean haEscrito(Sugerencia sugerencia){
-		if(sugerenciasQueHace.contains(sugerencia))
-			return true;
-		return false;
+		return sugerenciasQueHace.contains(sugerencia);
 	}
 	
 	public boolean haVotado(Sugerencia sugerencia){
-		if(sugerenciasQueVota.contains(sugerencia))
-			return true;
-		return false;
+		return sugerenciasQueVota.contains(sugerencia);
 	}
 
     @Override

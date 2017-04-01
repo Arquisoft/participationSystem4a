@@ -3,8 +3,8 @@ package hello.services;
 import hello.producers.KafkaProducer;
 import hello.producers.SingletonKafkaProducer;
 import hello.producers.Topics;
-import hello.util.loggerCutre.LoggerCutre;
-import hello.util.loggerCutre.SingletonLoggerCutre;
+import hello.util.loggercutre.LoggerCutre;
+import hello.util.loggercutre.SingletonLoggerCutre;
 
 public interface SuperService {
 	KafkaProducer logger = SingletonKafkaProducer.getInstance().getProducer();

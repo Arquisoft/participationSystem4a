@@ -29,9 +29,7 @@ public class Sugerencia {
 	@ManyToOne
 	@JoinColumn(name="usuario_id")
 	private Citizen usuario;
-
 	private Date fechaCreacion;
-
 
 	public Sugerencia(){}
 	
@@ -67,6 +65,14 @@ public class Sugerencia {
 		this.categoria = categoria;
 		this.usuario = usuario;
 		this.fechaCreacion = fechaCreacion;
+	}
+
+	public Citizen getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Citizen usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getNombre() {
@@ -162,8 +168,8 @@ public class Sugerencia {
 		if (categoria == null) {
 			if (other.categoria != null)
 				return false;
-		} else if (!categoria.equals(other.categoria))
-			return false;
+		} else 
+			return categoria.equals(other.categoria);
 		if (comentarios == null) {
 			if (other.comentarios != null)
 				return false;

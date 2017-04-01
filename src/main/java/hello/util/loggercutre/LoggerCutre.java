@@ -1,4 +1,4 @@
-package hello.util.loggerCutre;
+package hello.util.loggercutre;
 
 import java.lang.reflect.Method;
 
