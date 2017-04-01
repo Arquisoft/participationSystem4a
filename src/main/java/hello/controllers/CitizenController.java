@@ -26,7 +26,7 @@ import java.util.List;
 @Scope("session")
 public class CitizenController {
 
-    @Autowired
+
     /*private KafkaProducer kafkaProducer;
     private Citizen citizen;*/
     private String idCat="all";
