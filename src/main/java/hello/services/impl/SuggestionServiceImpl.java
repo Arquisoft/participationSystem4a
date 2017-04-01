@@ -51,6 +51,8 @@ public class SuggestionServiceImpl implements SuggestionService {
             suggestionRepository.save(sug);
             //guardar en la tabla votos la sugerencia con el usuario
             logger.send(Topics.POSITIVE_SUGGESTION_VOTE, sug.getId() + "");
+            loggerCutre.log(this.getClass(), "El ciudadano con ID: "+ciudadano.getId()+", Votando postivo a sugerencia ID: "+sug.getId());
+
         }
     }
 
@@ -64,6 +66,8 @@ public class SuggestionServiceImpl implements SuggestionService {
             sug.decrementarVotos();
             suggestionRepository.save(sug);
             logger.send(Topics.NEGATIVE_SUGGESTION_VOTE, sug.getId() + "");
+            loggerCutre.log(this.getClass(), "El ciudadano con ID: "+ciudadano.getId()+", Votando negativo a sugerencia ID: "+sug.getId());
+
         }
     }
     @Override

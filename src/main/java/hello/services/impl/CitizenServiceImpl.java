@@ -2,13 +2,8 @@ package hello.services.impl;
 
 import hello.domain.Categoria;
 import hello.domain.Citizen;
-import hello.domain.Comentario;
-import hello.domain.Sugerencia;
-import hello.producers.Topics;
 import hello.repository.CategoryRepository;
 import hello.repository.CitizenRepository;
-import hello.repository.CommentRepository;
-import hello.repository.SuggestionRepository;
 import hello.services.CitizenService;
 import hello.util.exception.CitizenException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +15,6 @@ import java.util.List;
 public class CitizenServiceImpl implements CitizenService {
 
 	private CitizenRepository citizenRepository;
-	private SuggestionRepository suggestionRepository;
-	private CommentRepository commentRepository;
 	private CategoryRepository categoryRepository;
 
 	public CitizenServiceImpl() {
@@ -32,15 +25,6 @@ public class CitizenServiceImpl implements CitizenService {
 		this.citizenRepository = citizenRepository;
 	}
 	
-	@Autowired
-	public void setSuggestionRepository(SuggestionRepository suggRep) {
-		this.suggestionRepository = suggRep;
-	}
-
-	@Autowired
-	public void setCommentRepository(CommentRepository commentRepository) {
-		this.commentRepository = commentRepository;
-	}
 
 	@Autowired
 	public void setCategoryRepository(CategoryRepository categoryRepository) {
@@ -104,31 +88,7 @@ public class CitizenServiceImpl implements CitizenService {
 //
 //	}
 
-	@Override
-	public void votePositiveComment(Comentario comment, Citizen ciudadano) throws CitizenException {
-		if (commentRepository.findOne(comment.getId()) == null) {
-			// Error
-			throw new CitizenException("El comentario no existe");
-		} else {
-			//votoRepository save
-			comment.incrementarVoto();
-			logger.send(Topics.POSITIVE_COMMENT_VOTE, comment.getId() + "");
-			loggerCutre.log(this.getClass(), "Votando positivo a comentario ID: "+comment.getId());
-		}
-
-	}
-
-	@Override
-	public void voteNegativeComment(Comentario comment, Citizen ciudadano) throws CitizenException {
-		if (commentRepository.findOne(comment.getId()) == null) {
-			throw new CitizenException("El comentario no existe");
-		} else {
-			comment.decrementarVoto();
-			logger.send(Topics.POSITIVE_COMMENT_VOTE, comment.getId() + "");
-			loggerCutre.log(this.getClass(), "Votando negativo a comentario ID: "+comment.getId());
-		}
-
-	}
+	
 
 
 
@@ -138,7 +98,7 @@ public class CitizenServiceImpl implements CitizenService {
 		return c;
 	}
 
-	@Override
+/*	@Override
 	public void votePositiveSuggestion(Sugerencia suggestion, Citizen ciudadano) throws CitizenException {
 		if(this.suggestionRepository.findOne(suggestion.getId()) == null){
 			loggerCutre.log(this.getClass(), "La sugerencia con nombre: "+suggestion.getNombre() +" no existe.");
@@ -151,17 +111,6 @@ public class CitizenServiceImpl implements CitizenService {
 
 	}
 
-	@Override
-	public void voteNegativeSuggestion(Sugerencia suggestion, Citizen ciudadano) throws CitizenException {
-		if(this.suggestionRepository.findOne(suggestion.getId()) == null){
-			loggerCutre.log(this.getClass(), "La sugerencia con nombre: "+suggestion.getNombre() +" no existe.");
-			throw new CitizenException("La sugerencia no existe.");
-		}
-		suggestion.addCiudadanoHaVotado(ciudadano);
-		suggestion.decrementarVotos();
-		logger.send(Topics.NEGATIVE_SUGGESTION_VOTE, suggestion.getId() + "");
-
-		loggerCutre.log(this.getClass(), "El ciudadano con ID: "+ciudadano.getId()+", Votando negativo a sugerencia ID: "+suggestion.getId());
-	}
+	*/
 
 }
