@@ -32,7 +32,9 @@ public class Citizen {
     @OneToMany(mappedBy="usuario",cascade = CascadeType.ALL)
     private Set<Comentario> comentarios;
     @OneToMany(mappedBy="usuario",cascade = CascadeType.ALL)
-    private Set<Sugerencia> sugerencias;
+    private Set<Sugerencia> sugerenciasQueHace;
+    @ManyToMany(mappedBy="usuario")
+    private Set<Sugerencia> sugerenciasQueVota;
     
     
     
@@ -143,10 +145,29 @@ public class Citizen {
 		return comentarios;
 	}
 
-	public Set<Sugerencia> getSugerencias() {
-		return sugerencias;
+	public Set<Sugerencia> getSugerenciasQueHace() {
+		return sugerenciasQueHace;
+	}
+	
+	public Set<Sugerencia> getSugerenciasQueVota() {
+		return sugerenciasQueVota;
+	}
+	
+	public void addSugerenciaHaVotado(Sugerencia sug){
+		sugerenciasQueVota.add(sug);
 	}
 
+	public boolean haEscrito(Sugerencia sugerencia){
+		if(sugerenciasQueHace.contains(sugerencia))
+			return true;
+		return false;
+	}
+	
+	public boolean haVotado(Sugerencia sugerencia){
+		if(sugerenciasQueVota.contains(sugerencia))
+			return true;
+		return false;
+	}
 
     @Override
     public boolean equals(Object o) {

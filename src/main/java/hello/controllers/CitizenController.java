@@ -88,10 +88,6 @@ public class CitizenController {
 
 
        return "/user/index";
-
-
-
-
     }
 
     private void putSugerenciasInSession(HttpSession session) {
@@ -120,8 +116,9 @@ public class CitizenController {
 
         Long id=Long.parseLong(idSug);
         Sugerencia sugerencia = suggestionService.findById(id);
+        Citizen citizen=(Citizen) session.getAttribute("citizen");
         try {
-            suggestionService.votePositiveSugerencia(sugerencia);
+            suggestionService.votePositiveSugerencia(sugerencia, citizen);
         } catch (CitizenException e) {
 
         }
@@ -136,8 +133,9 @@ public class CitizenController {
 
         Long id=Long.parseLong(idSug);
         Sugerencia sugerencia = suggestionService.findById(id);
+        Citizen citizen=(Citizen) session.getAttribute("citizen");
         try {
-            suggestionService.voteNegativeSugerencia(sugerencia);
+            suggestionService.voteNegativeSugerencia(sugerencia, citizen);
         } catch (CitizenException e) {
 
         }
@@ -166,9 +164,6 @@ public class CitizenController {
 
         }
     }
-
-
-
 
 
 }
