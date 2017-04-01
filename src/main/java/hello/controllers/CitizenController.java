@@ -5,6 +5,7 @@ import hello.domain.Citizen;
 import hello.domain.Sugerencia;
 import hello.services.CategoryService;
 import hello.services.CitizenService;
+import hello.services.CommentService;
 import hello.services.SuggestionService;
 import hello.util.exception.CitizenException;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -35,6 +36,12 @@ public class CitizenController {
     private CitizenService citizenService;
     private SuggestionService suggestionService;
     private CategoryService categoryService;
+    private CommentService commentService;
+
+    @Autowired
+    public void setCommentService(CommentService commentService) {
+        this.commentService = commentService;
+    }
 
     @Autowired
     public void setCategoryService(CategoryService categoryService) {
@@ -153,6 +160,27 @@ public class CitizenController {
         return "/user/viewSuggestion";
 
     }
+
+    @RequestMapping(value = "/comment")
+    public String addComment(@RequestParam String idSug,String comentario,Model model,HttpSession session){
+        Long id=Long.parseLong(idSug);
+        Sugerencia sugerencia = suggestionService.findById(id);
+        Citizen citizen=(Citizen) session.getAttribute("citizen");
+        commentService.createComentario(comentario, sugerencia, citizen );
+        sugerencia = suggestionService.findById(id);
+        model.addAttribute("sugerencia",sugerencia);
+        return "/user/viewSuggestion";
+    }
+    @RequestMapping(value = "/createSuggestion")
+    public String addComment(Model model){
+        model.addAttribute("listaCategorias",categoryService.findAll());
+
+
+        return "/user/createSuggestion";
+    }
+
+
+
 
 
     private List<Sugerencia> getSugerencias(Categoria c) {

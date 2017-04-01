@@ -27,6 +27,13 @@ public class Comentario {
 //		Association.PoseerComentario.link(sugerencia, this);
 	}
 
+	public Comentario(String contenido, Sugerencia sugerencia, Citizen usuario) {
+		this.contenido = contenido;
+		this.sugerencia = sugerencia;
+		this.usuario = usuario;
+		this.votos=0;
+	}
+
 	public int getVotos() {
 		return votos;
 	}
