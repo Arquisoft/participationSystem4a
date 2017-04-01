@@ -161,7 +161,6 @@ public class CitizenController {
             return suggestionService.findAll();
         } else {
             return suggestionService.findByCat(c);
-
         }
     }
 

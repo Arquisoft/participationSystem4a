@@ -3,7 +3,6 @@ package hello.services;
 import hello.domain.Categoria;
 import hello.domain.Citizen;
 import hello.domain.Comentario;
-import hello.domain.Sugerencia;
 import hello.util.exception.CitizenException;
 
 import java.util.List;
@@ -20,12 +19,7 @@ public interface CitizenService extends SuperService {
 
 //	public void createCategoria(Categoria categoria) throws CitizenException;
 
-	public void votePositiveComment(Comentario comment, Citizen ciudadano) throws CitizenException;
+	
 
-	public void voteNegativeComment(Comentario comment, Citizen ciudadano) throws CitizenException;
-
-	public void votePositiveSuggestion(Sugerencia suggestion, Citizen ciudadano) throws CitizenException;
-
-	public void voteNegativeSuggestion(Sugerencia suggestion, Citizen ciudadano) throws CitizenException;
-
+	
 }
