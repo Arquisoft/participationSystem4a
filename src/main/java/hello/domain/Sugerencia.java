@@ -15,6 +15,12 @@ public class Sugerencia {
 	private String contenido;
 	@OneToMany(mappedBy="sugerencia",cascade = CascadeType.ALL)
 	private Set<Comentario> comentarios;
+	@ManyToMany
+	@JoinTable(name = "voto", joinColumns = {
+			@JoinColumn(name = "SUGERENCIA_ID", nullable = false, updatable = false) },
+			inverseJoinColumns = { @JoinColumn(name = "CITIZEN_ID",
+					nullable = false, updatable = false) })
+	private Set<Citizen> ciudadanosQueVotan;
 	@ManyToOne
 	@JoinColumn(name="categoria_id")
 	private Categoria categoria;
@@ -67,6 +73,10 @@ public class Sugerencia {
 	public Set<Comentario> getComentarios() {
 		return new HashSet<Comentario>(comentarios);
 	}
+	
+	public Set<Citizen> getCiudadanosQueVotan() {
+		return new HashSet<Citizen>(ciudadanosQueVotan);
+	}
 
 	public Categoria getCategoria() {
 		return categoria;
@@ -80,6 +90,10 @@ public class Sugerencia {
 		this.votos--;
 	}
 
+	public void addCiudadanoHaVotado(Citizen ciudadano){
+		ciudadanosQueVotan.add(ciudadano);
+		ciudadano.addSugerenciaHaVotado(this);
+	}
 	@Override
 	public String toString() {
 		return "Sugerencia [votos=" + votos + ", comentarios=" + comentarios

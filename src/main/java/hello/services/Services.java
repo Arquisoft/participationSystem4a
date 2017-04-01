@@ -6,7 +6,6 @@ import hello.services.impl.CitizenServiceImpl;
 import hello.services.impl.CommentServiceImpl;
 import hello.services.impl.SuggestionServiceImpl;
 import hello.services.impl.SystemServicesImpl;
-import hello.services.impl.VotoServiceImpl;
 
 
 //SOBRA
@@ -36,8 +35,5 @@ public class Services {
 		return new SuggestionServiceImpl();
 	}
 	
-	public static VotoService getVotoService(){
-		return new VotoServiceImpl();
-	}
 	
 }

@@ -31,7 +31,7 @@ public class CitizenServiceImpl implements CitizenService {
 	public void setCitizenRepository(CitizenRepository citizenRepository) {
 		this.citizenRepository = citizenRepository;
 	}
-
+	
 	@Autowired
 	public void setSuggestionRepository(SuggestionRepository suggRep) {
 		this.suggestionRepository = suggRep;
@@ -105,11 +105,12 @@ public class CitizenServiceImpl implements CitizenService {
 //	}
 
 	@Override
-	public void votePositiveComment(Comentario comment) throws CitizenException {
+	public void votePositiveComment(Comentario comment, Citizen ciudadano) throws CitizenException {
 		if (commentRepository.findOne(comment.getId()) == null) {
 			// Error
 			throw new CitizenException("El comentario no existe");
 		} else {
+			//votoRepository save
 			comment.incrementarVoto();
 			logger.send(Topics.POSITIVE_COMMENT_VOTE, comment.getId() + "");
 			loggerCutre.log(this.getClass(), "Votando positivo a comentario ID: "+comment.getId());
@@ -118,7 +119,7 @@ public class CitizenServiceImpl implements CitizenService {
 	}
 
 	@Override
-	public void voteNegativeComment(Comentario comment) throws CitizenException {
+	public void voteNegativeComment(Comentario comment, Citizen ciudadano) throws CitizenException {
 		if (commentRepository.findOne(comment.getId()) == null) {
 			throw new CitizenException("El comentario no existe");
 		} else {
@@ -138,27 +139,29 @@ public class CitizenServiceImpl implements CitizenService {
 	}
 
 	@Override
-	public void votePositiveSuggestion(Sugerencia suggestion) throws CitizenException {
+	public void votePositiveSuggestion(Sugerencia suggestion, Citizen ciudadano) throws CitizenException {
 		if(this.suggestionRepository.findOne(suggestion.getId()) == null){
 			loggerCutre.log(this.getClass(), "La sugerencia con nombre: "+suggestion.getNombre() +" no existe.");
 			throw new CitizenException("La sugerencia no existe.");
 		}
+		suggestion.addCiudadanoHaVotado(ciudadano);
 		suggestion.incrementarVotos();
 		logger.send(Topics.POSITIVE_SUGGESTION_VOTE, suggestion.getId() + "");
-		loggerCutre.log(this.getClass(), "Votando postivo a sugerencia ID: "+suggestion.getId());
+		loggerCutre.log(this.getClass(), "El ciudadano con ID: "+ciudadano.getId()+", Votando postivo a sugerencia ID: "+suggestion.getId());
 
 	}
 
 	@Override
-	public void voteNegativeSuggestion(Sugerencia suggestion) throws CitizenException {
+	public void voteNegativeSuggestion(Sugerencia suggestion, Citizen ciudadano) throws CitizenException {
 		if(this.suggestionRepository.findOne(suggestion.getId()) == null){
 			loggerCutre.log(this.getClass(), "La sugerencia con nombre: "+suggestion.getNombre() +" no existe.");
 			throw new CitizenException("La sugerencia no existe.");
 		}
+		suggestion.addCiudadanoHaVotado(ciudadano);
 		suggestion.decrementarVotos();
 		logger.send(Topics.NEGATIVE_SUGGESTION_VOTE, suggestion.getId() + "");
 
-		loggerCutre.log(this.getClass(), "Votando negativo a sugerencia ID: "+suggestion.getId());
+		loggerCutre.log(this.getClass(), "El ciudadano con ID: "+ciudadano.getId()+", Votando negativo a sugerencia ID: "+suggestion.getId());
 	}
 
 }

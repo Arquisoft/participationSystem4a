@@ -20,12 +20,12 @@ public interface CitizenService extends SuperService {
 
 //	public void createCategoria(Categoria categoria) throws CitizenException;
 
-	public void votePositiveComment(Comentario comment) throws CitizenException;
+	public void votePositiveComment(Comentario comment, Citizen ciudadano) throws CitizenException;
 
-	public void voteNegativeComment(Comentario comment) throws CitizenException;
+	public void voteNegativeComment(Comentario comment, Citizen ciudadano) throws CitizenException;
 
-	public void votePositiveSuggestion(Sugerencia suggestion) throws CitizenException;
+	public void votePositiveSuggestion(Sugerencia suggestion, Citizen ciudadano) throws CitizenException;
 
-	public void voteNegativeSuggestion(Sugerencia suggestion) throws CitizenException;
+	public void voteNegativeSuggestion(Sugerencia suggestion, Citizen ciudadano) throws CitizenException;
 
 }

@@ -1,6 +1,7 @@
 package hello.services.impl;
 
 import hello.domain.Categoria;
+import hello.domain.Citizen;
 import hello.domain.Sugerencia;
 import hello.producers.Topics;
 import hello.repository.SuggestionRepository;
@@ -17,12 +18,12 @@ import java.util.List;
 @Service
 public class SuggestionServiceImpl implements SuggestionService {
     SuggestionRepository suggestionRepository;
-
+    
     @Autowired
     public void setSuggestionRepository(SuggestionRepository suggRep) {
         this.suggestionRepository = suggRep;
     }
-
+ 
 
     @Override
     public List<Sugerencia> findAll() {
@@ -41,10 +42,11 @@ public class SuggestionServiceImpl implements SuggestionService {
     }
 
     @Override
-    public void votePositiveSugerencia(Sugerencia sug) throws CitizenException {
+    public void votePositiveSugerencia(Sugerencia sug, Citizen ciudadano) throws CitizenException {
         if (suggestionRepository.findOne(sug.getId()) == null) {
             throw new CitizenException("La sugerencia no existe.");
         } else {
+        	sug.addCiudadanoHaVotado(ciudadano);
             sug.incrementarVotos();
             suggestionRepository.save(sug);
             //guardar en la tabla votos la sugerencia con el usuario
@@ -53,11 +55,12 @@ public class SuggestionServiceImpl implements SuggestionService {
     }
 
     @Override
-    public void voteNegativeSugerencia(Sugerencia sug) throws CitizenException {
+    public void voteNegativeSugerencia(Sugerencia sug, Citizen ciudadano) throws CitizenException {
         if (suggestionRepository.findOne(sug.getId()) == null) {
             // Error
             throw new CitizenException("La sugerencia no existe.");
         } else {
+        	sug.addCiudadanoHaVotado(ciudadano);
             sug.decrementarVotos();
             suggestionRepository.save(sug);
             logger.send(Topics.NEGATIVE_SUGGESTION_VOTE, sug.getId() + "");
