@@ -14,7 +14,7 @@ public class Sugerencia {
 	private int votos;
 	private String nombre;
 	private String contenido;
-	@OneToMany(mappedBy="sugerencia",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="sugerencia",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private Set<Comentario> comentarios;
 	@ManyToMany
 	@JoinTable(name = "voto", joinColumns = {
@@ -99,6 +99,9 @@ public class Sugerencia {
 		this.fechaCreacion = fechaCreacion;
 	}
 
+	public void addComentario(Comentario c) {
+		this.comentarios.add(c);
+	}
 
 	public Set<Comentario> getComentarios() {
 		return new HashSet<Comentario>(comentarios);

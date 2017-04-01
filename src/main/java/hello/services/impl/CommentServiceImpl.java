@@ -1,5 +1,7 @@
 package hello.services.impl;
 
+import hello.domain.Citizen;
+import hello.domain.Sugerencia;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import hello.domain.Citizen;
@@ -8,7 +10,9 @@ import hello.producers.Topics;
 import hello.repository.CommentRepository;
 import hello.services.CommentService;
 import hello.util.exception.CitizenException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CommentServiceImpl implements CommentService {
 
 	@Autowired
@@ -58,5 +62,13 @@ public class CommentServiceImpl implements CommentService {
 		}
 
 	}
+
+	@Override
+	public void createComentario(String contenido, Sugerencia sugerencia, Citizen citizen) {
+		Comentario c = new Comentario(contenido,sugerencia,citizen);
+		sugerencia.addComentario(c);
+		commentRepository.save(c);
+	}
+
 
 }
