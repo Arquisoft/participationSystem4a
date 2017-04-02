@@ -1,16 +1,20 @@
 package hello.services.impl;
 
-import hello.domain.Categoria;
-import hello.domain.Citizen;
-import hello.domain.Sugerencia;
-import hello.producers.Topics;
-import hello.repository.SuggestionRepository;
-import hello.services.SuggestionService;
-import hello.util.exception.CitizenException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import hello.domain.Categoria;
+import hello.domain.Citizen;
+import hello.domain.Configuration;
+import hello.domain.Sugerencia;
+import hello.producers.Topics;
+import hello.repository.ConfigurationRepository;
+import hello.repository.SuggestionRepository;
+import hello.services.SuggestionService;
+import hello.util.exception.CitizenException;
 
 /**
  * Created by pelay on 29/03/2017.
@@ -19,13 +23,21 @@ import java.util.List;
 public class SuggestionServiceImpl implements SuggestionService {
     private SuggestionRepository suggestionRepository;
     
+    
     @Autowired
     public void setSuggestionRepository(SuggestionRepository suggRep) {
         this.suggestionRepository = suggRep;
     }
+    
+    private ConfigurationRepository configurationRepository;
  
+    @Autowired
+    public void setConfigurationRepository(ConfigurationRepository configurationRepository) {
+		this.configurationRepository = configurationRepository;
+	}
 
-    @Override
+
+	@Override
     public List<Sugerencia> findAll() {
         return this.suggestionRepository.findAll();
 
@@ -52,7 +64,8 @@ public class SuggestionServiceImpl implements SuggestionService {
             //guardar en la tabla votos la sugerencia con el usuario
             logger.send(Topics.POSITIVE_SUGGESTION_VOTE, sug.getId() + "");
             loggerCutre.log(this.getClass(), "El ciudadano con ID: "+ciudadano.getId()+", Votando postivo a sugerencia ID: "+sug.getId());
-
+            
+            comprobarConsiguioMinimoVotos(sug);
         }
     }
 
@@ -98,5 +111,27 @@ public class SuggestionServiceImpl implements SuggestionService {
             throw new CitizenException("Error al guardar la sugerencia.");
         }
     }
+    
+    private void comprobarConsiguioMinimoVotos(Sugerencia sug){
+    	Configuration config = this.configurationRepository.findAll().get(0);
+    	int minVotos = config.getMinimoVotos();
+    	if(sug.getVotos() >= minVotos){
+    		sug.setConsiguioElMinimo(true);
+    	}
+    	logger.send(Topics.SUGGESTION_GETS_MIN_VOTES, sug.getNombre());
+    }
+
+
+	@Override
+	public List<Sugerencia> findSugerenciaWithMinVotes() {
+		List<Sugerencia> sugs = this.suggestionRepository.findAll();
+		List<Sugerencia> mySugs = new ArrayList<>();
+		for(Sugerencia sug : sugs){
+			if(sug.isConsiguioElMinimo()){
+				mySugs.add(sug);
+			}
+		}
+		return sugs;
+	}
 
 }

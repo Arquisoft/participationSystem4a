@@ -18,12 +18,12 @@ import hello.util.loggercutre.SingletonLoggerCutre;
 
 @WebAppConfiguration
 public class SuperSteps {
-	public CitizenService citizeServices = Services.getCitizenServices();
-	public AdminService adminServices = Services.getAdminServices();
-	public SystemServices systemSercices = Services.getSystemServices();
-	public CategoryService categoryService = Services.getCategoryService();
-	public CommentService commentService = Services.getCommentService();
-	public SuggestionService suggestionService = Services.getSuggestionService();
+//	public CitizenService citizeServices = Services.getCitizenServices();
+//	public AdminService adminServices = Services.getAdminServices();
+//	public SystemServices systemSercices = Services.getSystemServices();
+//	public CategoryService categoryService = Services.getCategoryService();
+//	public CommentService commentService = Services.getCommentService();
+//	public SuggestionService suggestionService = Services.getSuggestionService();
 	
 	protected ConfigurableApplicationContext appContext;
 	protected LoggerCutre loggerCutre = SingletonLoggerCutre.getInstance().getLogger();
@@ -36,25 +36,25 @@ public class SuperSteps {
 	@Autowired
 	WebApplicationContext context;
 	
-	
-	public CitizenService getCitizeServices() {
-		return citizeServices;
-	}
-	public AdminService getAdminServices() {
-		return adminServices;
-	}
-	public SystemServices getSystemSercices() {
-		return systemSercices;
-	}
-	public CategoryService getCategoryService() {
-		return categoryService;
-	}
-	public CommentService getCommentService() {
-		return commentService;
-	}
-	public SuggestionService getSuggestionService() {
-		return suggestionService;
-	}
+//	
+//	public CitizenService getCitizeServices() {
+//		return citizeServices;
+//	}
+//	public AdminService getAdminServices() {
+//		return adminServices;
+//	}
+//	public SystemServices getSystemSercices() {
+//		return systemSercices;
+//	}
+//	public CategoryService getCategoryService() {
+//		return categoryService;
+//	}
+//	public CommentService getCommentService() {
+//		return commentService;
+//	}
+//	public SuggestionService getSuggestionService() {
+//		return suggestionService;
+//	}
 	
 
 	

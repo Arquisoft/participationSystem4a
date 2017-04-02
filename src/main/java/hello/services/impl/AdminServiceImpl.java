@@ -1,9 +1,12 @@
 package hello.services.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import hello.domain.Configuration;
+import hello.domain.Sugerencia;
 import hello.repository.ConfigurationRepository;
 import hello.services.AdminService;
 
@@ -18,8 +21,15 @@ public class AdminServiceImpl implements AdminService {
 	private ConfigurationRepository configurationRepository;
 	@Override
 	public Configuration getConfiguracion() {
-		// ANA Obtener configuracion
-		return null;
+//		// ANA Obtener configuracion
+//		return null;
+		List<Configuration> listado = this.configurationRepository.findAll();
+		if(listado.size() == 0){
+			Configuration newC =  new Configuration();
+			this.configurationRepository.save(newC);
+			return newC;
+		}
+		return listado.get(0);
 	}
 
 	@Autowired
@@ -29,16 +39,39 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	public void setConfiguracion(Configuration config) {
-		configurationRepository.save(new Configuration("mierda"));
-		configurationRepository.save(new Configuration("puta"));
-		configurationRepository.save(new Configuration("polla"));
-		configurationRepository.save(new Configuration("gilipollas"));
-		configurationRepository.save(new Configuration("hostia"));
-		configurationRepository.save(new Configuration("cabrón"));
-		configurationRepository.save(new Configuration("subnormal"));
-		configurationRepository.save(new Configuration("coño"));
-		configurationRepository.save(new Configuration("joder"));
+//		configurationRepository.save(new Configuration("mierda"));
+//		configurationRepository.save(new Configuration("puta"));
+//		configurationRepository.save(new Configuration("polla"));
+//		configurationRepository.save(new Configuration("gilipollas"));
+//		configurationRepository.save(new Configuration("hostia"));
+//		configurationRepository.save(new Configuration("cabrón"));
+//		configurationRepository.save(new Configuration("subnormal"));
+//		configurationRepository.save(new Configuration("coño"));
+//		configurationRepository.save(new Configuration("joder"));
 		//ANA Establece la configuracion par ala base de datos
+		//Configuration antigua = getConfiguracion();
+		//this.configurationRepository.delete(antigua);
+		this.configurationRepository.deleteAll();
+		this.configurationRepository.save(config);
+	}
+
+	@Override
+	public void addPalabraProhibida(String word) {
+		Configuration antigua = getConfiguracion();
+		antigua.addPalabraNoPermitida(word);
+		setConfiguracion(antigua);
+	}
+
+	@Override
+	public Sugerencia editarSugerencia(Sugerencia antigua, String nuevoNombre, String nuevoContenido) {
+		if(!nuevoNombre.equals("") || nuevoNombre != null){
+			antigua.setNombre(nuevoNombre);
+		}
+		if(!nuevoContenido.equals("") || nuevoContenido != null){
+			antigua.setContenido(nuevoContenido);
+		}
+		
+		return antigua;
 	}
 
 }

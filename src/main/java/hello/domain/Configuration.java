@@ -28,9 +28,15 @@ public class Configuration {
 		return PALABRAS_NO_PERMITIDAS;
 	}
 
-	public Configuration(String palabras) {
+	public Configuration() {
+		// TODO Auto-generated constructor stub
 		this.palabrasNoPermitidas = new ArrayList<String>();
 		rellenarListaPalabrasNoPermitidas();
+		this.minimoVotos = 0;
+
+	}
+	public Configuration(String palabras) {
+		this();
 		PALABRAS_NO_PERMITIDAS=palabras;
 	}
 	

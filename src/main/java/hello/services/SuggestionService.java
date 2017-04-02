@@ -20,5 +20,5 @@ public interface SuggestionService extends SuperService {
     void createSugerencia(Sugerencia sug) throws CitizenException;
     void createSugerencia(Citizen citizen, Categoria categoria, String titulo, String contenido) throws CitizenException;
 
-    
+    List<Sugerencia> findSugerenciaWithMinVotes();
 }

@@ -49,5 +49,12 @@ public class Topics {
 																						// negativamente
 																						// una
 																						// propuesta.
-
+	public final static String SUGGESTION_GETS_MIN_VOTES = "SUGGESTION_GETS_MIN_VOTES"; // Cuando
+																						// una
+																						// sugerencia
+																						// alcanza
+																						// el
+																						// minimo
+																						// de
+																						// votos.
 }

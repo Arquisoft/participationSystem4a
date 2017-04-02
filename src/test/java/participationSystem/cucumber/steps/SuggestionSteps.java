@@ -61,7 +61,7 @@ public class SuggestionSteps extends SuperSteps {
 		// throw new PendingException();
 		try {
 			String catName = driver.findElement(By.xpath("//*[@id=\"categoriaSelect\"]")).getText();
-			Categoria currentCat = catRep.findByName(catName);
+			Categoria currentCat = catRep.findByNombre(catName);
 			this.currentSuggestion = new Sugerencia("Las rotondas molan",
 					"Queremos rotondas en todas las esquinas. Y descuentos en los cambios de neumaticos.", currentCat);
 			driver.findElement(By.xpath("//*[@id=\"titulo-text-input\"]")).sendKeys(currentSuggestion.getNombre());

@@ -10,6 +10,4 @@ import hello.domain.Sugerencia;
 public interface CategoryRepository extends JpaRepository<Categoria, Long>{
 
 	Categoria findByNombre(String name);
-
-	Categoria findByName(String catName);	
 }

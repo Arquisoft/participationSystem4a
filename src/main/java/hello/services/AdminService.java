@@ -1,6 +1,7 @@
 package hello.services;
 
 import hello.domain.Configuration;
+import hello.domain.Sugerencia;
 
 public interface AdminService extends SuperService{
 	
@@ -15,4 +16,13 @@ public interface AdminService extends SuperService{
 	 * @param config
 	 */
 	void setConfiguracion(Configuration config);
+	
+	void addPalabraProhibida(String word);
+	/**
+	 * Si me pasas null en alguno de los String paso de editarlos. 
+	 * @param antigua
+	 * @param nuevoNombre
+	 * @param nuevoContenido
+	 */
+	Sugerencia editarSugerencia(Sugerencia antigua, String nuevoNombre, String nuevoContenido);
 }
