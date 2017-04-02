@@ -1,6 +1,6 @@
 package participationSystem;
 
-import static org.junit.Assert.*;
+/*import static org.junit.Assert.*;
 
 import java.util.concurrent.TimeUnit;
 
@@ -16,9 +16,9 @@ import participationSystem.util.SeleniumUtils;
 
 @SuppressWarnings("deprecation")
 @IntegrationTest
-@WebAppConfiguration
+@WebAppConfiguration*/
 public class SeleniumTest {
-	private WebDriver driver;
+/*	private WebDriver driver;
 	private String baseUrl;
 	private StringBuffer verificationErrors = new StringBuffer();
 
@@ -63,7 +63,7 @@ public class SeleniumTest {
 				"Plantacion de nuevos arboles en el Campo San Francisco");
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[3]")).getText(), "14");
 
-		/*
+		
 		 * assertEquals(driver.findElement(By.xpath(
 		 * "//*[@id=\"sugerencias\"]/tbody/tr[1]/td[1]")).getText(),
 		 * "Activar ayudas a la eficiencia energética para apoyar la rehabilitación"
@@ -81,7 +81,7 @@ public class SeleniumTest {
 		 * "La hora de recogida de basuras en invierno es demasiado tarde");
 		 * assertEquals(driver.findElement(By.xpath(
 		 * "//*[@id=\"sugerencias\"]/tbody/tr[2]/td[3]")).getText(), 1);
-		 */}
+		 }
 
 	@Test
 	public void testVotarNegativo() throws Exception {
@@ -92,18 +92,18 @@ public class SeleniumTest {
 				"Plantacion de nuevos arboles en el Campo San Francisco");
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[3]")).getText(), "14");
 
-		/*
+		
 		 * assertEquals(driver.findElement(By.xpath(
 		 * "//*[@id=\"sugerencias\"]/tbody/tr[2]/td[2]")).getText(),
 		 * "La hora de recogida de basuras en invierno es demasiado tarde");
 		 * assertEquals(driver.findElement(By.xpath(
 		 * "//*[@id=\"sugerencias\"]/tbody/tr[2]/td[3]")).getText(), "0");
-		 */
+		 
 	}
 
 	@Test
 	public void testBuscarSugerencia() throws Exception {
-		/*
+		
 		 * driver.findElement(By.xpath(
 		 * "//*[@id=\"sugerencias_filter\"]/label/input")).sendKeys("HUCA");
 		 * assertEquals(driver.findElement(By.xpath(
@@ -121,7 +121,7 @@ public class SeleniumTest {
 		 * "//*[@id=\"sugerencias\"]/tbody/tr/td[5]/form/button")).click();
 		 * assertEquals(driver.findElement(By.xpath(
 		 * "//*[@id=\"sugerencias\"]/tbody/tr/td[3]")), 1);
-		 */
+		 
 	}
 
 	@Test
@@ -132,7 +132,7 @@ public class SeleniumTest {
 				"Marquesina Llamaquique");
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[3]")).getText(), "3");
 
-		/*
+		
 		 * assertEquals(driver.findElement(By.xpath(
 		 * "//*[@id=\"sugerencias\"]/tbody/tr/td[1]")).getText(),
 		 * "Nuevo estadio de atletismo");
@@ -149,7 +149,7 @@ public class SeleniumTest {
 		 * driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		 * assertEquals(driver.findElement(By.xpath(
 		 * "//*[@id=\"sugerencias\"]/tbody/tr/td[3]")).getText(), "6");
-		 */
+		 
 
 	}
 
@@ -164,14 +164,14 @@ public class SeleniumTest {
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[1]")).getText(),
 				"Nuevos Ã¡rboles");
 
-		/*
+		
 		 * assertEquals(driver.findElement(By.xpath(
 		 * "//*[@id=\"sugerencias\"]/tbody/tr[1]/td[1]")).getText(),
 		 * "Activar ayudas a la eficiencia energética para apoyar la rehabilitación"
 		 * ); assertEquals(driver.findElement(By.xpath(
 		 * "//*[@id=\"sugerencias\"]/tbody/tr[2]/td[1]")).getText(),
 		 * "Ampliacion de horario de recogida");
-		 */}
+		 }
 
 	@Test
 	public void testOrdenarSugerenciasPorContenido() throws Exception {
@@ -181,7 +181,7 @@ public class SeleniumTest {
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[1]")).getText(),
 				"Nuevos Ã¡rboles");
 
-		/*
+		
 		 * assertEquals(driver.findElement(By.xpath(
 		 * "//*[@id=\"sugerencias\"]/tbody/tr[1]/td[1]")).getText(),
 		 * "Ampliar el horario de la zona verde e incluir los domingos");
@@ -189,7 +189,7 @@ public class SeleniumTest {
 		 * "//*[@id=\"sugerencias\"]/tbody/tr[2]/td[1]")).getText(),
 		 * "Activar ayudas a la eficiencia energética para apoyar la rehabilitación"
 		 * );
-		 */
+		 
 
 	}
 
@@ -235,5 +235,5 @@ public class SeleniumTest {
 			fail(verificationErrorString);
 		}
 	}
-
+*/
 }
