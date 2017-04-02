@@ -169,7 +169,11 @@ public class CitizenController {
 		 Citizen citizen = (Citizen) session.getAttribute("citizen");
 		 Long idCat = Long.parseLong(idCategoria);
 		 Categoria categoria = categoryService.findById(idCat);
-		suggestionService.createSugerencia(citizen, categoria, tituloSugerencia, contSugerencia);
+		 try {
+			 suggestionService.createSugerencia(citizen, categoria, tituloSugerencia, contSugerencia);
+		 } catch (CitizenException e) {
+			 e.printStackTrace();
+		 }
 
 		 List<Sugerencia> listaSugerencias = getSugerencias(null);
 		 session.setAttribute("listaSugerencias", listaSugerencias);
