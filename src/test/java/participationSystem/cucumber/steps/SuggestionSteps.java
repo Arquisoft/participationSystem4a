@@ -18,8 +18,7 @@ public class SuggestionSteps extends SuperSteps{
 	@Given("^Inicio sesion en la aplicacion$")
 	public void inicio_sesion_en_la_aplicacion() throws Throwable {
 		driver.get(baseUrl);
-		SeleniumUtils.esperaCargaPagina(driver, baseUrl, "inputEmail", 5);
-		driver.findElement(By.id("inputEmail")).sendKeys("pelayo@gmail.com");
+		driver.findElement(By.xpath("//*[@id=\"inputEmail\"]")).sendKeys("pelayo@gmail.com");
 		driver.findElement(By.id("inputPassword")).sendKeys("temporal");
 		driver.findElement(By.name("botonlogin")).click();
 
@@ -32,17 +31,6 @@ public class SuggestionSteps extends SuperSteps{
 		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[1]")).getText(), "Marquesina Llamaquique");
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[3]")).getText(), "3");		
-		
-		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[1]")).getText(), "Nuevo estadio de atletismo");
-		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[3]")).getText(), "6");
-		driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[4]/form/button")).click();
-		
-		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[3]")).getText(), "7");
-		driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[5]/form/button")).click();
-		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr/td[3]")).getText(), "6");		
-		
 	}
 	
 	@When("^Creo la sugerencia$")

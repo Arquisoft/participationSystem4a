@@ -1,21 +1,31 @@
 package participationSystem.cucumber.steps;
 
+import static org.junit.Assert.assertEquals;
+
+import org.openqa.selenium.By;
+
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import participationSystem.util.SeleniumUtils;
 
 public class VoteCommentSteps extends SuperSteps{
 	@Given("^Soy un usuario registrado$")
 	public void soy_un_usuario_registrado() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+		driver.get(baseUrl);
+		driver.findElement(By.xpath("//*[@id=\"inputEmail\"]")).sendKeys("pelayo@gmail.com");
+		driver.findElement(By.id("inputPassword")).sendKeys("temporal");
+		driver.findElement(By.name("botonlogin")).click();
+
+		SeleniumUtils.esperaCargaPaginaxpath(driver, "/html/body/div/div/div[2]/div[1]/h2", 4);
 	}
 
 	@Given("^Existe al menos una sugerencia$")
 	public void existe_al_menos_una_sugerencia() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[1]/td[1]")).getText(), "Marquesina Llamaquique");
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[2]")).getText(), "Plantacion de nuevos arboles en el Campo San Francisco");
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[3]")).getText(), "14");		
 	}
 
 	@Given("^Esa sugerencia tiene al menos un comentario$")

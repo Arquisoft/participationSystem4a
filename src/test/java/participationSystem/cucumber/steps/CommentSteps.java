@@ -1,7 +1,10 @@
 package participationSystem.cucumber.steps;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import cucumber.api.PendingException;
 import cucumber.api.java.Before;
@@ -10,6 +13,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import hello.domain.Comentario;
 import hello.domain.Sugerencia;
+import participationSystem.util.SeleniumUtils;
 
 /**
  * Clase para probar lo que deberia pasar al insertar un comentario.
@@ -26,25 +30,19 @@ public class CommentSteps extends SuperSteps{
 	
 	@Before
 	public void setUp() {
-//		String[] args = {};
-//		Application.main(args);
-//		this.appContext = Application.getAppInstance();
-		driver = new HtmlUnitDriver();
 		driver.get(baseUrl);
-//		SeleniumUtils.EsperaCargaPagina(driver, baseUrl, "inputEmail", 5);
-		this.stepBien = true; //Reiniciar el valor
-	}
+		driver.findElement(By.xpath("//*[@id=\"inputEmail\"]")).sendKeys("pelayo@gmail.com");
+		driver.findElement(By.id("inputPassword")).sendKeys("temporal");
+		driver.findElement(By.name("botonlogin")).click();
+
+		SeleniumUtils.esperaCargaPaginaxpath(driver, "/html/body/div/div/div[2]/div[1]/h2", 4);
+}
 	
 	@Given("^Debe haber una sugerencia que comentar$")
 	public void debe_haber_una_sugerencia_que_comentar() throws Throwable {
-		List<Sugerencia> listaSugerencias = suggestionService.findAll();
-		if (listaSugerencias.size() == 0) {
-			stepBien = false;
-		}
-		if(!stepBien){
-			loggerCutre.log(getClass(), getClass().getEnclosingMethod(), "Step fallido. No hay sugerencias");
-		}
-		// throw new PendingException();
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[1]/td[1]")).getText(), "Marquesina Llamaquique");
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[2]")).getText(), "Plantacion de nuevos arboles en el Campo San Francisco");
+		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[3]")).getText(), "14");		
 	}
 
 	@Given("^he iniciado sesion en la aplicacion$")
@@ -55,35 +53,16 @@ public class CommentSteps extends SuperSteps{
 
 	@When("^creo un comentario$")
 	public void creo_un_comentario() throws Throwable {
-		try {
-			Sugerencia s = suggestionService.findAll().get(0); // Cojo la
-																// primera
-																// mismamente
-			Comentario c = new Comentario("Comentario de pruba con cucumber", s);
-			commentService.createComentario(c);
-		} catch (Exception e) {
-			loggerCutre.log(getClass(), "Step fallido, no he podido crar un comentario");
-		}
-		throw new PendingException();
+		driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[1]/a")).click();
+		driver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div/div/div/form/textarea")).sendKeys("Mola");
+		driver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div/div/div/form/button")).click();
+	
 	}
 
 	@Then("^la sugerencia debe tener mi comentario$")
 	public void la_sugerencia_debe_tener_mi_comentario() throws Throwable {
-		Sugerencia s = suggestionService.findAll().get(0); // Cojo la primera
-															// mismamente
-		if (s.getComentarios().size() == 0) {
-			loggerCutre.log(getClass(), "Step fallido, la sugerencia sigue sin tener comentarios tras haber creado uno.");
-			return;
-		}
-
-		boolean tengoComent = false;
-		for (Comentario c : s.getComentarios()) {
-			if (c.getContenido().equals("Comentario de pruba con cucumber"))
-				tengoComent = true;
-		}
-		if (!tengoComent)
-			loggerCutre.log(getClass(), "Step fallido, no existe mi comentario.");
-		// throw new PendingException();
+		assertEquals(driver.findElement(By.xpath("/html/body/div/div/div[2]/div[3]/div[2]/div/div[2]/p")).getText(),
+				"Por un Oviedo verde");
 	}
 
 }
