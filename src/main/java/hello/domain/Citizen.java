@@ -35,6 +35,7 @@ public class Citizen {
     private Set<Sugerencia> sugerenciasQueHace;
     @ManyToMany(mappedBy="usuario",fetch = FetchType.EAGER)
     private Set<Sugerencia> sugerenciasQueVota;
+    private boolean isAdmin;
     
     
     
@@ -66,6 +67,27 @@ public class Citizen {
         this.contrasena_NC = contrasena;
     }
 
+    public Citizen(String nombre, String apellidos, String email, Date fecha_nacimiento, String direccion_postal, String nacionalidad, String numero_identificativo, String contrasena, boolean isAdmin) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.direccion_postal = direccion_postal;
+        this.nacionalidad = nacionalidad;
+        this.numero_identificativo = numero_identificativo;
+        this.contrasena = DigestUtils.sha512Hex(contrasena);
+        this.contrasena_NC = contrasena;
+        this.isAdmin = isAdmin;
+
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
 
     public void setNombre(String name) {
         this.nombre = name;

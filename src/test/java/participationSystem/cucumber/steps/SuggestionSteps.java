@@ -1,14 +1,5 @@
 package participationSystem.cucumber.steps;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.web.WebAppConfiguration;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -16,7 +7,15 @@ import hello.domain.Categoria;
 import hello.domain.Sugerencia;
 import hello.repository.CategoryRepository;
 import hello.repository.SuggestionRepository;
+import org.openqa.selenium.By;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.web.WebAppConfiguration;
 import participationSystem.util.SeleniumUtils;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import static org.junit.Assert.assertEquals;
 
 @WebAppConfiguration
 public class SuggestionSteps extends SuperSteps {
