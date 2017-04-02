@@ -1,7 +1,10 @@
 
 
-INSERT INTO asw.usuarios (id, apellidos, contrasena, direccion_postal, email, fecha_nacimiento, nacionalidad, nombre, numero_identificativo) VALUES ('1', 'García Larteregui', '2088948c702d6fb94bfa4f4bf314341013730d6da4338507e1be3e5f3b8ccddd9d874faecf00923fe6e26cbd67f0322d9d8e4f6ab8d04704c7f13496dc63a5cb', 'Gijón', 'pelayo@gmail.com', '1994/05/25', 'Española', 'Pelayo', '511236');
-INSERT INTO asw.usuarios (id, apellidos, contrasena, direccion_postal, email, fecha_nacimiento, nacionalidad, nombre, numero_identificativo) VALUES ('2', 'Fernandez Alvarez', '2088948c702d6fb94bfa4f4bf314341013730d6da4338507e1be3e5f3b8ccddd9d874faecf00923fe6e26cbd67f0322d9d8e4f6ab8d04704c7f13496dc63a5cb', 'Oviedo', 'pedro@gmail.com', '1994/05/25', 'Española', 'Pedro', '51123684585T');
+INSERT INTO asw.usuarios (id, apellidos, contrasena, direccion_postal, email, fecha_nacimiento, nacionalidad, nombre, numero_identificativo, is_admin) VALUES ('1', 'García Larteregui', '2088948c702d6fb94bfa4f4bf314341013730d6da4338507e1be3e5f3b8ccddd9d874faecf00923fe6e26cbd67f0322d9d8e4f6ab8d04704c7f13496dc63a5cb', 'Gijón', 'pelayo@gmail.com', '1994/05/25', 'Española', 'Pelayo', '511236', FALSE);
+INSERT INTO asw.usuarios (id, apellidos, contrasena, direccion_postal, email, fecha_nacimiento, nacionalidad, nombre, numero_identificativo, is_admin) VALUES ('2', 'Fernandez Alvarez', '2088948c702d6fb94bfa4f4bf314341013730d6da4338507e1be3e5f3b8ccddd9d874faecf00923fe6e26cbd67f0322d9d8e4f6ab8d04704c7f13496dc63a5cb', 'Oviedo', 'pedro@gmail.com', '1994/05/25', 'Española', 'Pedro', '51123684585T', FALSE);
+
+INSERT INTO asw.usuarios (id, apellidos, contrasena, direccion_postal, email, fecha_nacimiento, nacionalidad, nombre, numero_identificativo, is_admin) VALUES ('3', 'Administrador del sistema', '2088948c702d6fb94bfa4f4bf314341013730d6da4338507e1be3e5f3b8ccddd9d874faecf00923fe6e26cbd67f0322d9d8e4f6ab8d04704c7f13496dc63a5cb', 'Oviedo', 'admin@gmail.com', '1994/05/25', 'Española', 'Admin', '5112368458f5T', TRUE);
+
 
 INSERT INTO asw.categoria (id, nombre) VALUES ('1', 'Infraestructuras');
 INSERT INTO asw.categoria (id, nombre) VALUES ('2', 'Jardines');

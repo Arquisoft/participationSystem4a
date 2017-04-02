@@ -3,10 +3,7 @@ package hello.controllers;
 import hello.domain.Categoria;
 import hello.domain.Citizen;
 import hello.domain.Sugerencia;
-import hello.services.CategoryService;
-import hello.services.CitizenService;
-import hello.services.CommentService;
-import hello.services.SuggestionService;
+import hello.services.*;
 import hello.util.exception.CitizenException;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +33,7 @@ public class CitizenController {
 	private SuggestionService suggestionService;
 	private CategoryService categoryService;
 	private CommentService commentService;
+	private SystemServices systemService;
 
 	@Autowired
 	public void setCommentService(CommentService commentService) {
@@ -56,6 +54,11 @@ public class CitizenController {
 	public void setSuggestionService(SuggestionService suggestionService) {
 		this.suggestionService = suggestionService;
 	}
+
+	@Autowired
+	public void setSystemService(SystemServices systemService) {
+		this.systemService = systemService;
+	}
 	/*
 	 * @RequestMapping("/") public String landing(Model model) { //
 	 * model.addAttribute("message", new Message()); return "index"; }
@@ -69,11 +72,19 @@ public class CitizenController {
 
 		if (citizen != null && DigestUtils.sha512Hex(password).equals(citizen.getContrasena())) {
 			session.setAttribute("citizen", citizen);
-			List<Sugerencia> listaSugerencias = getSugerencias(null);
-			session.setAttribute("listaSugerencias", listaSugerencias);
-			session.setAttribute("listaCategorias", categoryService.findAll());
+			if(!citizen.isAdmin()) {
+				List<Sugerencia> listaSugerencias = getSugerencias(null);
+				session.setAttribute("listaSugerencias", listaSugerencias);
+				session.setAttribute("listaCategorias", categoryService.findAll());
 
-			return "/user/index";
+				return "/user/index";
+			}
+
+			else{
+				//List<String> listaPalabras =
+
+				return "/admin/adminIndex";
+			}
 		}
 		model.addAttribute("error", "Your username and password is invalid.");
 		return "index";
@@ -165,10 +176,17 @@ public class CitizenController {
 	}
 
 	 @RequestMapping(value = "/submitSuggestion")
-	 	 public String addSuggestion(@RequestParam String tituloSugerencia, @RequestParam String idCategoria, @RequestParam String contSugerencia, HttpSession session){
+	 	 public String addSuggestion(@RequestParam String tituloSugerencia, @RequestParam String idCategoria, @RequestParam String contSugerencia, HttpSession session, Model model){
 		 Citizen citizen = (Citizen) session.getAttribute("citizen");
 		 Long idCat = Long.parseLong(idCategoria);
 		 Categoria categoria = categoryService.findById(idCat);
+		 if(systemService.contienePalabrasNoAdmitidas(tituloSugerencia) ||
+		 systemService.contienePalabrasNoAdmitidas(contSugerencia)){
+					model.addAttribute("errorMessage","Contiene palabras no admitidas");
+			 		return "/user/createSuggestion";
+		 }
+
+
 		 try {
 			 suggestionService.createSugerencia(citizen, categoria, tituloSugerencia, contSugerencia);
 		 } catch (CitizenException e) {
