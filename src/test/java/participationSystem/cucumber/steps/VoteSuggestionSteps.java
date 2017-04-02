@@ -24,17 +24,19 @@ public class VoteSuggestionSteps extends SuperSteps {
 	SuggestionRepository suggestionRepository;
 
 	CommentRepository commentRepository;
-	
+
 	CitizenRepository citizenRepository;
-	
+
 	@Autowired
 	public void setSuggestionRepository(SuggestionRepository suggestionRepository) {
 		this.suggestionRepository = suggestionRepository;
 	}
+
 	@Autowired
 	public void setCommentRepository(CommentRepository commentRepository) {
 		this.commentRepository = commentRepository;
 	}
+
 	@Autowired
 	public void setCitizenRepository(CitizenRepository citizenRepository) {
 		this.citizenRepository = citizenRepository;
@@ -49,8 +51,12 @@ public class VoteSuggestionSteps extends SuperSteps {
 		driver.findElement(By.xpath("//*[@id=\"inputEmail\"]")).sendKeys("pelayo@gmail.com");
 		driver.findElement(By.id("inputPassword")).sendKeys("temporal");
 		driver.findElement(By.name("botonlogin")).click();
-		
-		userLogged = citizenRepository.findByEmail("pelayo@gmail.com");
+		try {
+			userLogged = citizenRepository.findByEmail("pelayo@gmail.com");
+
+		} catch (Exception e) {
+			assertEquals(true, false);
+		}
 
 		SeleniumUtils.esperaCargaPaginaxpath(driver, "/html/body/div/div/div[2]/div[1]/h2", 4);
 	}
@@ -61,18 +67,19 @@ public class VoteSuggestionSteps extends SuperSteps {
 				"Marquesina Llamaquique");
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[2]")).getText(),
 				"Plantacion de nuevos arboles en el Campo San Francisco");
-		this.idSugerencia = Long.parseLong(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[3]")).getText());
+		this.idSugerencia = Long
+				.parseLong(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[3]")).getText());
 		assertEquals(idSugerencia, "13");
 	}
 
 	@Given("^No he votado ya esa sugerencia$")
 	public void no_he_votado_ya_esa_sugerencia() throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-//		throw new PendingException();
+		// throw new PendingException();
 		Sugerencia sugActual = suggestionRepository.findOne(idSugerencia);
-		if(userLogged!= null){
+		if (userLogged != null) {
 			assertEquals(true, !userLogged.getSugerenciasQueVota().contains(sugActual));
-		}else{
+		} else {
 			assertEquals(true, false);
 		}
 	}
@@ -102,12 +109,17 @@ public class VoteSuggestionSteps extends SuperSteps {
 	@Then("^no puedo volver a votar$")
 	public void no_puedo_volver_a_votar() throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-//		throw new PendingException();
-		Sugerencia sugActual = suggestionRepository.findOne(idSugerencia);
-		if(userLogged!= null){
-			assertEquals(true, userLogged.getSugerenciasQueVota().contains(sugActual));
-		}else{
+		// throw new PendingException();
+		try {
+			Sugerencia sugActual = suggestionRepository.findOne(idSugerencia);
+			if (userLogged != null) {
+				assertEquals(true, userLogged.getSugerenciasQueVota().contains(sugActual));
+			} else {
+				assertEquals(true, false);
+			}
+		} catch (Exception e) {
 			assertEquals(true, false);
 		}
+
 	}
 }
