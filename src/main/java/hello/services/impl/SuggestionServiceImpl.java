@@ -84,4 +84,19 @@ public class SuggestionServiceImpl implements SuggestionService {
 		}
 
 	}
+
+    @Override
+    public void createSugerencia(Citizen citizen, Categoria categoria, String titulo, String contenido) throws CitizenException {
+        try {
+            Sugerencia sug = new Sugerencia(titulo, contenido, categoria, citizen);
+            suggestionRepository.save(sug);
+            // Mandar a Kafka (ejemplo que no tiene por qué ser asi)
+            logger.send(Topics.CREATE_SUGGESTION,
+                    sug.getNombre() + separator + sug.getContenido() + separator + sug.getCategoria());
+            loggerCutre.log(this.getClass(), "Sugerencia = " + sug.getNombre(), "Categoria = " + sug.getCategoria().getNombre());
+        } catch (Exception e) {
+            throw new CitizenException("Error al guardar la sugerencia.");
+        }
+    }
+
 }

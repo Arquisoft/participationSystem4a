@@ -46,7 +46,10 @@ public class Sugerencia {
 		this.nombre = nombre;
 		this.contenido = contenido;
 		this.categoria = categoria;
-		this.usuario=usuario;	
+		this.usuario=usuario;
+		this.votos=0;
+		this.fechaCreacion=new Date();
+		this.ciudadanosQueVotan=new HashSet<>();
 	}
 
 	public Sugerencia(Set<Citizen> ciudadanosQueVotan, Categoria categoria, Citizen usuario, Date fechaCreacion) {

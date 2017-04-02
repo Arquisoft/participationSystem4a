@@ -164,6 +164,22 @@ public class CitizenController {
 		return "/user/createSuggestion";
 	}
 
+	 @RequestMapping(value = "/submitSuggestion")
+	 	 public String addSuggestion(@RequestParam String tituloSugerencia, @RequestParam String idCategoria, @RequestParam String contSugerencia, HttpSession session){
+		 Citizen citizen = (Citizen) session.getAttribute("citizen");
+		 Long idCat = Long.parseLong(idCategoria);
+		 Categoria categoria = categoryService.findById(idCat);
+		 try {
+			 suggestionService.createSugerencia(citizen, categoria, tituloSugerencia, contSugerencia);
+		 } catch (CitizenException e) {
+			 e.printStackTrace();
+		 }
+
+		 List<Sugerencia> listaSugerencias = getSugerencias(null);
+		 session.setAttribute("listaSugerencias", listaSugerencias);
+		return "/user/index";
+	 }
+
 	private List<Sugerencia> getSugerencias(Categoria c) {
 		if (c == null) {
 
