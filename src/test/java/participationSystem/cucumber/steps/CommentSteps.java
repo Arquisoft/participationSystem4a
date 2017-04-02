@@ -2,6 +2,7 @@ package participationSystem.cucumber.steps;
 
 import java.util.List;
 
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import cucumber.api.PendingException;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
@@ -19,6 +20,7 @@ import hello.domain.Sugerencia;
  * @author Javier Castro
  *
  */
+
 public class CommentSteps extends SuperSteps{
 
 	
@@ -27,6 +29,9 @@ public class CommentSteps extends SuperSteps{
 //		String[] args = {};
 //		Application.main(args);
 //		this.appContext = Application.getAppInstance();
+		driver = new HtmlUnitDriver();
+		driver.get(baseUrl);
+//		SeleniumUtils.EsperaCargaPagina(driver, baseUrl, "inputEmail", 5);
 		this.stepBien = true; //Reiniciar el valor
 	}
 	

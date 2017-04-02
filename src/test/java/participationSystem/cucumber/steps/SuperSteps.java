@@ -1,6 +1,12 @@
 package participationSystem.cucumber.steps;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.IntegrationTest;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.web.context.WebApplicationContext;
 
 import hello.services.AdminService;
 import hello.services.CategoryService;
@@ -12,6 +18,8 @@ import hello.services.SystemServices;
 import hello.util.loggercutre.LoggerCutre;
 import hello.util.loggercutre.SingletonLoggerCutre;
 
+@IntegrationTest
+@WebAppConfiguration
 public class SuperSteps {
 	CitizenService citizeServices = Services.getCitizenServices();
 	AdminService adminServices = Services.getAdminServices();
@@ -23,6 +31,13 @@ public class SuperSteps {
 	ConfigurableApplicationContext appContext;
 	LoggerCutre loggerCutre = SingletonLoggerCutre.getInstance().getLogger();
 	boolean stepBien = true;
+	
+	WebDriver driver=new HtmlUnitDriver();
+	String baseUrl = "http://localhost:8080/";
+	StringBuffer verificationErrors = new StringBuffer();
+	
+	@Autowired
+	WebApplicationContext context;
 	
 	
 	public CitizenService getCitizeServices() {

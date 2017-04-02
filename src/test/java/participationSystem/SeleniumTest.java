@@ -23,7 +23,6 @@ public class SeleniumTest {
 	private String baseUrl;
 	private StringBuffer verificationErrors = new StringBuffer();
 	
-	@Cuando("^inicia sesion$")
 	@Before
 	public void inicia_sesion() throws Exception {
 		driver = new HtmlUnitDriver();
@@ -143,6 +142,7 @@ public class SeleniumTest {
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[1]/td[1]")).getText(), "Ampliar el horario de la zona verde e incluir los domingos");
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[1]")).getText(), "Activar ayudas a la eficiencia energética para apoyar la rehabilitación");
 	
+
 	}
 	
 	@Test
