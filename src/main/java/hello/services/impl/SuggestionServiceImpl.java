@@ -84,4 +84,10 @@ public class SuggestionServiceImpl implements SuggestionService {
 		}
 
 	}
+
+    @Override
+    public void createSugerencia(Citizen citizen, Categoria categoria, String titulo, String contenido) {
+        Sugerencia sug = new Sugerencia(titulo, contenido, categoria, citizen);
+        suggestionRepository.save(sug);
+    }
 }
