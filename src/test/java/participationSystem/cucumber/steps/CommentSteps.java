@@ -59,6 +59,8 @@ public class CommentSteps extends SuperSteps{
 
 	@Then("^la sugerencia debe tener mi comentario$")
 	public void la_sugerencia_debe_tener_mi_comentario() throws Throwable {
+		//Si esta, false
+	//	SeleniumUtils.esperaCargaPaginaNoTexto(driver, texto, timeout);
 		assertEquals(driver.findElement(By.xpath("/html/body/div/div/div[2]/div[3]/div[2]/div/div[2]/p")).getText(),
 				"Por un Oviedo verde");
 	}

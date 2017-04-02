@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -18,28 +17,17 @@ import hello.repository.CommentRepository;
 import hello.repository.SuggestionRepository;
 import participationSystem.util.SeleniumUtils;
 
-@Service
 public class VoteSuggestionSteps extends SuperSteps {
 
+	@Autowired
 	SuggestionRepository suggestionRepository;
 
+	@Autowired
 	CommentRepository commentRepository;
 	
+	@Autowired
 	CitizenRepository citizenRepository;
 	
-	@Autowired
-	public void setSuggestionRepository(SuggestionRepository suggestionRepository) {
-		this.suggestionRepository = suggestionRepository;
-	}
-	@Autowired
-	public void setCommentRepository(CommentRepository commentRepository) {
-		this.commentRepository = commentRepository;
-	}
-	@Autowired
-	public void setCitizenRepository(CitizenRepository citizenRepository) {
-		this.citizenRepository = citizenRepository;
-	}
-
 	private Citizen userLogged = null;
 	private Long idSugerencia = null;
 

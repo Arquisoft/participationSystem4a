@@ -65,7 +65,7 @@ public class SystemServicesImpl implements SystemServices {
 	}
 
 	@Override
-	public boolean contienePalabrasAdmitidas(String mensaje) {
+	public boolean contienePalabrasNoAdmitidas(String mensaje) {
 		//List<String> wordsNotAllowed = config.getPalabrasNoPermitidas();
 		List<String> wordsNotAllowed = new ArrayList<String>();
 		for(Configuration c: this.configurationRepository.findAll()){

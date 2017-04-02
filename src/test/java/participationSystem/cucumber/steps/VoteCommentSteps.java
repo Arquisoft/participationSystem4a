@@ -78,4 +78,47 @@ public class VoteCommentSteps extends SuperSteps{
 	    throw new PendingException();
 	}
 
+	
+	@Given("^Existen al menos dos sugerencia para ordenar$")
+	public void existen_al_menos_dos_sugerencia_para_ordenar() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+	
+	@When("^Le doy a ordenar por Titulo$")
+	public void le_doy_a_ordenar_por_Titulo() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+	
+	@Then("^Se ordena por Titulo$")
+	public void se_ordena_por_Titulo() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+	
+	@When("^Le doy a ordenar por Votos$")
+	public void le_doy_a_ordenar_por_Votos() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+	
+	@Then("^Se ordena por votos$")
+	public void se_ordena_por_votos() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+	
+	@When("^Le doy a ordenar por Contenido$")
+	public void le_doy_a_ordenar_por_Contenido() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+	
+	@Then("^Se ordena por contenido$")
+	public void se_ordena_por_contenido() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
 }

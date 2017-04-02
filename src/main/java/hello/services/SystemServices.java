@@ -12,7 +12,7 @@ public interface SystemServices {
 
 	Configuration getConfiguration();
 	List<Categoria> getAllCategories();
-	boolean contienePalabrasAdmitidas(String mensaje);
+	boolean contienePalabrasNoAdmitidas(String mensaje);
 	boolean existeLaCategoria(Categoria cat);
 	boolean existeLaSugerencia(Sugerencia sugerencia);
 }
