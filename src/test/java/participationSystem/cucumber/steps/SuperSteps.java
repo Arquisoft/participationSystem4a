@@ -18,20 +18,20 @@ import hello.util.loggercutre.SingletonLoggerCutre;
 
 @WebAppConfiguration
 public class SuperSteps {
-	CitizenService citizeServices = Services.getCitizenServices();
-	AdminService adminServices = Services.getAdminServices();
-	SystemServices systemSercices = Services.getSystemServices();
-	CategoryService categoryService = Services.getCategoryService();
-	CommentService commentService = Services.getCommentService();
-	SuggestionService suggestionService = Services.getSuggestionService();
+	public CitizenService citizeServices = Services.getCitizenServices();
+	public AdminService adminServices = Services.getAdminServices();
+	public SystemServices systemSercices = Services.getSystemServices();
+	public CategoryService categoryService = Services.getCategoryService();
+	public CommentService commentService = Services.getCommentService();
+	public SuggestionService suggestionService = Services.getSuggestionService();
 	
-	ConfigurableApplicationContext appContext;
-	LoggerCutre loggerCutre = SingletonLoggerCutre.getInstance().getLogger();
-	boolean stepBien = true;
+	protected ConfigurableApplicationContext appContext;
+	protected LoggerCutre loggerCutre = SingletonLoggerCutre.getInstance().getLogger();
+	protected boolean stepBien = true;
 	
-	WebDriver driver=new HtmlUnitDriver();
-	String baseUrl = "http://localhost:8080/";
-	StringBuffer verificationErrors = new StringBuffer();
+	protected WebDriver driver=new HtmlUnitDriver();
+	protected String baseUrl = "http://localhost:8080/";
+	protected StringBuffer verificationErrors = new StringBuffer();
 	
 	@Autowired
 	WebApplicationContext context;
