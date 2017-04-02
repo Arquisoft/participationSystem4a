@@ -168,8 +168,8 @@ public class Sugerencia {
 		if (categoria == null) {
 			if (other.categoria != null)
 				return false;
-		} else 
-			return categoria.equals(other.categoria);
+		} else if (!categoria.equals(other.categoria))
+			return false;
 		if (comentarios == null) {
 			if (other.comentarios != null)
 				return false;
