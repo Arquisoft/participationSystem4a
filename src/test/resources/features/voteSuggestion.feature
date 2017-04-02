@@ -8,4 +8,4 @@ Scenario: Votar una sugerencia
 	And No he votado ya esa sugerencia
 	When Voto positiva o negativamente
 	Then Se contabiliza mi voto
-	But pero no se sabe lo que he votado
+	Then no puedo volver a votar

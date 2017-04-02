@@ -3,22 +3,33 @@ package participationSystem.cucumber.steps;
 import static org.junit.Assert.assertEquals;
 
 import org.openqa.selenium.By;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import hello.domain.Sugerencia;
+import hello.repository.CommentRepository;
+import hello.repository.SuggestionRepository;
 import participationSystem.util.SeleniumUtils;
 
 public class VoteCommentSteps extends SuperSteps{
+	@Autowired
+	SuggestionRepository suggestionRepository;
+	
+	@Autowired
+	CommentRepository commentRepository;
+	
 	@Given("^Soy un usuario registrado$")
 	public void soy_un_usuario_registrado() throws Throwable {
-		driver.get(baseUrl);
-		driver.findElement(By.xpath("//*[@id=\"inputEmail\"]")).sendKeys("pelayo@gmail.com");
-		driver.findElement(By.id("inputPassword")).sendKeys("temporal");
-		driver.findElement(By.name("botonlogin")).click();
-
-		SeleniumUtils.esperaCargaPaginaxpath(driver, "/html/body/div/div/div[2]/div[1]/h2", 4);
+//		driver.get(baseUrl);
+//		driver.findElement(By.xpath("//*[@id=\"inputEmail\"]")).sendKeys("pelayo@gmail.com");
+//		driver.findElement(By.id("inputPassword")).sendKeys("temporal");
+//		driver.findElement(By.name("botonlogin")).click();
+//
+//		SeleniumUtils.esperaCargaPaginaxpath(driver, "/html/body/div/div/div[2]/div[1]/h2", 4);
+		throw new PendingException();
 	}
 
 	@Given("^Existe al menos una sugerencia$")
@@ -31,7 +42,22 @@ public class VoteCommentSteps extends SuperSteps{
 	@Given("^Esa sugerencia tiene al menos un comentario$")
 	public void esa_sugerencia_tiene_al_menos_un_comentario() throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+//	    throw new PendingException();
+		boolean todoOK = true;
+		Long id = Long.parseLong(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[3]")).getText());
+		Sugerencia sugerenciaActual = null;
+		try{
+			sugerenciaActual = suggestionRepository.findOne(id);
+		}catch(Exception e){
+			if(sugerenciaActual == null)
+				todoOK = false;
+			assertEquals(true, todoOK); //Para que avise de que ha cascado
+			return;
+		}
+		//assertEquals(true, todoOK);
+		if(sugerenciaActual.getComentarios().size() < 1)
+			todoOK = false;
+		assertEquals(true, todoOK);
 	}
 
 	@When("^Voto positiva o negativamente mi voto$")

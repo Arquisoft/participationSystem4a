@@ -2,17 +2,12 @@ package participationSystem.cucumber.steps;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import cucumber.api.PendingException;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import hello.domain.Comentario;
-import hello.domain.Sugerencia;
 import participationSystem.util.SeleniumUtils;
 
 /**
@@ -31,6 +26,7 @@ public class CommentSteps extends SuperSteps{
 	@Before
 	public void setUp() {
 		driver.get(baseUrl);
+//		driver.findElement(By.id("inputEmail")).sendKeys("pelayo@gmail.com");
 		driver.findElement(By.xpath("//*[@id=\"inputEmail\"]")).sendKeys("pelayo@gmail.com");
 		driver.findElement(By.id("inputPassword")).sendKeys("temporal");
 		driver.findElement(By.name("botonlogin")).click();
@@ -48,7 +44,9 @@ public class CommentSteps extends SuperSteps{
 	@Given("^he iniciado sesion en la aplicacion$")
 	public void he_iniciado_sesion_en_la_aplicacion() throws Throwable {
 		// // Write code here that turns the phrase above into concrete actions
-		throw new PendingException();
+//		throw new PendingException();
+		String currentURL = driver.getCurrentUrl();
+		assertEquals(currentURL, "http://localhost:8080/home");
 	}
 
 	@When("^creo un comentario$")
