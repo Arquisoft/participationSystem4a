@@ -80,8 +80,8 @@ public class SeleniumUtils {
 		static public List<WebElement> esperaCargaPagina(WebDriver driver, String criterio, String id, int timeout)
 		{
 			String busqueda;
-			if (criterio.equals("id")) busqueda = "//*[contains(@id,'" + id + "')]";
-			else if (criterio.equals("class")) busqueda = "//*[contains(@class,'" + id + "')]";
+			if ("id".equals(criterio)) busqueda = "//*[contains(@id,'" + id + "')]";
+			else if ("class".equals(criterio)) busqueda = "//*[contains(@class,'" + id + "')]";
 			else busqueda = "//*[contains(text(),'" + id + "')]";
 			return esperaCargaPaginaxpath(driver, busqueda, timeout);
 		}

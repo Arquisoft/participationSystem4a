@@ -90,14 +90,6 @@ public class TestLogic {
 		
 	}
 	
-	@SuppressWarnings("static-access")
-	@Test
-	public void testCitizenController(){
-		CitizenController cc= new CitizenController();
-		cc.setCategoryService(new Services().getCategoryService());
-		cc.setCitizenService(new Services().getCitizenServices());
-		cc.setSuggestionService(new Services().getSuggestionService());
-	}
 	
 	@Test
 	public void testMessage(){
@@ -114,8 +106,14 @@ public class TestLogic {
 		assertEquals(s1, s2);
 	}
 	
+	@SuppressWarnings("static-access")
 	@Test
 	public void testClasesModelo(){
+		CitizenController cc= new CitizenController();
+		cc.setCategoryService(new Services().getCategoryService());
+		cc.setCitizenService(new Services().getCitizenServices());
+		cc.setSuggestionService(new Services().getSuggestionService());
+	
 		Categoria c= new Categoria("nombre");
 		Sugerencia s1=new Sugerencia("s1", "contenido1", c);
 		Sugerencia s2=new Sugerencia("s2", "contenido2", c);

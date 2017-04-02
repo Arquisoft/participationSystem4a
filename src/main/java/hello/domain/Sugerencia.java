@@ -210,9 +210,7 @@ public class Sugerencia {
 				return false;
 		} else if (!usuario.equals(other.usuario))
 			return false;
-		if (votos != other.votos)
-			return false;
-		return true;
+		return (votos == other.votos);
 	}
 
 	@Override

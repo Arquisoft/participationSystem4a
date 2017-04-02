@@ -12,14 +12,13 @@ import cucumber.api.java.en.When;
 import hello.domain.Sugerencia;
 import hello.repository.CommentRepository;
 import hello.repository.SuggestionRepository;
-import participationSystem.util.SeleniumUtils;
 
 public class VoteCommentSteps extends SuperSteps{
 	@Autowired
-	SuggestionRepository suggestionRepository;
+	private SuggestionRepository suggestionRepository;
 	
 	@Autowired
-	CommentRepository commentRepository;
+	private CommentRepository commentRepository;
 	
 	@Given("^Soy un usuario registrado$")
 	public void soy_un_usuario_registrado() throws Throwable {

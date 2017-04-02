@@ -21,11 +21,11 @@ import participationSystem.util.SeleniumUtils;
 @Service
 public class VoteSuggestionSteps extends SuperSteps {
 
-	SuggestionRepository suggestionRepository;
+	private SuggestionRepository suggestionRepository;
 
-	CommentRepository commentRepository;
+	private CommentRepository commentRepository;
 
-	CitizenRepository citizenRepository;
+	private CitizenRepository citizenRepository;
 
 	@Autowired
 	public void setSuggestionRepository(SuggestionRepository suggestionRepository) {

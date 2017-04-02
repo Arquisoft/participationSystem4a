@@ -20,10 +20,10 @@ import static org.junit.Assert.assertEquals;
 @WebAppConfiguration
 public class SuggestionSteps extends SuperSteps {
 
-	SuggestionRepository sR;
+	private SuggestionRepository sR;
 
-	Sugerencia currentSuggestion;
-	CategoryRepository catRep;
+	private Sugerencia currentSuggestion;
+	private CategoryRepository catRep;
 
 	@Autowired
 	public void setsR(SuggestionRepository sR) {

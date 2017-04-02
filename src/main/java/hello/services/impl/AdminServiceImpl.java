@@ -64,10 +64,10 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Sugerencia editarSugerencia(Sugerencia antigua, String nuevoNombre, String nuevoContenido) {
-		if(!nuevoNombre.equals("") || nuevoNombre != null){
+		if(!"".equals(nuevoNombre) || nuevoNombre != null){
 			antigua.setNombre(nuevoNombre);
 		}
-		if(!nuevoContenido.equals("") || nuevoContenido != null){
+		if(!"".equals(nuevoContenido) || nuevoContenido != null){
 			antigua.setContenido(nuevoContenido);
 		}
 		

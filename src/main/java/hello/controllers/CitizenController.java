@@ -102,7 +102,7 @@ public class CitizenController {
 	}
 
 	private void putSugerenciasInSession(HttpSession session) {
-		if (idCat.equals("all")) {
+		if ("all".equals(idCat)) {
 			session.setAttribute("listaSugerencias", suggestionService.findAll());
 		} else {
 			Long id = Long.parseLong(idCat);

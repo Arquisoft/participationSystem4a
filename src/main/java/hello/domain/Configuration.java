@@ -106,9 +106,7 @@ public class Configuration {
 				return false;
 		} else if (!PALABRAS_NO_PERMITIDAS.equals(other.PALABRAS_NO_PERMITIDAS))
 			return false;
-		if (minimoVotos != other.minimoVotos)
-			return false;
-		return true;
+		return !(minimoVotos != other.minimoVotos);
 	}
 	
 	

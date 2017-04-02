@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 
 public class LogginSteps extends SuperSteps {
 
-	List<Map<String, String>> usuarios;
+	private List<Map<String, String>> usuarios;
 
 	@Before
 	public void setUp() {

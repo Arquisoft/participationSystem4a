@@ -22,15 +22,14 @@ import hello.util.exception.CitizenException;
 @Service
 public class SuggestionServiceImpl implements SuggestionService {
     private SuggestionRepository suggestionRepository;
-    
+    private ConfigurationRepository configurationRepository;
     
     @Autowired
     public void setSuggestionRepository(SuggestionRepository suggRep) {
         this.suggestionRepository = suggRep;
     }
     
-    private ConfigurationRepository configurationRepository;
- 
+   
     @Autowired
     public void setConfigurationRepository(ConfigurationRepository configurationRepository) {
 		this.configurationRepository = configurationRepository;
