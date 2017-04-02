@@ -35,32 +35,6 @@ public class CommentServiceImpl implements CommentService {
 	}
 	
 	@Override
-	public void votePositiveComment(Comentario comment, Citizen ciudadano) throws CitizenException {
-		if (commentRepository.findOne(comment.getId()) == null) {
-			// Error
-			throw new CitizenException("El comentario no existe");
-		} else {
-			//votoRepository save
-			comment.incrementarVoto();
-			logger.send(Topics.POSITIVE_COMMENT_VOTE, comment.getId() + "");
-			loggerCutre.log(this.getClass(), "Votando positivo a comentario ID: "+comment.getId());
-		}
-
-	}
-
-	@Override
-	public void voteNegativeComment(Comentario comment, Citizen ciudadano) throws CitizenException {
-		if (commentRepository.findOne(comment.getId()) == null) {
-			throw new CitizenException("El comentario no existe");
-		} else {
-			comment.decrementarVoto();
-			logger.send(Topics.POSITIVE_COMMENT_VOTE, comment.getId() + "");
-			loggerCutre.log(this.getClass(), "Votando negativo a comentario ID: "+comment.getId());
-		}
-
-	}
-
-	@Override
 	public void createComentario(String contenido, Sugerencia sugerencia, Citizen citizen) {
 		Comentario c = new Comentario(contenido,sugerencia,citizen);
 		sugerencia.addComentario(c);

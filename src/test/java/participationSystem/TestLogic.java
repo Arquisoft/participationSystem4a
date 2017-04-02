@@ -184,14 +184,6 @@ public class TestLogic {
 		assertEquals(s1.getVotos(), 1);
 		s1.decrementarVotos();
 		assertEquals(s1.getVotos(), 0);
-		c1.incrementarVoto();
-		assertEquals(c1.getVotos(), 1);
-		c1.incrementarVoto();
-		assertEquals(c1.getVotos(), 2);
-		c1.decrementarVoto();
-		assertEquals(c1.getVotos(), 1);
-		c1.decrementarVoto();
-		assertEquals(c1.getVotos(), 0);
 		
 		Configuration co= new Configuration("mierda");
 		assertEquals(co.getPalabraNoPermitida(), "mierda");

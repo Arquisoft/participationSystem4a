@@ -8,7 +8,6 @@ public class Comentario {
 	@Id
 	@GeneratedValue
 	private Long id;
-	private int votos;
 	private String contenido;
 	@ManyToOne
 	@JoinColumn(name="sugerencia_id")
@@ -31,12 +30,9 @@ public class Comentario {
 		this.contenido = contenido;
 		this.sugerencia = sugerencia;
 		this.usuario = usuario;
-		this.votos=0;
 	}
 
-	public int getVotos() {
-		return votos;
-	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -45,9 +41,7 @@ public class Comentario {
 		return sugerencia;
 	}
 
-	public void setVotos(int votosPositivos) {
-		this.votos = votosPositivos;
-	}
+	
 
 	public String getContenido() {
 		return contenido;
@@ -65,23 +59,15 @@ public class Comentario {
 		this.usuario = usuario;
 	}
 
-	public void incrementarVoto() {
-		this.votos++;
-	}
-
-	public void decrementarVoto() {
-		this.votos--;
-	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((contenido == null) ? 0 : contenido.hashCode());
-		result = prime * result + votos;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -92,18 +78,18 @@ public class Comentario {
 		if (getClass() != obj.getClass())
 			return false;
 		Comentario other = (Comentario) obj;
-		if (contenido == null) {
-			if (other.contenido != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!contenido.equals(other.contenido))
+		} else if (!id.equals(other.id))
 			return false;
-		return !(votos != other.votos);
+		return true;
 	}
+
 
 	@Override
 	public String toString() {
-		return "Comentario [votos=" + votos + ", comentario=" + contenido
-				+ "]";
+		return "Comentario [contenido=" + contenido + ", sugerencia=" + sugerencia + ", usuario=" + usuario + "]";
 	}
 
 }
