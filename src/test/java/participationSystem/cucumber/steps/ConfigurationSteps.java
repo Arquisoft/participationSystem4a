@@ -5,28 +5,27 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class SuggestionSteps extends SuperSteps{
-
-	@Given("^Inicio sesion en la aplicacion$")
-	public void inicio_sesion_en_la_aplicacion() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
-	}
-	
-	@Given("^Existe al menos una categoria en la que puedo meter mi sugerencia$")
-	public void existe_al_menos_una_categoria_en_la_que_puedo_meter_mi_sugerencia() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
-	}
-	
-	@When("^Creo la sugerencia$")
-	public void creo_la_sugerencia() throws Throwable {
+public class ConfigurationSteps extends SuperSteps{
+	@Given("^Inicio sesion$")
+	public void inicio_sesion() throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new PendingException();
 	}
 
-	@Then("^El sistema debe tener mi sugerencia$")
-	public void el_sistema_debe_tener_mi_sugerencia() throws Throwable {
+	@Given("^Soy un usuario administrador$")
+	public void soy_un_usuario_administrador() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@When("^Añado una palabrea prohida$")
+	public void añado_una_palabrea_prohida() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@Then("^No se puede volver a utilizar esa palabra\\.$")
+	public void no_se_puede_volver_a_utilizar_esa_palabra() throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new PendingException();
 	}
