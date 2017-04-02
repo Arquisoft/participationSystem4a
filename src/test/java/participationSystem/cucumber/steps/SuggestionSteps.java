@@ -1,14 +1,5 @@
 package participationSystem.cucumber.steps;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.web.WebAppConfiguration;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -16,7 +7,15 @@ import hello.domain.Categoria;
 import hello.domain.Sugerencia;
 import hello.repository.CategoryRepository;
 import hello.repository.SuggestionRepository;
+import org.openqa.selenium.By;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.web.WebAppConfiguration;
 import participationSystem.util.SeleniumUtils;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import static org.junit.Assert.assertEquals;
 
 @WebAppConfiguration
 public class SuggestionSteps extends SuperSteps {
@@ -61,7 +60,7 @@ public class SuggestionSteps extends SuperSteps {
 		// throw new PendingException();
 		try {
 			String catName = driver.findElement(By.xpath("//*[@id=\"categoriaSelect\"]")).getText();
-			Categoria currentCat = catRep.findByName(catName);
+			Categoria currentCat = catRep.findByNombre(catName);
 			this.currentSuggestion = new Sugerencia("Las rotondas molan",
 					"Queremos rotondas en todas las esquinas. Y descuentos en los cambios de neumaticos.", currentCat);
 			driver.findElement(By.xpath("//*[@id=\"titulo-text-input\"]")).sendKeys(currentSuggestion.getNombre());

@@ -2,6 +2,7 @@ package hello.controllers;
 
 import hello.domain.Categoria;
 import hello.domain.Citizen;
+import hello.domain.Configuration;
 import hello.domain.Sugerencia;
 import hello.services.*;
 import hello.util.exception.CitizenException;
@@ -81,7 +82,8 @@ public class CitizenController {
 			}
 
 			else{
-				//List<String> listaPalabras =
+				Configuration configuration = systemService.getConfiguration();
+				model.addAttribute("listaPalabras",configuration.getPalabrasNoPermitidas());
 
 				return "/admin/adminIndex";
 			}
