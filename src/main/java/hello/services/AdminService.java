@@ -31,4 +31,6 @@ public interface AdminService extends SuperService{
 	 */
 	Sugerencia editarSugerencia(Sugerencia antigua, String nuevoNombre, String nuevoContenido);
 	
+	void setMinimoVotos(int minVotes);
+	int getMinimoVotos();
 }
