@@ -1,23 +1,26 @@
 package hello.domain;
 
-
 import javax.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 //import java.util.ArrayList;
 //import java.util.List;
 
 @Entity
-@Table(name="CONFIGURACION")
+@Table(name = "CONFIGURACION")
 public class Configuration {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String PALABRAS_NO_PERMITIDAS;//Si esto es un POJO... qué hace una lista???
+	private String PALABRAS_NO_PERMITIDAS;// Si esto es un POJO... qué hace una
+											// lista???
 	private int minimoVotos;
-	
+
 	@Transient
-	private String cadenaDePalabrasnoPermitidas; //En la base de datos se guardaran como palabra@@palabra
+	private String cadenaDePalabrasnoPermitidas; // En la base de datos se
+													// guardaran como
+													// palabra@@palabra
 	@Transient
 	private List<String> palabrasNoPermitidas;
 	@Transient
@@ -26,9 +29,6 @@ public class Configuration {
 	public Configuration(Long id) {
 		this.id = id;
 	}
-
-
-
 
 	public String getPalabraNoPermitida() {
 		return PALABRAS_NO_PERMITIDAS;
@@ -41,16 +41,17 @@ public class Configuration {
 		this.minimoVotos = 0;
 
 	}
+
 	public Configuration(String palabras) {
 		this();
-		PALABRAS_NO_PERMITIDAS=palabras;
+		PALABRAS_NO_PERMITIDAS = palabras;
 	}
-	
-	public void addPalabraNoPermitida(String word){
+
+	public void addPalabraNoPermitida(String word) {
 		this.palabrasNoPermitidas.add(word);
 		actualizarCadenaDePalabras();
 	}
-	
+
 	public int getMinimoVotos() {
 		return minimoVotos;
 	}
@@ -58,21 +59,21 @@ public class Configuration {
 	public void setMinimoVotos(int minimoVotos) {
 		this.minimoVotos = minimoVotos;
 	}
-	
-	public List<String> getPalabrasNoPermitidas(){
+
+	public List<String> getPalabrasNoPermitidas() {
 		List<String> listado = new ArrayList<String>();
-		for(String s : palabrasNoPermitidas){
+		for (String s : palabrasNoPermitidas) {
 			listado.add(s);
 		}
 		return listado;
 	}
-	
-	private void actualizarCadenaDePalabras(){
+
+	private void actualizarCadenaDePalabras() {
 		StringBuilder sb = new StringBuilder();
-		for(int i = 0; i < palabrasNoPermitidas.size(); i++){
-			if(i == palabrasNoPermitidas.size() - 1){
+		for (int i = 0; i < palabrasNoPermitidas.size(); i++) {
+			if (i == palabrasNoPermitidas.size() - 1) {
 				sb.append(palabrasNoPermitidas.get(i));
-			}else{
+			} else {
 				sb.append(palabrasNoPermitidas.get(i) + separador);
 			}
 		}
@@ -86,7 +87,7 @@ public class Configuration {
 		}
 		this.cadenaDePalabrasnoPermitidas = this.PALABRAS_NO_PERMITIDAS;
 		String[] palabras = this.cadenaDePalabrasnoPermitidas.split(separador);
-		for(String palabra : palabras){
+		for (String palabra : palabras) {
 			this.palabrasNoPermitidas.add(palabra);
 		}
 	}
@@ -116,7 +117,5 @@ public class Configuration {
 			return false;
 		return !(minimoVotos != other.minimoVotos);
 	}
-	
-	
-	
+
 }
