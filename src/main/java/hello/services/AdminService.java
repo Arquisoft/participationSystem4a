@@ -12,10 +12,15 @@ public interface AdminService extends SuperService{
 	Configuration getConfiguracion();
 	
 	/**
-	 * Establece una nueva configuracion en el sistema. 
+	 * Establece una nueva configuracion en el sistema borrando todas las demas. 
 	 * @param config
 	 */
 	void setConfiguracion(Configuration config);
+	/**
+	 * Actualiza la configuracion actual sin borrar nada de la tabla
+	 * @param config
+	 */
+	void updateConfiguracion(Configuration config);
 	
 	void addPalabraProhibida(String word);
 	/**
@@ -25,4 +30,5 @@ public interface AdminService extends SuperService{
 	 * @param nuevoContenido
 	 */
 	Sugerencia editarSugerencia(Sugerencia antigua, String nuevoNombre, String nuevoContenido);
+	
 }

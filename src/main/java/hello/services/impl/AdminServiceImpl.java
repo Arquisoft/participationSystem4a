@@ -25,6 +25,7 @@ public class AdminServiceImpl implements AdminService {
 //		return null;
 		List<Configuration> listado = this.configurationRepository.findAll();
 		if(listado.size() == 0){
+			loggerCutre.log(getClass(), "No hay configuraciones asi que vamos a crear una nueva.");
 			Configuration newC =  new Configuration();
 			this.configurationRepository.save(newC);
 			return newC;
@@ -58,6 +59,14 @@ public class AdminServiceImpl implements AdminService {
 		//this.configurationRepository.delete(antigua);
 		this.configurationRepository.deleteAll();
 		this.configurationRepository.save(config);
+		loggerCutre.log(getClass(), "Se han borrado todas las configuraciones y se ha añadido una nueva.");
+	}
+	
+	@Override
+	public void updateConfiguracion(Configuration config){
+		this.configurationRepository.save(config);
+		loggerCutre.log(getClass(), "Se ha actualizado la configuracion del sistema.");
+
 	}
 
 	@Override
@@ -65,6 +74,7 @@ public class AdminServiceImpl implements AdminService {
 		Configuration antigua = getConfiguracion();
 		antigua.addPalabraNoPermitida(word);
 		setConfiguracion(antigua);
+		//updateConfiguracion(antigua);
 	}
 
 	@Override
