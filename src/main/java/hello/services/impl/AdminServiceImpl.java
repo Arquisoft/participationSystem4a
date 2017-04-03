@@ -73,8 +73,8 @@ public class AdminServiceImpl implements AdminService {
 	public void addPalabraProhibida(String word) {
 		Configuration antigua = getConfiguracion();
 		antigua.addPalabraNoPermitida(word);
-		setConfiguracion(antigua);
-		//updateConfiguracion(antigua);
+		//setConfiguracion(antigua);
+		updateConfiguracion(antigua);
 	}
 
 	@Override
@@ -88,6 +88,23 @@ public class AdminServiceImpl implements AdminService {
 		suggestionRepository.save(antigua);
 		
 		return antigua;
+	}
+
+	@Override
+	public void setMinimoVotos(int minVotes) {
+		Configuration config = getConfiguracion();
+		config.setMinimoVotos(minVotes);
+		updateConfiguracion(config);
+		//setConfiguracion(config);
+		loggerCutre.log(getClass(), "Se ha actualizado el minimo de votos a "+ minVotes);
+	}
+
+	@Override
+	public int getMinimoVotos() {
+		Configuration config = getConfiguracion();
+		int value = config.getMinimoVotos();
+		loggerCutre.log(getClass(), "El numero de votos minimos de la configuracion es "+ value);
+		return value;
 	}
 
 }

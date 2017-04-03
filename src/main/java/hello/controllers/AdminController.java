@@ -1,5 +1,6 @@
 package hello.controllers;
 
+import hello.domain.Configuration;
 import hello.domain.Sugerencia;
 import hello.services.AdminService;
 import hello.services.SuggestionService;
@@ -64,6 +65,29 @@ public class AdminController {
         List<Sugerencia> listaSugerencias =suggestionService.findSugerenciaWithMinVotes();
         session.setAttribute("listaSugerencias", listaSugerencias);
         return "/admin/adminIndex";
+    }
+
+    @RequestMapping(value = "/goToAddWord")
+    public String chargeWords(Model model){
+        Configuration conf =  systemService.getConfiguration();
+        List<String>listaPalabras = conf.getPalabrasNoPermitidas();
+        model.addAttribute("palabras",listaPalabras);
+        model.addAttribute("votes", conf.getMinimoVotos());
+        return "/admin/addWord";
+    }
+
+    @RequestMapping(value = "/addWord")
+    public String chargeWords(@RequestParam String word){
+        adminService.addPalabraProhibida(word);
+        return "/admin/addWord";
+    }
+
+    @RequestMapping(value = "/changeVotes")
+    public String changeVotes(@RequestParam String votes, Model model){
+        adminService.setMinimoVotos(Integer.parseInt(votes));
+        Configuration conf =  systemService.getConfiguration();
+        model.addAttribute("votes", conf.getMinimoVotos());
+        return "/admin/addWord";
     }
 
 
