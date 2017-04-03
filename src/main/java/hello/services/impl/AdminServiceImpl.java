@@ -27,7 +27,7 @@ public class AdminServiceImpl implements AdminService {
 		// // ANA Obtener configuracion
 		// return null;
 		List<Configuration> listado = this.configurationRepository.findAll();
-		if (listado.size() == 0) {
+		if (listado.isEmpty()) {
 			loggerCutre.log(getClass(), "No hay configuraciones asi que vamos a crear una nueva.");
 			Configuration newC = new Configuration();
 			this.configurationRepository.save(newC);

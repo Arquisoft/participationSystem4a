@@ -3,14 +3,10 @@ package hello.util.loggercutre;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-import scala.sys.process.ProcessBuilderImpl.FileOutput;
-
 /**
  * Logger de consola muy cutre
  * 

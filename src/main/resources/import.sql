@@ -91,4 +91,4 @@ INSERT INTO asw.voto (sugerencia_id, citizen_id) VALUES ('2', '15');
 INSERT INTO asw.voto (sugerencia_id, citizen_id) VALUES ('2', '16');
 INSERT INTO asw.voto (sugerencia_id, citizen_id) VALUES ('2', '17');
 
-INSERT INTO asw.configuracion (id, palabras_no_permitidas, minimo_votos) VALUES ('1', 'polla@puta', '200');
+INSERT INTO asw.configuracion (id, palabras_no_permitidas, minimo_votos) VALUES ('1', 'polla@@puta', '200');
