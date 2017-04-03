@@ -212,4 +212,13 @@ public class CitizenController {
 		}
 	}
 
+	@RequestMapping(value = "/logOut")
+	public String logOut(HttpSession session){
+	 	 	session.setAttribute("citizen",null);
+		return "/index";
+
+	}
+
+
+
 }

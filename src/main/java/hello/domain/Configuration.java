@@ -81,8 +81,8 @@ public class Configuration {
 		this.PALABRAS_NO_PERMITIDAS = cadenaDePalabrasnoPermitidas;
 	}
 
-	private void rellenarListaPalabrasNoPermitidas() {
-		if (this.PALABRAS_NO_PERMITIDAS == null) {
+	private void rellenarListaPalabrasNoPermitidas(){
+		if(this.PALABRAS_NO_PERMITIDAS == null){
 			this.PALABRAS_NO_PERMITIDAS = "";
 		}
 		this.cadenaDePalabrasnoPermitidas = this.PALABRAS_NO_PERMITIDAS;
