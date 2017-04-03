@@ -38,7 +38,7 @@ public class Configuration {
 	public Configuration() {
 		// TODO Auto-generated constructor stub
 		this.palabrasNoPermitidas = new ArrayList<String>();
-		rellenarListaPalabrasNoPermitidas();
+		//rellenarListaPalabrasNoPermitidas();
 		this.minimoVotos = 0;
 
 	}
@@ -50,13 +50,18 @@ public class Configuration {
 
 	public void addPalabraNoPermitida(String word) {
 		if (!"".equals(word)) {
-			this.palabrasNoPermitidas.add(word);
+			//rellenarListaPalabrasNoPermitidas();
+//			this.palabrasNoPermitidas.add(word);
 			SingletonLoggerCutre.getInstance().getLogger().log(getClass(),
-					"Antes de actualizar " + palabrasNoPermitidas.toString());
-			actualizarCadenaDePalabras();
+					"Antes de actualizar " + PALABRAS_NO_PERMITIDAS);
+//			actualizarCadenaDePalabras();
+			StringBuilder sb = new StringBuilder();
+			sb.append(this.PALABRAS_NO_PERMITIDAS);
+			sb.append(separador + word);
+			this.PALABRAS_NO_PERMITIDAS =  sb.toString();
 
 			SingletonLoggerCutre.getInstance().getLogger().log(getClass(),
-					"Tras actualizar " + palabrasNoPermitidas.toString());
+					"Tras actualizar " + this.PALABRAS_NO_PERMITIDAS);
 		}
 	}
 
@@ -70,41 +75,42 @@ public class Configuration {
 
 	public List<String> getPalabrasNoPermitidas() {
 		List<String> listado = new ArrayList<String>();
-		for (String s : palabrasNoPermitidas) {
+		String[] aux = this.PALABRAS_NO_PERMITIDAS.split(separador);
+		for (String s : aux) {
 			listado.add(s);
 		}
 		return listado;
 	}
 
-	private void actualizarCadenaDePalabras() {
-		StringBuilder sb = new StringBuilder();
-		
-		for (int i = 0; i < palabrasNoPermitidas.size(); i++) {
-			if (i == palabrasNoPermitidas.size() - 1) {
-				sb.append(palabrasNoPermitidas.get(i));
-			} else {
-				sb.append(palabrasNoPermitidas.get(i) + separador);
-				SingletonLoggerCutre.getInstance().getLogger().log(getClass(),
-						"He añadido la palabra " + palabrasNoPermitidas.get(i));
-			}
-		}
-		PALABRAS_NO_PERMITIDAS = sb.toString();
-		this.cadenaDePalabrasnoPermitidas = PALABRAS_NO_PERMITIDAS;
-	}
+//	private void actualizarCadenaDePalabras() {
+//		StringBuilder sb = new StringBuilder();
+//		
+//		for (int i = 0; i < palabrasNoPermitidas.size(); i++) {
+//			if (i == palabrasNoPermitidas.size() - 1) {
+//				sb.append(palabrasNoPermitidas.get(i));
+//			} else {
+//				sb.append(palabrasNoPermitidas.get(i) + separador);
+//				SingletonLoggerCutre.getInstance().getLogger().log(getClass(),
+//						"He añadido la palabra " + palabrasNoPermitidas.get(i));
+//			}
+//		}
+//		PALABRAS_NO_PERMITIDAS = sb.toString();
+//		this.cadenaDePalabrasnoPermitidas = PALABRAS_NO_PERMITIDAS;
+//	}
 
-	private void rellenarListaPalabrasNoPermitidas() {
-		
-		if (this.PALABRAS_NO_PERMITIDAS == null) {
-			this.PALABRAS_NO_PERMITIDAS = ""; //Parece ser que no carga las palabras de la base de datos (9:47)
-		}
-		
-		String[] palabras = this.PALABRAS_NO_PERMITIDAS.split(separador);
-		for (String palabra : palabras) {
-			if (!"".equals(palabra))
-				this.palabrasNoPermitidas.add(palabra);
-		}
-		this.cadenaDePalabrasnoPermitidas = this.PALABRAS_NO_PERMITIDAS;
-	}
+//	private void rellenarListaPalabrasNoPermitidas() {
+//		
+//		if (this.PALABRAS_NO_PERMITIDAS == null) {
+//			this.PALABRAS_NO_PERMITIDAS = ""; //Parece ser que no carga las palabras de la base de datos (9:47)
+//		}
+//		
+//		String[] palabras = this.PALABRAS_NO_PERMITIDAS.split(separador);
+//		for (String palabra : palabras) {
+//			if (!"".equals(palabra))
+//				this.palabrasNoPermitidas.add(palabra);
+//		}
+//		this.cadenaDePalabrasnoPermitidas = this.PALABRAS_NO_PERMITIDAS;
+//	}
 
 	@Override
 	public int hashCode() {
