@@ -26,14 +26,17 @@ public class AdminServiceImpl implements AdminService {
 	public Configuration getConfiguracion() {
 		// // ANA Obtener configuracion
 		// return null;
+		Long id = new Long(1);
+		Configuration config = this.configurationRepository.findOne(id);
 		List<Configuration> listado = this.configurationRepository.findAll();
-		if (listado.isEmpty()) {
+
+		if (listado.isEmpty() || config == null) {
 			loggerCutre.log(getClass(), "No hay configuraciones asi que vamos a crear una nueva.");
 			Configuration newC = new Configuration();
 			this.configurationRepository.save(newC);
 			return newC;
 		}
-		return listado.get(0);
+		return config;
 	}
 
 	@Autowired
@@ -76,6 +79,7 @@ public class AdminServiceImpl implements AdminService {
 	public void addPalabraProhibida(String word) {
 		try {
 			Configuration antigua = getConfiguracion();
+			loggerCutre.log(getClass(), "Tengo estas palabras en la config "+antigua.getPalabraNoPermitida());
 			antigua.addPalabraNoPermitida(word);
 			updateConfiguracion(antigua);
 			loggerCutre.log(getClass(),

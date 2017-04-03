@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import hello.domain.Configuration;
 
-@Repository("configuracionRepository")
+@Repository("configurationRepository")
 public interface ConfigurationRepository extends JpaRepository<Configuration, Long>{
 
 }
