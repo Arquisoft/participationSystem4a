@@ -10,7 +10,7 @@ import participationSystem.util.SeleniumUtils;
 
 public class OrdenarPorVotosSteps extends SuperSteps{
 	
-	@Given("^Inicio sesion en la aplicacion$")
+	@Given("^Inicio sesion en la aplicacion3$")
 	public void inicio_sesion_en_la_aplicacion() throws Throwable {
 		driver.get(baseUrl);
 		driver.findElement(By.xpath("//*[@id=\"inputEmail\"]")).sendKeys("pelayo@gmail.com");
@@ -19,7 +19,7 @@ public class OrdenarPorVotosSteps extends SuperSteps{
 
 		SeleniumUtils.esperaCargaPaginaxpath(driver, "/html/body/div/div/div[2]/div[1]/h2", 4);
 	}
-	@Given("^Existen al menos dos sugerencia para ordenar$")
+	@Given("^Existen al menos dos sugerencia para ordenar3$")
 	public void existen_al_menos_dos_sugerencia_para_ordenar() throws Throwable {
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[1]/td[1]")).getText(), "Marquesina Llamaquique");
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[2]")).getText(), "Plantacion de nuevos arboles en el Campo San Francisco");
