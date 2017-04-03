@@ -77,12 +77,14 @@ public class Configuration {
 			}
 		}
 		cadenaDePalabrasnoPermitidas = sb.toString();
+		this.PALABRAS_NO_PERMITIDAS = cadenaDePalabrasnoPermitidas;
 	}
-	
+
 	private void rellenarListaPalabrasNoPermitidas(){
-		if(this.cadenaDePalabrasnoPermitidas == null){
-			this.cadenaDePalabrasnoPermitidas = "";
+		if(this.PALABRAS_NO_PERMITIDAS == null){
+			this.PALABRAS_NO_PERMITIDAS = "";
 		}
+		this.cadenaDePalabrasnoPermitidas = this.PALABRAS_NO_PERMITIDAS;
 		String[] palabras = this.cadenaDePalabrasnoPermitidas.split(separador);
 		for(String palabra : palabras){
 			this.palabrasNoPermitidas.add(palabra);
