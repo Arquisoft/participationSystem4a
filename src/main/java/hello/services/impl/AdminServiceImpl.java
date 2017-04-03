@@ -1,14 +1,14 @@
 package hello.services.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import hello.domain.Configuration;
 import hello.domain.Sugerencia;
 import hello.repository.ConfigurationRepository;
+import hello.repository.SuggestionRepository;
 import hello.services.AdminService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 
@@ -17,7 +17,7 @@ import hello.services.AdminService;
  */
 @Service
 public class AdminServiceImpl implements AdminService {
-
+	private SuggestionRepository suggestionRepository;
 	private ConfigurationRepository configurationRepository;
 	@Override
 	public Configuration getConfiguracion() {
@@ -35,6 +35,11 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	public void setConfigurationRepository(ConfigurationRepository configRepository) {
 		this.configurationRepository = configRepository;
+	}
+
+	@Autowired
+	public void setSuggestionRepository(SuggestionRepository suggestionRepository) {
+		this.suggestionRepository=suggestionRepository;
 	}
 	
 	@Override
@@ -70,6 +75,7 @@ public class AdminServiceImpl implements AdminService {
 		if(!"".equals(nuevoContenido) || nuevoContenido != null){
 			antigua.setContenido(nuevoContenido);
 		}
+		suggestionRepository.save(antigua);
 		
 		return antigua;
 	}

@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" >
     <link href="../static/css/home.css" rel="stylesheet">
 
 
@@ -45,43 +43,44 @@
             <strong>Categorias</strong>
             <p><a th:href="@{/cat(idCat=all)}">Todas</a></p>
             <p th:each="categoria : ${session.listaCategorias}">
-            <a th:text="${categoria.nombre}" th:href="@{/cat(idCat=${categoria.getId()})}" >categoria</a><!-- th:id="categoria=${categoria.getId()" -->
+                <a th:text="${categoria.nombre}" th:href="@{/cat(idCat=${categoria.getId()})}">categoria</a>
+                <!-- th:id="categoria=${categoria.getId()" -->
             </p>
 
         </div>
         <div class="col-sm-8 text-left">
             <div class="page-header">
-                <h2>Listado de sugerencias</h2>
+                <h2>Edición de sugerencia</h2>
             </div>
-            <table id="sugerencias" class="display" cellspacing="0" width="100%">
-                <thead>
-                <tr>
-                    <th>Título</th>
-                    <th>Contenido</th>
-                    <th>Votos</th>
-                    <th>Fecha Creación</th>
-                    <th>Edición</th>
+            <div name="editaSugerencia">
+                <form th:action="@{/editSuggestion}" method="post">
+                    <div class="form-group row">
+                        <label for="titulo-text-input" class="col-2 col-form-label">Título</label>
+                        <div class="col-10">
+                            <input th:value="${suggestion.nombre}" name="tituloSugerencia" class="form-control" type="text"  id="titulo-text-input"/>
+                        </div>
+                    </div>
 
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="sugerencia : ${session.listaSugerencias}">
-                    <td> <a th:text="${sugerencia.nombre}" th:href="@{/sug(idSug=${sugerencia.getId()})}">Titulo</a></td>
-                    <td th:text="${sugerencia.contenido}">Contenido</td>
-                    <td th:text="${sugerencia.votos}">Votos</td>
-                    <td th:text="${#dates.format(sugerencia.fechaCreacion, 'dd-MM-yyyy')}"></td>
-                    <td>
-                        <form action="#" th:action="@{/goToEdit}"  method="post">
-                            <input name="idSug" type="hidden" th:value="${sugerencia.id}"/>
-                            <button class="btn btn-warning"  type="submit">Editar</button>
-                        </form></td>
-                </tr>
-                </tbody>
-            </table>
+
+                    <div class="form-group row">
+                        <label for="contenido-text-area" class="col-2 col-form-label">Contenido</label>
+                        <div class="col-10">
+                            <textarea th:text="${suggestion.contenido}" name="contSugerencia" class="form-control" type="text"
+                                      id="contenido-text-area"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-10">
+                            <input type="hidden" name="idSug" th:value="${suggestion.id}"/>
+                            <button type="submit" class="btn btn-info">Editar sugerencia</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
         <div class="col-sm-2 sidenav">
             <div class="well">
-                <p th:text="${session.citizen.email}"></p>
+                <p id="emailUser" th:text="${session.citizen.email}"></p>
             </div>
             <div class="well">
                 <p>ADS</p>
@@ -92,10 +91,6 @@
 
 <footer class="container-fluid text-center">
     <p>ParticipantsSystem4a - ASW 2017 - Universidad de Oviedo</p>
-  <script>  $(document).ready(function() {
-    $('#sugerencias').DataTable({
-        "iDisplayLength": 6});
-    } );</script>
 </footer>
 
 </body>

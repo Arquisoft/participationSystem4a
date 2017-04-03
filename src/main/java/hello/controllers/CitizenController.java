@@ -84,6 +84,9 @@ public class CitizenController {
 			else{
 				Configuration configuration = systemService.getConfiguration();
 				model.addAttribute("listaPalabras",configuration.getPalabrasNoPermitidas());
+				List<Sugerencia> listaSugerencias = suggestionService.findSugerenciaWithMinVotes();
+				session.setAttribute("listaSugerencias", listaSugerencias);
+
 
 				return "/admin/adminIndex";
 			}
