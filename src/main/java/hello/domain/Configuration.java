@@ -1,10 +1,9 @@
 package hello.domain;
 
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.*;
 //import java.util.ArrayList;
 //import java.util.List;
 
@@ -12,6 +11,8 @@ import javax.persistence.*;
 @Table(name="CONFIGURACION")
 public class Configuration {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private String PALABRAS_NO_PERMITIDAS;//Si esto es un POJO... qué hace una lista???
 	private int minimoVotos;
 	
@@ -21,8 +22,13 @@ public class Configuration {
 	private List<String> palabrasNoPermitidas;
 	@Transient
 	private String separador = "@@";
-	
-	
+
+	public Configuration(Long id) {
+		this.id = id;
+	}
+
+
+
 
 	public String getPalabraNoPermitida() {
 		return PALABRAS_NO_PERMITIDAS;

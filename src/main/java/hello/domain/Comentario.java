@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name="COMENTARIO")
 public class Comentario {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String contenido;
 	@ManyToOne
