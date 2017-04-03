@@ -74,9 +74,15 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public void addPalabraProhibida(String word) {
-		Configuration antigua = getConfiguracion();
-		antigua.addPalabraNoPermitida(word);
-		updateConfiguracion(antigua);
+		try {
+			Configuration antigua = getConfiguracion();
+			antigua.addPalabraNoPermitida(word);
+			updateConfiguracion(antigua);
+			loggerCutre.log(getClass(),
+					"Se ha añadido una palabra prohibida, ahora tengo: \n\n\t" + antigua.getPalabraNoPermitida());
+		} catch (Exception e) {
+			loggerCutre.log(getClass(), "ERROR al añadir una palabra: \n\n\t" + e.getMessage());
+		}
 	}
 
 	@Override
@@ -97,7 +103,7 @@ public class AdminServiceImpl implements AdminService {
 		Configuration config = getConfiguracion();
 		config.setMinimoVotos(minVotes);
 		updateConfiguracion(config);
-		loggerCutre.log(getClass(), "Se ha actualizado el minimo de votos a "+ minVotes);
+		loggerCutre.log(getClass(), "Se ha actualizado el minimo de votos a " + minVotes);
 	}
 
 	@Override

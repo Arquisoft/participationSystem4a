@@ -2,6 +2,8 @@ package hello.domain;
 
 import javax.persistence.*;
 
+import hello.util.loggercutre.SingletonLoggerCutre;
+
 import java.util.ArrayList;
 import java.util.List;
 //import java.util.ArrayList;
@@ -13,8 +15,7 @@ public class Configuration {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String PALABRAS_NO_PERMITIDAS;// Si esto es un POJO... qué hace una
-											// lista???
+	private String PALABRAS_NO_PERMITIDAS;
 	private int minimoVotos;
 
 	@Transient
@@ -48,8 +49,15 @@ public class Configuration {
 	}
 
 	public void addPalabraNoPermitida(String word) {
-		this.palabrasNoPermitidas.add(word);
-		actualizarCadenaDePalabras();
+		if (!"".equals(word)) {
+			this.palabrasNoPermitidas.add(word);
+			SingletonLoggerCutre.getInstance().getLogger().log(getClass(),
+					"Antes de actualizar " + palabrasNoPermitidas.toString());
+			actualizarCadenaDePalabras();
+
+			SingletonLoggerCutre.getInstance().getLogger().log(getClass(),
+					"Tras actualizar " + palabrasNoPermitidas.toString());
+		}
 	}
 
 	public int getMinimoVotos() {
@@ -70,26 +78,32 @@ public class Configuration {
 
 	private void actualizarCadenaDePalabras() {
 		StringBuilder sb = new StringBuilder();
+		
 		for (int i = 0; i < palabrasNoPermitidas.size(); i++) {
 			if (i == palabrasNoPermitidas.size() - 1) {
 				sb.append(palabrasNoPermitidas.get(i));
 			} else {
 				sb.append(palabrasNoPermitidas.get(i) + separador);
+				SingletonLoggerCutre.getInstance().getLogger().log(getClass(),
+						"He añadido la palabra " + palabrasNoPermitidas.get(i));
 			}
 		}
-		cadenaDePalabrasnoPermitidas = sb.toString();
-		this.PALABRAS_NO_PERMITIDAS = cadenaDePalabrasnoPermitidas;
+		PALABRAS_NO_PERMITIDAS = sb.toString();
+		this.cadenaDePalabrasnoPermitidas = PALABRAS_NO_PERMITIDAS;
 	}
 
-	private void rellenarListaPalabrasNoPermitidas(){
-		if(this.PALABRAS_NO_PERMITIDAS == null){
-			this.PALABRAS_NO_PERMITIDAS = "";
+	private void rellenarListaPalabrasNoPermitidas() {
+		
+		if (this.PALABRAS_NO_PERMITIDAS == null) {
+			this.PALABRAS_NO_PERMITIDAS = ""; //Parece ser que no carga las palabras de la base de datos (9:47)
+		}
+		
+		String[] palabras = this.PALABRAS_NO_PERMITIDAS.split(separador);
+		for (String palabra : palabras) {
+			if (!"".equals(palabra))
+				this.palabrasNoPermitidas.add(palabra);
 		}
 		this.cadenaDePalabrasnoPermitidas = this.PALABRAS_NO_PERMITIDAS;
-		String[] palabras = this.cadenaDePalabrasnoPermitidas.split(separador);
-		for (String palabra : palabras) {
-			this.palabrasNoPermitidas.add(palabra);
-		}
 	}
 
 	@Override

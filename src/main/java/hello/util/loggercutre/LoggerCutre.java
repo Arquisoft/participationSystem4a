@@ -60,12 +60,12 @@ public class LoggerCutre {
 	 */
 	public void log(Class className, String... data) {
 		StringBuilder mensaje = new StringBuilder();
-		mensaje.append("-------------------INICIO LOGGERCUTRE------------------------------\n\n");
+		mensaje.append("\n\n-------------------INICIO LOGGERCUTRE------------------------------\n\n");
 		mensaje.append("Estoy en la clase " + className.getName() + "\n");
 		for (String s : data) {
 			mensaje.append("\t-MENSAJE: " + s + "\n");
 		}
-		mensaje.append("-------------------FIN LOGGERCUTRE------------------------------\n\n");
+		mensaje.append("\n\n-------------------FIN LOGGERCUTRE------------------------------\n\n");
 		System.out.println(mensaje.toString());
 	}
 

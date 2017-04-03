@@ -8,7 +8,7 @@ import hello.domain.Sugerencia;
 
 
 
-public interface SystemServices {
+public interface SystemServices extends SuperService{
 
 	Configuration getConfiguration();
 	List<Categoria> getAllCategories();

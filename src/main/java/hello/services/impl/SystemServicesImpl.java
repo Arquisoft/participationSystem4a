@@ -26,8 +26,14 @@ public class SystemServicesImpl implements SystemServices {
 	
 	
 	public Configuration getConfiguration() {
-		
-		return this.configurationRepository.findAll().get(0);
+		List<Configuration> listado = this.configurationRepository.findAll();
+		if (listado.size() == 0) {
+			loggerCutre.log(getClass(), "No hay configuraciones asi que vamos a crear una nueva.");
+			Configuration newC = new Configuration();
+			this.configurationRepository.save(newC);
+			return newC;
+		}
+		return listado.get(0);
 	}
 	
 	
